@@ -1,0 +1,12 @@
+{
+    "name": "@meijer-theorie/root",
+    "version": "1.0.0",
+    "private": true,
+    "workspaces": [
+        "directus",
+        "front-end"
+    ],
+    "scripts": {
+        "start": "cd directus && docker compose up -d && cd ../front-end && npm run dev"
+    }
+  }
