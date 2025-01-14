@@ -1,6 +1,11 @@
 <script lang="ts">
-	import '../app.css';
-	let { children } = $props();
+	import { setAppContext } from '$lib/contexts/app'
+
+	import '../app.css'
+
+	let { children, data } = $props()
+
+	setAppContext({ globals: data.globals })
 </script>
 
 {@render children()}

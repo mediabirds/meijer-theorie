@@ -7,6 +7,7 @@
         "front-end"
     ],
     "scripts": {
-        "start": "cd directus && docker compose up -d && cd ../front-end && npm run dev"
+        "start": "cd directus && docker compose up -d && cd ../front-end && npm run dev",
+        "typegen": "npx indirectus sdk generate --url http://localhost:8055 --token 1nrsO0lzBtkRGPcVcxPsexKQrrW6v97d --outputDir ./front-end/src/lib/directus"
     }
   }
