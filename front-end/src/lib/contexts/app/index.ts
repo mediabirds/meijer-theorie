@@ -1,7 +1,24 @@
-import { getContext, setContext } from 'svelte'
+import { Context } from 'runed'
+import { type AppContext, getAppContext, setAppContext } from './index.svelte'
+import type { AuthenticationData } from '@directus/sdk'
 
-export type AppContext = {
-	globals: Directus.Globals
+export type Globals = {
+	description: string
+	favicon: string
+	logo: string
+	social_links: unknown
+	tagline: string
+	title: string
+	url: string
 }
-export const setAppContext = (data: AppContext) => setContext('app', () => data)
-export const getAppContext = () => getContext<() => AppContext>('app')()
+
+export type Site = {
+	isMenuCollapsed: boolean
+}
+
+export const globals = new Context<AppContext['globals']>('APP_STATE')
+export const session = new Context<App.Locals['session']>('APP_SESSION')
+export const user = new Context<App.Locals['user']>('APP_SESSION')
+export const site = new Context<Site>('APP_SITE')
+
+export { getAppContext, setAppContext, type AppContext }

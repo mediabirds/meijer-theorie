@@ -1,10 +1,7 @@
 import { PUBLIC_DIRECTUS_URL } from '$env/static/public'
 import {
-	type AuthenticationClient,
 	type AuthenticationData,
-	type DirectusClient,
 	type FetchInterface,
-	type RestClient,
 	authentication,
 	createDirectus,
 	rest

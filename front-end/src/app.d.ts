@@ -1,3 +1,4 @@
+import type { AuthenticationData } from '@directus/sdk'
 import type { createClient } from './lib/directus'
 
 // See https://svelte.dev/docs/kit/types#app.d.ts
@@ -8,8 +9,17 @@ declare global {
 		interface Locals {
 			directus: ReturnType<typeof createClient>
 			globals: Directus.Globals
-			session: string | null
-			user: Directus.DirectusUsers | null
+			session: AuthenticationData | null
+			user: Directus.SchemaMapper<
+				Directus.DirectusUsers,
+				{
+					subscription: Directus.SubscriptionTiers
+					practiceExams: Directus.SchemaMapper<
+						Directus.UserExams,
+						{ exam: Directus.PracticeExams }
+					>[]
+				}
+			> | null
 		}
 		// interface PageData {}
 		// interface PageState {}
@@ -455,6 +465,7 @@ declare global {
 			description?: string | null
 			email?: string | null
 			email_notifications?: boolean | null
+			expiresAt?: string | null
 			external_identifier?: string | null
 			first_name?: string | null
 			id: string
@@ -466,10 +477,11 @@ declare global {
 			password?: string | null
 			policies: any[] | DirectusAccess[]
 			posts: any[] | Posts[]
+			practiceExams: any[] | UserExams[]
 			provider: string
 			role?: string | DirectusRoles | null
 			status: string
-			subscription?: number | Subscriptions | null
+			subscription?: string | SubscriptionTiers | null
 			tags?: unknown | null
 			tfa_secret?: string | null
 			theme_dark?: string | null
@@ -627,23 +639,92 @@ declare global {
 			title?: string | null
 		}
 
+		export type PracticeExams = {
+			id: string
+			questions: any[] | PracticeExamsQuestions[]
+			questions_i23sd54: string
+			title: string
+		}
+
+		export type PracticeExamsQuestions = {
+			collection?: string | null
+			id: number
+			practice_exam?: string | PracticeExams | null
+			questions?: string | any | null
+		}
+
+		export type QuestionsInOrder = {
+			answers?: unknown | null
+			id: number
+			thumbnail?: string | DirectusFiles | null
+			title: string
+		}
+
+		export type QuestionsMultipleChoice = {
+			answers?: unknown | null
+			id: number
+			thumbnail?: string | DirectusFiles | null
+			title: string
+		}
+
 		export type SubscriptionTiers = {
-			daysOfAccess: string
+			daysOfAccess: number
 			discountPrice?: number | null
 			featureList: unknown
 			icon: string | DirectusFiles
 			id: string
+			maxPracticeExams?: number | null
+			practiceExams: any[] | SubscriptionTiersPracticeExams[]
 			price: number
 			slug?: string | null
+			subscription?: number | Subscriptions | null
 			title: string
+			videoCourses: any[] | VideoCourses[]
+		}
+
+		export type SubscriptionTiersPracticeExams = {
+			id: number
+			practice_exam?: string | PracticeExams | null
+			subscription_tier?: string | SubscriptionTiers | null
 		}
 
 		export type Subscriptions = {
-			createdAt: string
-			expiresAt: string
 			id: number
-			tier?: string | SubscriptionTiers | null
+			tiers: any[] | SubscriptionTiers[]
 			type: string
+		}
+
+		export type UserExams = {
+			didPass?: boolean | null
+			exam?: string | PracticeExams | null
+			id: number
+			user?: string | DirectusUsers | null
+		}
+
+		export type UserVideoCourses = {
+			didFinish?: boolean | null
+			id: string
+			videoCourse: number | VideoCourses
+		}
+
+		export type VideoCourses = {
+			category?: string | null
+			estimatedDurationInMinutes: number
+			id: number
+			lessons: any[] | VideoCoursesLessons[]
+			slug: string
+			subscriptionTier?: string | SubscriptionTiers | null
+			tagline: string
+			thumbnail: string | DirectusFiles
+			title?: string | null
+		}
+
+		export type VideoCoursesLessons = {
+			description?: string | null
+			id: number
+			title: string
+			video: string | DirectusFiles
+			videoCourse?: number | VideoCourses | null
 		}
 
 		export type CustomDirectusTypes = {
@@ -694,19 +775,26 @@ declare global {
 			page_blocks: PageBlocks[]
 			pages: Pages[]
 			posts: Posts[]
+			practice_exams: PracticeExams[]
+			practice_exams_questions: PracticeExamsQuestions[]
+			questions_in_order: QuestionsInOrder[]
+			questions_multiple_choice: QuestionsMultipleChoice[]
 			subscription_tiers: SubscriptionTiers[]
+			subscription_tiers_practice_exams: SubscriptionTiersPracticeExams[]
 			subscriptions: Subscriptions[]
+			user_exams: UserExams[]
+			user_video_courses: UserVideoCourses[]
+			video_courses: VideoCourses[]
+			video_courses_lessons: VideoCoursesLessons[]
 		}
-	}
-}
 
-declare module '@directus/utils' {
-	export type Schemas = Directus.CustomDirectusTypes[keyof CustomDirectusTypes]
+		export type Schemas = Directus.CustomDirectusTypes[keyof CustomDirectusTypes]
 
-	export type SchemaMapper<T, K extends Partial<Record<keyof T, any>>> = {
-		[P in keyof T]: P extends keyof K ? Exclude<K[P], null | undefined> : T[P]
-	} & {
-		[P in keyof K]: Exclude<K[P], null | undefined>
+		export type SchemaMapper<T, K extends Partial<Record<keyof T, any>>> = {
+			[P in keyof T]: P extends keyof K ? Exclude<K[P], null | undefined> : T[P]
+		} & {
+			[P in keyof K]: Exclude<K[P], null | undefined>
+		}
 	}
 }
 

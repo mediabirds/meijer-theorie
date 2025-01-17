@@ -1,9 +1,13 @@
 <script lang="ts">
-	import { getAppContext } from '$lib/contexts/app'
+	import { globals } from '$lib/contexts/app'
+	import { getImageUrl } from '$lib/utils'
+	import type { HTMLImgAttributes } from 'svelte/elements'
 
-	console.log(getAppContext())
+	type Props = Omit<HTMLImgAttributes, 'src' | 'alt'>
+
+	const { ...restProps } = $props()
 </script>
 
 <a href="/">
-	<!-- <img src={getImageUrl(globals.logo!)} alt="Logo" /> -->
+	<img src={getImageUrl(globals.get().logo)} alt="Meijer Theorie" {...restProps} />
 </a>

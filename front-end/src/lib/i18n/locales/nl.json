@@ -1,0 +1,22 @@
+{
+	"common": {
+		"dashboard": "Dashboard",
+		"video_courses": "Videocursus",
+		"partice_exams": "Oefenexamens",
+		"blog": "Blog",
+		"profile": "Mijn account",
+		"chapters": "Hoofdstukken"
+	},
+	"account": {
+		"welcome": "Hi {username}",
+		"subscription": "{subscription}",
+		"login": {
+			"title": "Log in en start nu!",
+			"username": "Gebruikersnaam",
+			"password": "Wachtwoord",
+			"remember": "Onthoud mij",
+			"submit": "Inloggen",
+			"invalid_credentials": "Ongeldige gebruikersnaam of wachtwoord"
+		}
+	}
+}
