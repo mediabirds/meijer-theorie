@@ -3,7 +3,7 @@
 --
 
 -- Dumped from database version 16.6 (Debian 16.6-1.pgdg110+1)
--- Dumped by pg_dump version 17.2 (Ubuntu 17.2-1.pgdg22.04+1)
+-- Dumped by pg_dump version 16.6 (Ubuntu 16.6-0ubuntu0.24.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -21,6 +21,7 @@ ALTER TABLE ONLY public.video_courses DROP CONSTRAINT video_courses_subscription
 ALTER TABLE ONLY public.video_courses_lessons DROP CONSTRAINT video_courses_lessons_videocourse_foreign;
 ALTER TABLE ONLY public.video_courses_lessons DROP CONSTRAINT video_courses_lessons_video_foreign;
 ALTER TABLE ONLY public.user_video_courses DROP CONSTRAINT user_video_courses_videocourse_foreign;
+ALTER TABLE ONLY public.user_video_courses DROP CONSTRAINT user_video_courses_user_foreign;
 ALTER TABLE ONLY public.user_exams DROP CONSTRAINT user_exams_user_foreign;
 ALTER TABLE ONLY public.user_exams DROP CONSTRAINT user_exams_exam_foreign;
 ALTER TABLE ONLY public.subscription_tiers DROP CONSTRAINT subscription_tiers_subscription_foreign;
@@ -1679,7 +1680,9 @@ ALTER SEQUENCE public.user_exams_id_seq OWNED BY public.user_exams.id;
 CREATE TABLE public.user_video_courses (
     id uuid NOT NULL,
     "didFinish" boolean,
-    "videoCourse" integer NOT NULL
+    "videoCourse" integer NOT NULL,
+    "user" uuid,
+    "lessonsFinished" json DEFAULT '[]'::json
 );
 
 
@@ -3149,6 +3152,24 @@ COPY public.directus_activity (id, action, "user", "timestamp", ip, user_agent, 
 1106	create	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-16 22:45:47.857+00	172.19.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_collections	user_video_courses	http://localhost:8055
 1119	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-16 23:23:51.109+00	172.19.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	252	http://localhost:8055
 1120	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-16 23:24:05.304+00	172.19.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	video_courses	1	http://localhost:8055
+1121	login	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 10:19:27.538+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_users	60f562f9-84b6-4914-bf63-a7193567fcdf	http://localhost:8055
+1122	create	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 10:19:47.687+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	253	http://localhost:8055
+1123	create	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 10:19:54.402+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	254	http://localhost:8055
+1124	create	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 10:20:27.671+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	255	http://localhost:8055
+1127	login	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 10:56:36.982+00	172.21.0.1	node	directus_users	60f562f9-84b6-4914-bf63-a7193567fcdf	http://127.0.0.1:5173
+1125	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 10:21:55.54+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_files	440df429-4715-42a0-afcd-569f5cdfb145	http://localhost:8055
+1126	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 10:21:55.542+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_files	6fdbc31c-c2b2-46d0-b473-10dc08d9bc98	http://localhost:8055
+1128	login	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 12:55:17.527+00	172.21.0.1	node	directus_users	60f562f9-84b6-4914-bf63-a7193567fcdf	http://127.0.0.1:5173
+1129	create	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 13:39:37.394+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	256	http://localhost:8055
+1130	create	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 13:39:37.639+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	257	http://localhost:8055
+1131	create	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 13:41:22.891+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	258	http://localhost:8055
+1132	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 13:41:27.335+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	249	http://localhost:8055
+1133	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 13:41:27.346+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	250	http://localhost:8055
+1134	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 13:41:27.354+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	251	http://localhost:8055
+1135	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 13:41:27.366+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	258	http://localhost:8055
+1136	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 13:41:27.38+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	257	http://localhost:8055
+1137	create	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 14:28:26.271+00	172.21.0.1	node	user_video_courses	9cac4d35-b290-4890-a9f3-9cb4883d1533	http://127.0.0.1:5173
+1138	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 14:28:26.282+00	172.21.0.1	node	directus_users	60f562f9-84b6-4914-bf63-a7193567fcdf	http://127.0.0.1:5173
 \.
 
 
@@ -3448,9 +3469,6 @@ COPY public.directus_fields (id, collection, field, special, interface, options,
 247	directus_users	subscription	m2o	select-dropdown-m2o	{"template":"{{title}}","enableCreate":false}	\N	\N	f	f	2	full	\N	\N	\N	t	\N	\N	\N
 227	directus_users	expiresAt	\N	datetime	\N	\N	\N	f	f	3	full	\N	\N	\N	t	\N	\N	\N
 243	directus_users	practiceExams	o2m	list-o2m	{"enableSelect":false,"template":"{{exam.title}}{{didPass}}"}	\N	\N	f	f	4	full	\N	\N	\N	f	\N	\N	\N
-249	user_video_courses	id	uuid	input	\N	\N	\N	t	t	1	full	\N	\N	\N	f	\N	\N	\N
-250	user_video_courses	didFinish	cast-boolean	boolean	\N	\N	\N	f	f	2	full	\N	\N	\N	f	\N	\N	\N
-251	user_video_courses	videoCourse	m2o	select-dropdown-m2o	{"template":"{{title}}"}	\N	\N	f	f	3	full	\N	\N	\N	t	\N	\N	\N
 191	video_courses	id	\N	input	\N	\N	\N	t	t	1	full	\N	\N	\N	f	\N	\N	\N
 192	video_courses	title	\N	input	\N	\N	\N	f	f	3	half	\N	\N	\N	t	\N	\N	\N
 193	video_courses	slug	\N	extension-wpslug	{"template":"{{title}}"}	\N	\N	f	f	4	half	\N	\N	\N	t	\N	\N	\N
@@ -3460,6 +3478,15 @@ COPY public.directus_fields (id, collection, field, special, interface, options,
 203	video_courses	lessons	o2m	list-o2m	{"template":"{{title}}"}	\N	\N	f	f	8	full	\N	\N	\N	t	\N	\N	\N
 206	video_courses	subscriptionTier	\N	select-dropdown-m2o	\N	\N	\N	f	f	9	full	\N	\N	\N	f	\N	\N	\N
 252	video_courses	category	\N	select-dropdown	{"choices":[{"text":"Auto","value":"auto","icon":"directions_car"},{"text":"Motor","value":"motor","icon":"motorcycle"},{"text":"Scooter","value":"scooter","icon":"bike_scooter"}]}	\N	\N	f	f	2	full	\N	\N	\N	t	\N	\N	\N
+253	subscriptions	createdAt	\N	\N	\N	\N	\N	f	f	\N	full	\N	\N	\N	f	\N	\N	\N
+254	subscriptions	expiresAt	\N	\N	\N	\N	\N	f	f	\N	full	\N	\N	\N	f	\N	\N	\N
+255	subscriptions	tier	uuid	\N	\N	\N	\N	f	f	\N	full	\N	\N	\N	f	\N	\N	\N
+256	directus_users	videoCourses	o2m	list-o2m	{"template":"{{videoCourse.title}}"}	\N	\N	f	f	5	full	\N	\N	\N	f	\N	\N	\N
+249	user_video_courses	id	uuid	input	\N	\N	\N	t	t	1	full	\N	\N	\N	f	\N	\N	\N
+250	user_video_courses	didFinish	cast-boolean	boolean	\N	\N	\N	f	f	2	full	\N	\N	\N	f	\N	\N	\N
+251	user_video_courses	videoCourse	m2o	select-dropdown-m2o	{"template":"{{title}}"}	\N	\N	f	f	3	full	\N	\N	\N	t	\N	\N	\N
+258	user_video_courses	lessonsFinished	cast-json	\N	\N	\N	\N	f	f	4	full	\N	\N	\N	f	\N	\N	\N
+257	user_video_courses	user	\N	select-dropdown-m2o	\N	\N	\N	f	t	5	full	\N	\N	\N	f	\N	\N	\N
 \.
 
 
@@ -3475,7 +3502,6 @@ COPY public.directus_files (id, storage, filename_disk, filename_download, title
 35a67f1b-d401-4300-a503-b8e583186f2a	local	35a67f1b-d401-4300-a503-b8e583186f2a.svg	35a67f1b-d401-4300-a503-b8e583186f2a.svg	Directus Logo	image/svg+xml	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 10:43:10.203+00	\N	2025-01-14 10:43:10.208+00	\N	11267	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2025-01-14 10:43:10.207+00
 3eff7dc2-445a-47c5-9503-3f600ecdb5c6	local	3eff7dc2-445a-47c5-9503-3f600ecdb5c6.jpeg	3eff7dc2-445a-47c5-9503-3f600ecdb5c6.jpeg	3eff7dc2 445a 47c5 9503 3f600ecdb5c6	image/jpeg	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 10:43:10.298+00	\N	2025-01-14 10:43:10.303+00	\N	51166	512	512	\N	\N	\N	\N	\N	{}	\N	\N	\N	\N	2025-01-14 10:43:10.303+00
 43ddd7b8-9b2f-4aa1-b63c-933b4ae81ca2	local	43ddd7b8-9b2f-4aa1-b63c-933b4ae81ca2.svg	43ddd7b8-9b2f-4aa1-b63c-933b4ae81ca2.svg	Directus Logo Dark	image/svg+xml	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 10:43:10.402+00	\N	2025-01-14 10:43:10.408+00	\N	11267	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2025-01-14 10:43:10.407+00
-440df429-4715-42a0-afcd-569f5cdfb145	local	440df429-4715-42a0-afcd-569f5cdfb145.svg	440df429-4715-42a0-afcd-569f5cdfb145.svg	Bunny Bot	image/svg+xml	\N	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 10:43:10.502+00	\N	2025-01-14 10:43:10.505+00	\N	33753	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2025-01-14 10:43:10.505+00
 44a4e780-d59b-4fa5-9b26-1c4b447474d2	local	44a4e780-d59b-4fa5-9b26-1c4b447474d2.jpg	44a4e780-d59b-4fa5-9b26-1c4b447474d2.jpg	Multicolored Can Wall Decor	image/jpeg	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 10:43:10.599+00	\N	2025-01-14 10:43:10.612+00	\N	1221311	1917	1918	\N	\N	\N	\N	\N	{}	\N	\N	\N	\N	2025-01-14 10:43:10.612+00
 50570a31-a990-453c-bdfc-0ad7175dd8bf	local	50570a31-a990-453c-bdfc-0ad7175dd8bf.png	50570a31-a990-453c-bdfc-0ad7175dd8bf.png	169   L 09 Oct 09.09	image/png	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 10:43:10.698+00	\N	2025-01-14 10:43:10.704+00	\N	409799	2560	1440	\N	\N	\N	\N	\N	{}	\N	\N	\N	\N	2025-01-14 10:43:10.704+00
 535f1284-dbc4-4e4e-9e50-b44a1df130bd	local	535f1284-dbc4-4e4e-9e50-b44a1df130bd.webp	535f1284-dbc4-4e4e-9e50-b44a1df130bd.webp	Content Manager	image/webp	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 10:43:10.798+00	\N	2025-01-14 10:43:10.805+00	\N	93276	1024	1024	\N	\N	\N	\N	\N	{}	\N	\N	\N	\N	2025-01-14 10:43:10.805+00
@@ -3498,7 +3524,6 @@ fd6440c2-dd48-4792-9d08-3124cd99b40f	local	fd6440c2-dd48-4792-9d08-3124cd99b40f.
 f28f2e8f-dfe4-4021-a029-583f6c8a6da4	local	f28f2e8f-dfe4-4021-a029-583f6c8a6da4.png	Wie-mag-hier-als-eerst-rijden-11.png	Wie Mag Hier Als Eerst Rijden 11	image/png	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 14:07:40.471+00	\N	2025-01-14 14:07:40.513+00	\N	343090	1080	1080	\N	\N	\N	\N	\N	{}	\N	\N	\N	\N	2025-01-14 14:07:40.512+00
 788cae90-bd68-400c-a262-ff6c02b4555b	local	788cae90-bd68-400c-a262-ff6c02b4555b.png	Wie-mag-hier-als-eerst-rijden-16.png	Wie Mag Hier Als Eerst Rijden 16	image/png	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 14:08:14.113+00	\N	2025-01-14 14:08:14.155+00	\N	231646	1080	1080	\N	\N	\N	\N	\N	{}	\N	\N	\N	\N	2025-01-14 14:08:14.154+00
 bcc1e125-9bed-4ea6-a28f-c619127a9423	local	bcc1e125-9bed-4ea6-a28f-c619127a9423.png	Wie-mag-hier-als-eerst-rijden-17.png	Wie Mag Hier Als Eerst Rijden 17	image/png	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 14:09:29.225+00	\N	2025-01-14 14:09:29.239+00	\N	265973	1080	1080	\N	\N	\N	\N	\N	{}	\N	\N	\N	\N	2025-01-14 14:09:29.237+00
-6fdbc31c-c2b2-46d0-b473-10dc08d9bc98	local	6fdbc31c-c2b2-46d0-b473-10dc08d9bc98.png	335d19aa122ffaedd315fc9064882a30.png	335d19aa122ffaedd315fc9064882a30	image/png	\N	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 14:48:13.106+00	\N	2025-01-14 14:48:13.165+00	\N	559511	1200	800	\N	\N	\N	\N	\N	{}	\N	\N	\N	\N	2025-01-14 14:48:13.164+00
 82616dcf-a772-49b5-a4c3-f1d159b3d10a	local	82616dcf-a772-49b5-a4c3-f1d159b3d10a.mp4	meijer-theorie-1.1.mp4	Meijer Theorie 1.1	video/mp4	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 14:53:13.846+00	\N	2025-01-14 14:53:13.893+00	\N	7880812	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2025-01-14 14:53:13.892+00
 0b592bdc-d961-42aa-b8b8-4f609cbe1804	local	0b592bdc-d961-42aa-b8b8-4f609cbe1804.mp4	meijer-theorie-1.2.mp4	Meijer Theorie 1.2	video/mp4	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 14:55:24.729+00	\N	2025-01-14 14:55:24.744+00	\N	130378	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2025-01-14 14:55:24.742+00
 cd1f8e25-d49f-46c8-ba43-55155b255f06	local	cd1f8e25-d49f-46c8-ba43-55155b255f06.png	Schermafbeelding-2024-09-06-114723-1-300x300.png	Schermafbeelding 2024 09 06 114723 1 300x300	image/png	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 15:09:46.16+00	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-15 15:57:11.171+00	\N	40105	300	300	\N	\N	\N	\N	\N	{}	\N	\N	\N	\N	2025-01-14 15:09:46.182+00
@@ -3507,6 +3532,8 @@ cc782919-f1d6-42a5-b057-33c33c4d9af1	local	cc782919-f1d6-42a5-b057-33c33c4d9af1.
 6da389ca-b696-42e9-b976-7c1e1c0acb31	local	6da389ca-b696-42e9-b976-7c1e1c0acb31.png	bb9a84e185c5ffeca2380e825f754c3d.png	Bb9a84e185c5ffeca2380e825f754c3d	image/png	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-16 16:15:41.888+00	\N	2025-01-16 16:15:41.908+00	\N	1603358	4096	2088	\N	\N	\N	\N	\N	{}	\N	\N	\N	\N	2025-01-16 16:15:41.907+00
 f64fc481-fcfe-419f-91fa-de8e54798406	local	f64fc481-fcfe-419f-91fa-de8e54798406.png	ea3c1b872ed051809efd880f6b7b2110.png	Ea3c1b872ed051809efd880f6b7b2110	image/png	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-16 16:16:10.881+00	\N	2025-01-16 16:16:10.893+00	\N	760507	1024	724	\N	\N	\N	\N	\N	{}	\N	\N	\N	\N	2025-01-16 16:16:10.893+00
 81570a53-530c-4eec-b5c9-ed7679c8ce88	local	81570a53-530c-4eec-b5c9-ed7679c8ce88.png	4c595946aff82ccbaaccf198b536f76f.png	4c595946aff82ccbaaccf198b536f76f	image/png	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-16 16:17:28.843+00	\N	2025-01-16 16:17:28.854+00	\N	576753	1024	724	\N	\N	\N	\N	\N	{}	\N	\N	\N	\N	2025-01-16 16:17:28.854+00
+440df429-4715-42a0-afcd-569f5cdfb145	local	440df429-4715-42a0-afcd-569f5cdfb145.svg	440df429-4715-42a0-afcd-569f5cdfb145.svg	Bunny Bot	image/svg+xml	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 10:43:10.502+00	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 10:21:55.538+00	\N	33753	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2025-01-14 10:43:10.505+00
+6fdbc31c-c2b2-46d0-b473-10dc08d9bc98	local	6fdbc31c-c2b2-46d0-b473-10dc08d9bc98.png	335d19aa122ffaedd315fc9064882a30.png	335d19aa122ffaedd315fc9064882a30	image/png	ece7bab9-5433-4a63-b9f7-bde8b517d6d9	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-14 14:48:13.106+00	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 10:21:55.538+00	\N	559511	1200	800	\N	\N	\N	\N	\N	{}	\N	\N	\N	\N	2025-01-14 14:48:13.164+00
 \.
 
 
@@ -3859,9 +3886,9 @@ COPY public.directus_presets (id, bookmark, "user", role, collection, search, la
 17	\N	60f562f9-84b6-4914-bf63-a7193567fcdf	\N	video_courses	\N	\N	{"tabular":{"page":1}}	\N	\N	\N	bookmark	\N
 14	\N	60f562f9-84b6-4914-bf63-a7193567fcdf	\N	pages	\N	tabular	{"tabular":{"page":1,"fields":["title","status","permalink","blocks","published_at"],"sort":["sort"]}}	{"tabular":{"widths":{"status":149.625,"title":179.501708984375}}}	\N	\N	bookmark_border	\N
 18	\N	60f562f9-84b6-4914-bf63-a7193567fcdf	\N	video_courses_lessons	\N	\N	{"tabular":{"page":1}}	\N	\N	\N	bookmark	\N
-10	\N	60f562f9-84b6-4914-bf63-a7193567fcdf	\N	directus_files	\N	cards	{"cards":{"sort":["-uploaded_on"],"page":1,"limit":25}}	{"cards":{"icon":"insert_drive_file","title":"{{ title }}","subtitle":"{{ type }} • {{ filesize }}","size":4,"imageFit":"crop"}}	\N	\N	bookmark_border	\N
 16	\N	60f562f9-84b6-4914-bf63-a7193567fcdf	\N	posts	\N	tabular	{"tabular":{"page":1,"fields":["image","title","status","published_at","slug","author"],"limit":25}}	{"tabular":{"widths":{"image":55.890625,"title":375.66015625,"status":170.03125}}}	\N	\N	bookmark_border	\N
 19	\N	60f562f9-84b6-4914-bf63-a7193567fcdf	\N	practice_exams	\N	\N	{"tabular":{"page":1,"fields":["title","questions"]}}	{"tabular":{"widths":{"title":352}}}	\N	\N	bookmark	\N
+10	\N	60f562f9-84b6-4914-bf63-a7193567fcdf	\N	directus_files	\N	cards	{"cards":{"sort":["-uploaded_on"],"page":1,"limit":25}}	{"cards":{"icon":"insert_drive_file","title":"{{ title }}","subtitle":"{{ type }} • {{ filesize }}","size":4,"imageFit":"crop"}}	\N	\N	bookmark_border	\N
 \.
 
 
@@ -3911,6 +3938,7 @@ COPY public.directus_relations (id, many_collection, many_field, one_collection,
 46	subscription_tiers	subscription	subscriptions	tiers	\N	\N	\N	\N	nullify
 47	directus_users	subscription	subscription_tiers	\N	\N	\N	\N	\N	nullify
 48	user_video_courses	videoCourse	video_courses	\N	\N	\N	\N	\N	nullify
+49	user_video_courses	user	directus_users	videoCourses	\N	\N	\N	\N	nullify
 \.
 
 
@@ -4445,6 +4473,7 @@ COPY public.directus_revisions (id, activity, collection, item, data, delta, par
 521	522	block_pricing_cards	83972d2a-742e-4a6c-8698-563d01dde54d	{"id":"83972d2a-742e-4a6c-8698-563d01dde54d","title":null,"description":null,"price":null,"badge":null,"features":null,"button":null,"pricing":"48cf2543-15e0-454f-9b31-cbf3c2406712","is_highlighted":false,"sort":null}	{"pricing":"48cf2543-15e0-454f-9b31-cbf3c2406712"}	523	\N
 522	523	block_pricing_cards	388404db-1703-4b10-b12b-e5d4385f1530	{"id":"388404db-1703-4b10-b12b-e5d4385f1530","title":null,"description":null,"price":null,"badge":null,"features":null,"button":null,"pricing":"48cf2543-15e0-454f-9b31-cbf3c2406712","is_highlighted":false,"sort":null}	{"pricing":"48cf2543-15e0-454f-9b31-cbf3c2406712"}	523	\N
 524	525	block_pricing_cards	388404db-1703-4b10-b12b-e5d4385f1530	{"id":"388404db-1703-4b10-b12b-e5d4385f1530","title":"Starter Plan","description":"Perfect for your small busines","price":"$199 /month","badge":"Most Popular","features":["One seat","Unlimited","Lifetime access"],"button":"dda7d91c-b449-4ab3-9d9d-84d4e8c09caf","pricing":"48cf2543-15e0-454f-9b31-cbf3c2406712","is_highlighted":false,"sort":null}	{"title":"Starter Plan","description":"Perfect for your small busines","price":"$199 /month","badge":"Most Popular","features":["One seat","Unlimited","Lifetime access"],"button":"dda7d91c-b449-4ab3-9d9d-84d4e8c09caf","pricing":"48cf2543-15e0-454f-9b31-cbf3c2406712","is_highlighted":false,"sort":null}	\N	\N
+1086	1122	directus_fields	253	{"special":null,"collection":"subscriptions","field":"createdAt"}	{"special":null,"collection":"subscriptions","field":"createdAt"}	\N	\N
 525	526	block_pricing_cards	83972d2a-742e-4a6c-8698-563d01dde54d	{"id":"83972d2a-742e-4a6c-8698-563d01dde54d","title":"Enterprise Plan","description":"The best plan with all the best features","price":"$599 /month","badge":null,"features":["All of them","Yes all of them"],"button":"efb97ae9-d95e-4f9d-bf00-9df9966c65ec","pricing":"48cf2543-15e0-454f-9b31-cbf3c2406712","is_highlighted":true,"sort":null}	{"title":"Enterprise Plan","description":"The best plan with all the best features","price":"$599 /month","badge":null,"features":["All of them","Yes all of them"],"button":"efb97ae9-d95e-4f9d-bf00-9df9966c65ec","pricing":"48cf2543-15e0-454f-9b31-cbf3c2406712","is_highlighted":true,"sort":null}	\N	\N
 526	527	block_richtext	1134799b-3fd1-47ea-963f-13d8ac1b9e3a	{"content":"<p>Welcome to our website solution - where simplicity meets power. While we've made content management beautifully simple, there's a lot more under the hood when you need it.</p>\\n<p>Built on Directus, our platform starts as an intuitive CMS that anyone can use. Update your website, manage blog posts, handle forms, and organize media files with ease - no coding required. It's perfect for content creators, marketing teams, and business owners who want to focus on their message, not technical details.</p>\\n<p>But here's the exciting part: when your needs grow, so can your platform. Directus isn't just a CMS - it's a full-featured backend that can power everything from mobile apps to complex digital experiences. Think of it as future-proofing your digital presence while keeping things simple today.</p>\\n<p><strong>What you'll love:</strong></p>\\n<ul>\\n<li>A friendly interface that just makes sense</li>\\n<li>Easy visual page building</li>\\n<li>Hassle-free media management</li>\\n<li>Smart form handling with email notifications</li>\\n<li>Flexible blog management with drafts</li>\\n<li>Custom navigation menus</li>\\n<li>Team collaboration tools</li>\\n<li>Mobile-ready interface for updates anywhere</li>\\n</ul>\\n<p><strong>And when you're ready for more than just CMS:</strong></p>\\n<ul>\\n<li>API access for custom applications</li>\\n<li>Advanced data relationships</li>\\n<li>Custom workflows</li>\\n<li>Automated tasks</li>\\n<li>Enterprise-grade security</li>\\n</ul>\\n<p>Start simple, grow seamlessly. That's our promise to you. Ready to make your website work better for you?</p>","headline":"Our promise to you","id":"1134799b-3fd1-47ea-963f-13d8ac1b9e3a","alignment":"center","tagline":"About Us"}	{"content":"<p>Welcome to our website solution - where simplicity meets power. While we've made content management beautifully simple, there's a lot more under the hood when you need it.</p>\\n<p>Built on Directus, our platform starts as an intuitive CMS that anyone can use. Update your website, manage blog posts, handle forms, and organize media files with ease - no coding required. It's perfect for content creators, marketing teams, and business owners who want to focus on their message, not technical details.</p>\\n<p>But here's the exciting part: when your needs grow, so can your platform. Directus isn't just a CMS - it's a full-featured backend that can power everything from mobile apps to complex digital experiences. Think of it as future-proofing your digital presence while keeping things simple today.</p>\\n<p><strong>What you'll love:</strong></p>\\n<ul>\\n<li>A friendly interface that just makes sense</li>\\n<li>Easy visual page building</li>\\n<li>Hassle-free media management</li>\\n<li>Smart form handling with email notifications</li>\\n<li>Flexible blog management with drafts</li>\\n<li>Custom navigation menus</li>\\n<li>Team collaboration tools</li>\\n<li>Mobile-ready interface for updates anywhere</li>\\n</ul>\\n<p><strong>And when you're ready for more than just CMS:</strong></p>\\n<ul>\\n<li>API access for custom applications</li>\\n<li>Advanced data relationships</li>\\n<li>Custom workflows</li>\\n<li>Automated tasks</li>\\n<li>Enterprise-grade security</li>\\n</ul>\\n<p>Start simple, grow seamlessly. That's our promise to you. Ready to make your website work better for you?</p>","headline":"Our promise to you","alignment":"center","tagline":"About Us"}	\N	\N
 527	528	block_richtext	129625db-433f-4104-9922-3b803ba4599d	{"content":"<p>We were tired of solutions that were super friendly for content editors but were challenging for developers to work with. Conversely, what good is DX if the content editors don't enjoy using the CMS?</p>","headline":"Make your entire team happy","id":"129625db-433f-4104-9922-3b803ba4599d","alignment":"center","tagline":"Why Us?"}	{"content":"<p>We were tired of solutions that were super friendly for content editors but were challenging for developers to work with. Conversely, what good is DX if the content editors don't enjoy using the CMS?</p>","headline":"Make your entire team happy","alignment":"center","tagline":"Why Us?"}	\N	\N
@@ -4496,6 +4525,7 @@ COPY public.directus_revisions (id, activity, collection, item, data, delta, par
 573	574	navigation_items	e096f25c-a549-4fe5-a284-17b0a347037a	{"id":"e096f25c-a549-4fe5-a284-17b0a347037a","navigation":"footer","page":"9821199f-4b05-49fb-8407-fbfe9b866ef0","parent":null,"sort":2,"title":"Contact Us","type":"page","url":null,"post":null,"children":[]}	{"navigation":"footer","page":"9821199f-4b05-49fb-8407-fbfe9b866ef0","parent":null,"sort":2,"title":"Contact Us","type":"page","url":null,"post":null}	\N	\N
 574	575	page_blocks	1f774f44-3e33-4b0f-93f4-fdd6df898438	{"id":"1f774f44-3e33-4b0f-93f4-fdd6df898438","sort":1,"page":"9821199f-4b05-49fb-8407-fbfe9b866ef0","item":"185eca12-4af1-4a1c-bfd7-4bc2fab52097","collection":"block_form","hide_block":false,"background":"light"}	{"sort":1,"page":"9821199f-4b05-49fb-8407-fbfe9b866ef0","item":"185eca12-4af1-4a1c-bfd7-4bc2fab52097","collection":"block_form","hide_block":false,"background":"light"}	\N	\N
 575	576	page_blocks	b4d48d5a-0450-4e8c-8c5b-198e7063a10f	{"id":"b4d48d5a-0450-4e8c-8c5b-198e7063a10f","sort":1,"page":"636dc283-e634-4d5d-aada-e6743db46036","item":"d81ab264-b2be-4077-84e7-b1406e74d9c3","collection":"block_hero","hide_block":false,"background":"light"}	{"sort":1,"page":"636dc283-e634-4d5d-aada-e6743db46036","item":"d81ab264-b2be-4077-84e7-b1406e74d9c3","collection":"block_hero","hide_block":false,"background":"light"}	\N	\N
+1087	1123	directus_fields	254	{"special":null,"collection":"subscriptions","field":"expiresAt"}	{"special":null,"collection":"subscriptions","field":"expiresAt"}	\N	\N
 576	577	page_blocks	bc826e30-4988-4035-98bd-5ffc4799e5fc	{"id":"bc826e30-4988-4035-98bd-5ffc4799e5fc","sort":1,"page":"93023385-f574-4040-9ead-42b717db2015","item":"a6275645-16b7-4994-8100-8c43ca07ab06","collection":"block_richtext","hide_block":false,"background":"light"}	{"sort":1,"page":"93023385-f574-4040-9ead-42b717db2015","item":"a6275645-16b7-4994-8100-8c43ca07ab06","collection":"block_richtext","hide_block":false,"background":"light"}	\N	\N
 577	578	page_blocks	090e286c-3dfe-4638-89d9-09b2e0caf2ea	{"id":"090e286c-3dfe-4638-89d9-09b2e0caf2ea","sort":1,"page":null,"item":"93693278-93bc-4a70-a54c-bbbf1e0037d7","collection":"block_hero","hide_block":false,"background":"light"}	{"sort":1,"page":null,"item":"93693278-93bc-4a70-a54c-bbbf1e0037d7","collection":"block_hero","hide_block":false,"background":"light"}	\N	\N
 578	579	page_blocks	45227f61-5ff1-431c-8dee-1a50d369325f	{"id":"45227f61-5ff1-431c-8dee-1a50d369325f","sort":1,"page":"1ce02298-817a-46bc-ac92-6a6c10c20f88","item":"060b632d-d70d-4db1-8b95-4fbab7a52ae8","collection":"block_posts","hide_block":false,"background":"light"}	{"sort":1,"page":"1ce02298-817a-46bc-ac92-6a6c10c20f88","item":"060b632d-d70d-4db1-8b95-4fbab7a52ae8","collection":"block_posts","hide_block":false,"background":"light"}	\N	\N
@@ -4552,6 +4582,7 @@ COPY public.directus_revisions (id, activity, collection, item, data, delta, par
 621	622	directus_fields	142	{"id":142,"collection":"pages","field":"status","special":null,"interface":"select-dropdown","options":{"choices":[{"text":"$t:draft","value":"draft","icon":"draft_orders","color":"#E2E8F0"},{"text":"In Review","value":"in_review","icon":"rate_review","color":"#FFA439"},{"text":"$t:published","value":"published","icon":"check","color":"#2ECDA7"}]},"display":"labels","display_options":{"choices":[{"text":"$t:draft","value":"draft","icon":"draft_orders","color":null,"background":"#E2E8F0","foreground":"#18222F"},{"text":"In Review","value":"in_review","icon":"rate_review","color":null,"background":"#FFA439","foreground":"#FFFFFF"},{"text":"$t:published","value":"published","icon":"check","color":null,"background":"#2ECDA7","foreground":"#FFFFFF"}]},"readonly":false,"hidden":false,"sort":6,"width":"half","translations":null,"note":"Is this page published?","conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	{"collection":"pages","field":"status","special":null,"interface":"select-dropdown","options":{"choices":[{"text":"$t:draft","value":"draft","icon":"draft_orders","color":"#E2E8F0"},{"text":"In Review","value":"in_review","icon":"rate_review","color":"#FFA439"},{"text":"$t:published","value":"published","icon":"check","color":"#2ECDA7"}]},"display":"labels","display_options":{"choices":[{"text":"$t:draft","value":"draft","icon":"draft_orders","color":null,"background":"#E2E8F0","foreground":"#18222F"},{"text":"In Review","value":"in_review","icon":"rate_review","color":null,"background":"#FFA439","foreground":"#FFFFFF"},{"text":"$t:published","value":"published","icon":"check","color":null,"background":"#2ECDA7","foreground":"#FFFFFF"}]},"readonly":false,"hidden":false,"sort":6,"width":"half","translations":null,"note":"Is this page published?","conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	\N	\N
 622	623	directus_fields	150	{"id":150,"collection":"posts","field":"id","special":["uuid"],"interface":"input","options":null,"display":null,"display_options":null,"readonly":true,"hidden":true,"sort":1,"width":"full","translations":null,"note":null,"conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	{"collection":"posts","field":"id","special":["uuid"],"interface":"input","options":null,"display":null,"display_options":null,"readonly":true,"hidden":true,"sort":1,"width":"full","translations":null,"note":null,"conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	\N	\N
 883	899	directus_files	c3b1434f-d9db-4b78-8cca-17fef70984a9	{"id":"c3b1434f-d9db-4b78-8cca-17fef70984a9","storage":"local","filename_disk":"c3b1434f-d9db-4b78-8cca-17fef70984a9.svg","filename_download":"logo-meijer.svg","title":"Logo Meijer","type":"image/svg+xml","folder":"ece7bab9-5433-4a63-b9f7-bde8b517d6d9","uploaded_by":"60f562f9-84b6-4914-bf63-a7193567fcdf","created_on":"2025-01-14T15:09:09.406Z","modified_by":"60f562f9-84b6-4914-bf63-a7193567fcdf","modified_on":"2025-01-15T15:57:17.560Z","charset":null,"filesize":"27406","width":null,"height":null,"duration":null,"embed":null,"description":null,"location":null,"tags":null,"metadata":null,"focal_point_x":null,"focal_point_y":null,"tus_id":null,"tus_data":null,"uploaded_on":"2025-01-14T15:09:09.414Z"}	{"folder":"ece7bab9-5433-4a63-b9f7-bde8b517d6d9","modified_by":"60f562f9-84b6-4914-bf63-a7193567fcdf","modified_on":"2025-01-15T15:57:17.560Z"}	\N	\N
+1088	1124	directus_fields	255	{"special":["uuid"],"collection":"subscriptions","field":"tier"}	{"special":["uuid"],"collection":"subscriptions","field":"tier"}	\N	\N
 623	624	directus_fields	154	{"id":154,"collection":"posts","field":"status","special":null,"interface":"select-dropdown","options":{"choices":[{"text":"$t:draft","value":"draft","icon":"draft_orders","color":"#E2E8F0"},{"text":"In Review","value":"in_review","icon":"rate_review","color":"#FFA439"},{"text":"$t:published","value":"published","icon":"check","color":"#2ECDA7"}]},"display":"labels","display_options":{"choices":[{"text":"$t:draft","value":"draft","icon":"draft_orders","color":null,"background":"#E2E8F0","foreground":"#18222F"},{"text":"In Review","value":"in_review","icon":"rate_review","color":null,"background":"#FFA439","foreground":"#FFFFFF"},{"text":"$t:published","value":"published","icon":"check","color":null,"background":"#2ECDA7","foreground":"#FFFFFF"}]},"readonly":false,"hidden":false,"sort":6,"width":"half","translations":null,"note":"Is this post published?","conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	{"collection":"posts","field":"status","special":null,"interface":"select-dropdown","options":{"choices":[{"text":"$t:draft","value":"draft","icon":"draft_orders","color":"#E2E8F0"},{"text":"In Review","value":"in_review","icon":"rate_review","color":"#FFA439"},{"text":"$t:published","value":"published","icon":"check","color":"#2ECDA7"}]},"display":"labels","display_options":{"choices":[{"text":"$t:draft","value":"draft","icon":"draft_orders","color":null,"background":"#E2E8F0","foreground":"#18222F"},{"text":"In Review","value":"in_review","icon":"rate_review","color":null,"background":"#FFA439","foreground":"#FFFFFF"},{"text":"$t:published","value":"published","icon":"check","color":null,"background":"#2ECDA7","foreground":"#FFFFFF"}]},"readonly":false,"hidden":false,"sort":6,"width":"half","translations":null,"note":"Is this post published?","conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	\N	\N
 624	625	directus_fields	155	{"id":155,"collection":"posts","field":"title","special":null,"interface":"input","options":{"placeholder":"Essential tips for first-time home buyers"},"display":null,"display_options":null,"readonly":false,"hidden":false,"sort":3,"width":"full","translations":null,"note":"Title of the blog post (used in page title and meta tags)","conditions":null,"required":true,"group":null,"validation":null,"validation_message":null}	{"collection":"posts","field":"title","special":null,"interface":"input","options":{"placeholder":"Essential tips for first-time home buyers"},"display":null,"display_options":null,"readonly":false,"hidden":false,"sort":3,"width":"full","translations":null,"note":"Title of the blog post (used in page title and meta tags)","conditions":null,"required":true,"group":null,"validation":null,"validation_message":null}	\N	\N
 625	626	directus_dashboards	5a5b8448-16f4-46b1-abe8-19730cadc3a5	{"id":"5a5b8448-16f4-46b1-abe8-19730cadc3a5","name":"Form Submissions","icon":"forms_apps_script","note":"Quick dashboard to tracking performance of your forms","date_created":"2024-09-12T20:44:53.881Z","user_created":"d56956bf-6ed0-465e-bb4a-ec9bde65c5f0","color":null}	{"id":"5a5b8448-16f4-46b1-abe8-19730cadc3a5","name":"Form Submissions","icon":"forms_apps_script","note":"Quick dashboard to tracking performance of your forms","date_created":"2024-09-12T20:44:53.881Z","user_created":"d56956bf-6ed0-465e-bb4a-ec9bde65c5f0","color":null}	\N	\N
@@ -5004,6 +5035,17 @@ COPY public.directus_revisions (id, activity, collection, item, data, delta, par
 1082	1117	directus_fields	203	{"id":203,"collection":"video_courses","field":"lessons","special":["o2m"],"interface":"list-o2m","options":{"template":"{{title}}"},"display":null,"display_options":null,"readonly":false,"hidden":false,"sort":8,"width":"full","translations":null,"note":null,"conditions":null,"required":true,"group":null,"validation":null,"validation_message":null}	{"collection":"video_courses","field":"lessons","sort":8,"group":null}	\N	\N
 1083	1118	directus_fields	206	{"id":206,"collection":"video_courses","field":"subscriptionTier","special":null,"interface":"select-dropdown-m2o","options":null,"display":null,"display_options":null,"readonly":false,"hidden":false,"sort":9,"width":"full","translations":null,"note":null,"conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	{"collection":"video_courses","field":"subscriptionTier","sort":9,"group":null}	\N	\N
 1084	1119	directus_fields	252	{"id":252,"collection":"video_courses","field":"category","special":null,"interface":"select-dropdown","options":{"choices":[{"text":"Auto","value":"auto","icon":"directions_car"},{"text":"Motor","value":"motor","icon":"motorcycle"},{"text":"Scooter","value":"scooter","icon":"bike_scooter"}]},"display":null,"display_options":null,"readonly":false,"hidden":false,"sort":2,"width":"full","translations":null,"note":null,"conditions":null,"required":true,"group":null,"validation":null,"validation_message":null}	{"collection":"video_courses","field":"category","options":{"choices":[{"text":"Auto","value":"auto","icon":"directions_car"},{"text":"Motor","value":"motor","icon":"motorcycle"},{"text":"Scooter","value":"scooter","icon":"bike_scooter"}]}}	\N	\N
+1089	1125	directus_files	440df429-4715-42a0-afcd-569f5cdfb145	{"id":"440df429-4715-42a0-afcd-569f5cdfb145","storage":"local","filename_disk":"440df429-4715-42a0-afcd-569f5cdfb145.svg","filename_download":"440df429-4715-42a0-afcd-569f5cdfb145.svg","title":"Bunny Bot","type":"image/svg+xml","folder":"ece7bab9-5433-4a63-b9f7-bde8b517d6d9","uploaded_by":"60f562f9-84b6-4914-bf63-a7193567fcdf","created_on":"2025-01-14T10:43:10.502Z","modified_by":"60f562f9-84b6-4914-bf63-a7193567fcdf","modified_on":"2025-01-17T10:21:55.538Z","charset":null,"filesize":"33753","width":null,"height":null,"duration":null,"embed":null,"description":null,"location":null,"tags":null,"metadata":null,"focal_point_x":null,"focal_point_y":null,"tus_id":null,"tus_data":null,"uploaded_on":"2025-01-14T10:43:10.505Z"}	{"folder":"ece7bab9-5433-4a63-b9f7-bde8b517d6d9","modified_by":"60f562f9-84b6-4914-bf63-a7193567fcdf","modified_on":"2025-01-17T10:21:55.538Z"}	\N	\N
+1090	1126	directus_files	6fdbc31c-c2b2-46d0-b473-10dc08d9bc98	{"id":"6fdbc31c-c2b2-46d0-b473-10dc08d9bc98","storage":"local","filename_disk":"6fdbc31c-c2b2-46d0-b473-10dc08d9bc98.png","filename_download":"335d19aa122ffaedd315fc9064882a30.png","title":"335d19aa122ffaedd315fc9064882a30","type":"image/png","folder":"ece7bab9-5433-4a63-b9f7-bde8b517d6d9","uploaded_by":"60f562f9-84b6-4914-bf63-a7193567fcdf","created_on":"2025-01-14T14:48:13.106Z","modified_by":"60f562f9-84b6-4914-bf63-a7193567fcdf","modified_on":"2025-01-17T10:21:55.538Z","charset":null,"filesize":"559511","width":1200,"height":800,"duration":null,"embed":null,"description":null,"location":null,"tags":null,"metadata":{},"focal_point_x":null,"focal_point_y":null,"tus_id":null,"tus_data":null,"uploaded_on":"2025-01-14T14:48:13.164Z"}	{"folder":"ece7bab9-5433-4a63-b9f7-bde8b517d6d9","modified_by":"60f562f9-84b6-4914-bf63-a7193567fcdf","modified_on":"2025-01-17T10:21:55.538Z"}	\N	\N
+1091	1129	directus_fields	256	{"sort":5,"interface":"list-o2m","special":["o2m"],"options":{"template":"{{videoCourse.title}}"},"collection":"directus_users","field":"videoCourses"}	{"sort":5,"interface":"list-o2m","special":["o2m"],"options":{"template":"{{videoCourse.title}}"},"collection":"directus_users","field":"videoCourses"}	\N	\N
+1092	1130	directus_fields	257	{"sort":4,"interface":"select-dropdown-m2o","hidden":true,"collection":"user_video_courses","field":"user"}	{"sort":4,"interface":"select-dropdown-m2o","hidden":true,"collection":"user_video_courses","field":"user"}	\N	\N
+1093	1131	directus_fields	258	{"sort":5,"special":["cast-json"],"collection":"user_video_courses","field":"lessonsFinished"}	{"sort":5,"special":["cast-json"],"collection":"user_video_courses","field":"lessonsFinished"}	\N	\N
+1094	1132	directus_fields	249	{"id":249,"collection":"user_video_courses","field":"id","special":["uuid"],"interface":"input","options":null,"display":null,"display_options":null,"readonly":true,"hidden":true,"sort":1,"width":"full","translations":null,"note":null,"conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	{"collection":"user_video_courses","field":"id","sort":1,"group":null}	\N	\N
+1095	1133	directus_fields	250	{"id":250,"collection":"user_video_courses","field":"didFinish","special":["cast-boolean"],"interface":"boolean","options":null,"display":null,"display_options":null,"readonly":false,"hidden":false,"sort":2,"width":"full","translations":null,"note":null,"conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	{"collection":"user_video_courses","field":"didFinish","sort":2,"group":null}	\N	\N
+1096	1134	directus_fields	251	{"id":251,"collection":"user_video_courses","field":"videoCourse","special":["m2o"],"interface":"select-dropdown-m2o","options":{"template":"{{title}}"},"display":null,"display_options":null,"readonly":false,"hidden":false,"sort":3,"width":"full","translations":null,"note":null,"conditions":null,"required":true,"group":null,"validation":null,"validation_message":null}	{"collection":"user_video_courses","field":"videoCourse","sort":3,"group":null}	\N	\N
+1097	1135	directus_fields	258	{"id":258,"collection":"user_video_courses","field":"lessonsFinished","special":["cast-json"],"interface":null,"options":null,"display":null,"display_options":null,"readonly":false,"hidden":false,"sort":4,"width":"full","translations":null,"note":null,"conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	{"collection":"user_video_courses","field":"lessonsFinished","sort":4,"group":null}	\N	\N
+1098	1136	directus_fields	257	{"id":257,"collection":"user_video_courses","field":"user","special":null,"interface":"select-dropdown-m2o","options":null,"display":null,"display_options":null,"readonly":false,"hidden":true,"sort":5,"width":"full","translations":null,"note":null,"conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	{"collection":"user_video_courses","field":"user","sort":5,"group":null}	\N	\N
+1099	1137	user_video_courses	9cac4d35-b290-4890-a9f3-9cb4883d1533	{"didFinish":true,"videoCourse":1,"lessonsFinished":["Voertuigen"],"user":"60f562f9-84b6-4914-bf63-a7193567fcdf"}	{"didFinish":true,"videoCourse":1,"lessonsFinished":["Voertuigen"],"user":"60f562f9-84b6-4914-bf63-a7193567fcdf"}	\N	\N
 \.
 
 
@@ -5023,7 +5065,6 @@ c36d4878-9546-4449-857c-bd86f5e50eeb	Administrator	verified	$t:admin_description
 
 COPY public.directus_sessions (token, "user", expires, ip, user_agent, share, origin, next_token) FROM stdin;
 WQ-_Yu_nnktOnhRcXpXmzRIa2qUvJnXyoxcIrjeljfGz1WjMy_T221AHfeLG_lKh	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-21 18:57:58.293+00	172.19.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	\N	http://localhost:8055	\N
-jT-33NHcENqXHv17fL2GI5pQvDDIG3UxOJlbhA-0tEhGO76GvGEIsNxNpM0H6SmM	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 00:49:39.085+00	172.19.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	\N	http://localhost:8055	\N
 LPgo-n4rlHyjMc38qsmdjupPcW9zXWkjyr_Q-tjTwjb_DA8Uyo45oDMiy5LmnIyM	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-23 00:53:08.13+00	172.19.0.1	node	\N	http://127.0.0.1:5173	\N
 qwlLdeYdclGlPQ0jfUK0cJrbVu_jflNwmdxvlgtQlIKS9DLFU_EFwepklI8wLJVJ	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-23 00:58:56.278+00	172.19.0.1	node	\N	http://127.0.0.1:5173	\N
 3JoUSRNHCKxzMZFx7AyZAXckqY7O_hwGlyH8Yjnkk1_J_PfZ9B5O7ljz8bwLGEM_	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-23 01:03:43.078+00	172.19.0.1	node	\N	http://127.0.0.1:5173	\N
@@ -5034,8 +5075,11 @@ cBAhbNs0o2E7JTJPpKVUc7IYojKCYe8YxWZlCtbvRWpgDGM5y0KHacvbIPZP20Xh	60f562f9-84b6-4
 GQcKacRA_BzQYjyd7OJotCKc64_UFh-c_s1ap_oZRF2PraWu8G1W89ff9haFGJEN	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-23 14:20:47.334+00	172.19.0.1	node	\N	http://localhost:5173	\N
 Eduo4b8HRlDUBJPchz8pPN2-DJ82wsunci325dhPdN-jSWmvGFukoayu1X0PnAyK	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-23 14:29:52.588+00	172.19.0.1	node	\N	http://localhost:5173	\N
 92NVf2iKoyTTZVcPQYqmYXgYqR_cCpbXmvqZqprKb_KlC4Hwl6gFM1w10a7eHieG	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-04-26 14:31:41.214+00	172.19.0.1	node	\N	http://localhost:5173	\N
--ZSOxxbR5iYN7agN4YqfnuagOVY7NoReNjljobixaWxhIs_vdWYLzD4AFIpevhoM	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-16 16:25:46.969+00	172.19.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	\N	http://localhost:8055	B8iULlneK3wyzA4lv-DO96HC0pN7SOsriV0LM4y1RVCzHN2Zu0pjgBMGDoO5XCyS
 B8iULlneK3wyzA4lv-DO96HC0pN7SOsriV0LM4y1RVCzHN2Zu0pjgBMGDoO5XCyS	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 16:25:36.969+00	172.19.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	\N	http://localhost:8055	\N
+TImzw6v68oKqtblMX1To1A5UcclVoLTojWQ874tiZfzOu36gSrg1U784hGr8zlxy	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-04-27 10:56:36.96+00	172.21.0.1	node	\N	http://127.0.0.1:5173	\N
+4rrvXUpTM2XeSouPDcj2BCohsdeu-AK51LCdzV32hoowZxmPbg0IEho-nCAHjRC-	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-04-27 12:55:17.508+00	172.21.0.1	node	\N	http://127.0.0.1:5173	\N
+xHDxFY3jRsueBx0eN_zaQ-XZu6aURO_JjggeDnK7WR07-y9CHPcY27OdcRbnFTry	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 14:29:04.369+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	\N	http://localhost:8055	91b7NYYyjVOitu_j1oPJ819eRk5LrrztOJyXyzWMWe_hFgg0w7GskD4O2nlCJfa8
+91b7NYYyjVOitu_j1oPJ819eRk5LrrztOJyXyzWMWe_hFgg0w7GskD4O2nlCJfa8	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-18 14:28:54.369+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	\N	http://localhost:8055	\N
 \.
 
 
@@ -5071,7 +5115,7 @@ COPY public.directus_translations (id, language, key, value) FROM stdin;
 COPY public.directus_users (id, first_name, last_name, email, password, location, title, description, tags, avatar, language, tfa_secret, status, role, token, last_access, last_page, provider, external_identifier, auth_data, email_notifications, appearance, theme_dark, theme_light, theme_light_overrides, theme_dark_overrides, "expiresAt", subscription) FROM stdin;
 88a6e8cf-f0f8-41db-a3a2-8a9741c086cc	Frontend	Bot	\N	\N	\N	For server-to-server communication	This user has API only access and is meant for communicating securely with Directus from your frontend.\n\nThis user has elevated permissions over the Public to:\n- Submit Forms \n- Upload Files \n\nFrom a security perspective, you would typically not want to allow public access to upload files or submit forms.\n\n- Generate a static token access below and include it in API calls to Directus when submitting forms or uploading files from a form.\n- Be careful to only use the token server side to prevent the static access token from being exposed to the client side.	["API"]	440df429-4715-42a0-afcd-569f5cdfb145	\N	\N	active	\N	\N	\N	\N	default	\N	\N	t	\N	\N	\N	\N	\N	\N	\N
 d56956bf-6ed0-465e-bb4a-ec9bde65c5f0	Webmaster	\N	cms@example.com	\N	\N	\N	\N	\N	dea64c65-de50-4d86-abea-6dee3d5256b2	\N	\N	active	c36d4878-9546-4449-857c-bd86f5e50eeb	\N	2024-12-27 13:28:31.084+00	\N	default	\N	\N	t	\N	\N	\N	\N	\N	\N	\N
-60f562f9-84b6-4914-bf63-a7193567fcdf	Admin	User	richard@codeit.ninja	$argon2id$v=19$m=65536,t=3,p=4$RJcQ9WpW48oYbrw//JWwRQ$CPjd79nlZLHxOoZVk6Dbpp0nqR2mp6ijXqjv6mKbnxQ	 	\N	\N	\N	\N	\N	\N	active	c36d4878-9546-4449-857c-bd86f5e50eeb	1nrsO0lzBtkRGPcVcxPsexKQrrW6v97d	2025-01-16 16:25:36.982+00	/content/subscriptions/1	default	\N	\N	t	\N	\N	\N	\N	\N	2025-02-26 12:00:00	8e173084-fb18-45db-8d7a-bc78819b26ca
+60f562f9-84b6-4914-bf63-a7193567fcdf	Admin	User	richard@codeit.ninja	$argon2id$v=19$m=65536,t=3,p=4$RJcQ9WpW48oYbrw//JWwRQ$CPjd79nlZLHxOoZVk6Dbpp0nqR2mp6ijXqjv6mKbnxQ	 	\N	\N	\N	\N	\N	\N	active	c36d4878-9546-4449-857c-bd86f5e50eeb	1nrsO0lzBtkRGPcVcxPsexKQrrW6v97d	2025-01-17 14:28:54.375+00	/users/60f562f9-84b6-4914-bf63-a7193567fcdf	default	\N	\N	t	\N	\N	\N	\N	\N	2025-02-26 12:00:00	8e173084-fb18-45db-8d7a-bc78819b26ca
 \.
 
 
@@ -5304,7 +5348,8 @@ COPY public.user_exams (id, exam, "didPass", "user") FROM stdin;
 -- Data for Name: user_video_courses; Type: TABLE DATA; Schema: public; Owner: directus
 --
 
-COPY public.user_video_courses (id, "didFinish", "videoCourse") FROM stdin;
+COPY public.user_video_courses (id, "didFinish", "videoCourse", "user", "lessonsFinished") FROM stdin;
+9cac4d35-b290-4890-a9f3-9cb4883d1533	t	1	60f562f9-84b6-4914-bf63-a7193567fcdf	["Voertuigen"]
 \.
 
 
@@ -5331,14 +5376,14 @@ COPY public.video_courses_lessons (id, title, video, description, "videoCourse")
 -- Name: directus_activity_id_seq; Type: SEQUENCE SET; Schema: public; Owner: directus
 --
 
-SELECT pg_catalog.setval('public.directus_activity_id_seq', 1120, true);
+SELECT pg_catalog.setval('public.directus_activity_id_seq', 1138, true);
 
 
 --
 -- Name: directus_fields_id_seq; Type: SEQUENCE SET; Schema: public; Owner: directus
 --
 
-SELECT pg_catalog.setval('public.directus_fields_id_seq', 252, true);
+SELECT pg_catalog.setval('public.directus_fields_id_seq', 258, true);
 
 
 --
@@ -5366,14 +5411,14 @@ SELECT pg_catalog.setval('public.directus_presets_id_seq', 19, true);
 -- Name: directus_relations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: directus
 --
 
-SELECT pg_catalog.setval('public.directus_relations_id_seq', 48, true);
+SELECT pg_catalog.setval('public.directus_relations_id_seq', 49, true);
 
 
 --
 -- Name: directus_revisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: directus
 --
 
-SELECT pg_catalog.setval('public.directus_revisions_id_seq', 1085, true);
+SELECT pg_catalog.setval('public.directus_revisions_id_seq', 1099, true);
 
 
 --
@@ -6609,6 +6654,14 @@ ALTER TABLE ONLY public.user_exams
 
 ALTER TABLE ONLY public.user_exams
     ADD CONSTRAINT user_exams_user_foreign FOREIGN KEY ("user") REFERENCES public.directus_users(id) ON DELETE SET NULL;
+
+
+--
+-- Name: user_video_courses user_video_courses_user_foreign; Type: FK CONSTRAINT; Schema: public; Owner: directus
+--
+
+ALTER TABLE ONLY public.user_video_courses
+    ADD CONSTRAINT user_video_courses_user_foreign FOREIGN KEY ("user") REFERENCES public.directus_users(id) ON DELETE SET NULL;
 
 
 --
