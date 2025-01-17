@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { Logo } from '$lib/components/logo'
-	import { site as siteSettings, user } from '$lib/contexts/app'
+	import { session } from '$lib/stores/app.svelte'
 	import { _, locale } from 'svelte-i18n'
 
 	let { children } = $props()
-	let username = $derived(user.get()!.first_name + ' ' + user.get()!.last_name)
-	let subscription = $derived(user.get()!.subscription.title)
-
-	const site = siteSettings.get()
+	let username = $derived(session.user?.first_name + ' ' + session.user?.last_name)
+	let subscription = $derived(session.user?.subscription.title)
 </script>
 
 <div class="flex min-h-screen flex-col gap-12">

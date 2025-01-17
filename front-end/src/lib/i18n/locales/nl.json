@@ -5,7 +5,8 @@
 		"partice_exams": "Oefenexamens",
 		"blog": "Blog",
 		"profile": "Mijn account",
-		"chapters": "Hoofdstukken"
+		"chapters": "Hoofdstukken",
+		"lesson_content": "Lesinhoud"
 	},
 	"account": {
 		"welcome": "Hi {username}",

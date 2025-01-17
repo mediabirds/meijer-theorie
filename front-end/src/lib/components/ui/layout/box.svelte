@@ -1,18 +1,20 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte'
 	import { H } from '../heading'
+	import type { HTMLAttributes } from 'svelte/elements'
+	import { cn } from '$lib/utils'
 
 	type Props = {
 		children: Snippet
 		title?: Snippet
-	}
+	} & Omit<HTMLAttributes<HTMLDivElement>, 'title'>
 
-	const { children, title }: Props = $props()
+	const { children, title, ...restProps }: Props = $props()
 </script>
 
-<div class="rounded-xl bg-white p-8 shadow-lg">
+<div {...restProps} class={cn('rounded-3xl bg-white p-6 shadow-lg', restProps.class)}>
 	{#if title}
-		<H level="3" class="mb-2 text-2xl font-bold">{@render title()}</H>
+		{@render title()}
 	{/if}
 	{@render children()}
 </div>

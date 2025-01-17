@@ -19,6 +19,5 @@ export type Site = {
 export const globals = new Context<AppContext['globals']>('APP_STATE')
 export const session = new Context<App.Locals['session']>('APP_SESSION')
 export const user = new Context<App.Locals['user']>('APP_SESSION')
-export const site = new Context<Site>('APP_SITE')
 
 export { getAppContext, setAppContext, type AppContext }

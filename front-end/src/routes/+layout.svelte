@@ -1,15 +1,16 @@
 <script lang="ts">
-	import type { Globals } from '$lib/contexts/app/index.svelte'
-	import { globals, session, user, site } from '$lib/contexts/app'
+	import { site, session } from '$lib/stores/app.svelte'
+	import { onMount } from 'svelte'
 
 	import '../app.css'
 
 	let { children, data } = $props()
 
-	globals.set(data.globals as Globals)
-	session.set(data.session)
-	user.set(data.user)
-	site.set({ isMenuCollapsed: false })
+	onMount(() => {
+		session.set({ ...data.session, user: data.user })
+		// @ts-ignore
+		site.set({ ...data.globals })
+	})
 </script>
 
 {@render children()}

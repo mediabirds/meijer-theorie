@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { globals } from '$lib/contexts/app'
+	import { site } from '$lib/stores/app.svelte'
 	import { getImageUrl } from '$lib/utils'
 	import type { HTMLImgAttributes } from 'svelte/elements'
 
@@ -9,5 +10,5 @@
 </script>
 
 <a href="/">
-	<img src={getImageUrl(globals.get().logo)} alt="Meijer Theorie" {...restProps} />
+	<img src={getImageUrl(site.logo)} alt="Meijer Theorie" {...restProps} />
 </a>

@@ -50,29 +50,14 @@ export async function refresh(
 
 export async function me(event: RequestEvent) {
 	try {
-		const user = await event.locals.directus.request<
-			Directus.SchemaMapper<
-				Directus.DirectusUsers,
-				{
-					subscription: Directus.SchemaMapper<
-						Directus.Subscriptions,
-						{
-							tier: Directus.SubscriptionTiers
-						}
-					>
-					practiceExams: Directus.SchemaMapper<
-						Directus.UserExams,
-						{ exam: Directus.PracticeExams }
-					>[]
-				}
-			>
-		>(
+		const user = await event.locals.directus.request<App.Locals['user']>(
 			readMe({
 				fields: [
 					'*',
 					{
-						subscription: ['*', { tier: ['*'] }],
-						practiceExams: ['*', { exam: ['*', { questions: [{ questions: ['*'] }] }] }]
+						subscription: ['*'],
+						practiceExams: ['*', { exam: ['*', { questions: [{ questions: ['*'] }] }] }],
+						videoCourses: ['lessonsFinished', 'didFinish', { videoCourse: ['*'] }]
 					}
 				]
 			})

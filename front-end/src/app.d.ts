@@ -13,6 +13,13 @@ declare global {
 			user: Directus.SchemaMapper<
 				Directus.DirectusUsers,
 				{
+					videoCourses: Directus.SchemaMapper<
+						Directus.UserVideoCourses,
+						{
+							videoCourse: Directus.VideoCourses
+							lessonsFinished: string[]
+						}
+					>[]
 					subscription: Directus.SubscriptionTiers
 					practiceExams: Directus.SchemaMapper<
 						Directus.UserExams,
@@ -490,6 +497,7 @@ declare global {
 			theme_light_overrides?: unknown | null
 			title?: string | null
 			token?: string | null
+			videoCourses: any[] | UserVideoCourses[]
 		}
 
 		export type DirectusVersions = {
@@ -704,6 +712,8 @@ declare global {
 		export type UserVideoCourses = {
 			didFinish?: boolean | null
 			id: string
+			lessonsFinished?: unknown | null
+			user?: string | DirectusUsers | null
 			videoCourse: number | VideoCourses
 		}
 

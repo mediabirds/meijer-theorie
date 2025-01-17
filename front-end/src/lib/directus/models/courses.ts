@@ -41,11 +41,11 @@ export const getCourse = async (
 	event: RequestEvent,
 	query?: Query<Directus.CustomDirectusTypes, Directus.VideoCourses>
 ) => {
-	const course = await getCourses(event, query)
+	const { courses } = await getCourses(event, query)
 
-	if (course.courses.length === 0) {
+	if (courses.length === 0) {
 		return null
 	}
 
-	return course.courses[0]
+	return courses[0]
 }
