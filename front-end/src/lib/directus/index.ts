@@ -12,7 +12,7 @@ export const createClient = (fetch?: FetchInterface, session?: Required<Authenti
 		PUBLIC_DIRECTUS_URL,
 		fetch ? { globals: { fetch } } : {}
 	)
-		.with(rest())
+		.with(rest({ credentials: 'same-origin' }))
 		.with(authentication('json'))
 
 	if (session) {

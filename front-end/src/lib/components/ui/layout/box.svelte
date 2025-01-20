@@ -6,7 +6,8 @@
 
 	type Props = {
 		children: Snippet
-		title?: Snippet
+		title?: Snippet | string
+		href?: string
 	} & Omit<HTMLAttributes<HTMLDivElement>, 'title'>
 
 	const { children, title, ...restProps }: Props = $props()
@@ -14,7 +15,11 @@
 
 <div {...restProps} class={cn('rounded-3xl bg-white p-6 shadow-lg', restProps.class)}>
 	{#if title}
-		{@render title()}
+		{#if typeof title === 'string'}
+			<H level="5">{title}</H>
+		{:else}
+			{@render title()}
+		{/if}
 	{/if}
 	{@render children()}
 </div>

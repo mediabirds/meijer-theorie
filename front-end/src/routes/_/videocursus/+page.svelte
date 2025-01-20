@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { H } from '$lib/components/ui/heading'
 	import { Box } from '$lib/components/ui/layout'
+	import { Tooltip } from '$lib/components/ui/tooltip'
 	import { cn, getImageUrl } from '$lib/utils.js'
 	import { _ } from 'svelte-i18n'
 
@@ -9,30 +9,39 @@
 	console.log(data.courses)
 </script>
 
-<Box>
-	{#snippet title()}
-		{$_('common.chapters')}
-	{/snippet}
-	<span>Stap voor stap naar je theorie-examen!</span>
-	<div class="mt-8 grid lg:grid-cols-2 xl:grid-cols-3">
-		{#each data.courses as course}
-			<a
-				href="/_/videocursus/{course.category}/{course.slug}"
-				class={cn(
-					'bg-primary-50 flex flex-col gap-6 rounded-2xl p-4',
-					'hover:bg-primary-100 transition-colors'
-				)}
-			>
-				<header class="flex flex-col">
-					<H level="6">{course.title}</H>
-					<span>{course.tagline}</span>
-				</header>
-				<img
-					src={getImageUrl(course.thumbnail, { width: 400 })}
-					alt={course.title}
-					class="aspect-video rounded-xl object-cover"
-				/>
-			</a>
-		{/each}
-	</div>
-</Box>
+<div class="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
+	{#each data.courses as course}
+		{@const finishedCount = course.chapters.filter((chapter) => chapter.didFinish).length}
+		<Box title={course.title!}>
+			<p class="mb-4 mt-1">{course.tagline}</p>
+			<img
+				src={getImageUrl(course.thumbnail, { width: 600 })}
+				alt={course.title}
+				class="aspect-video rounded-xl object-cover"
+			/>
+			<div class="mt-6 flex flex-col gap-2">
+				<span class="flex justify-between">
+					<span>{finishedCount} {$_('common.of')} {course.chapters.length}</span>
+					<span>{((finishedCount / course.chapters.length) * 100).toFixed(0)}%</span>
+				</span>
+				<div class="flex gap-2">
+					{#each course.chapters as chapter}
+						<Tooltip tooltip={chapter.title}>
+							{#snippet trigger({ props })}
+								<a
+									href={`/_/videocursus/${course.category}/${course.slug}/${chapter.slug}`}
+									aria-label={chapter.title}
+									class={cn(
+										'h-4 w-full rounded-full bg-neutral-200 transition-colors hover:bg-primary-200',
+										chapter.didFinish && 'bg-primary'
+									)}
+									{...props}
+								></a>
+							{/snippet}
+						</Tooltip>
+					{/each}
+				</div>
+			</div>
+		</Box>
+	{/each}
+</div>

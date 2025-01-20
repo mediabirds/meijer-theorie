@@ -1,5 +1,6 @@
 import type { AuthenticationData } from '@directus/sdk'
 import type { createClient } from './lib/directus'
+import type { Services } from '$lib/server/services'
 
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
@@ -20,13 +21,17 @@ declare global {
 							lessonsFinished: string[]
 						}
 					>[]
-					subscription: Directus.SubscriptionTiers
+					subscription: Directus.SchemaMapper<
+						Directus.SubscriptionTiers,
+						{ subscription: { type: 'car' | 'scooter' | 'motor' } }
+					>
 					practiceExams: Directus.SchemaMapper<
 						Directus.UserExams,
 						{ exam: Directus.PracticeExams }
 					>[]
 				}
 			> | null
+			services: Services
 		}
 		// interface PageData {}
 		// interface PageState {}
@@ -648,6 +653,7 @@ declare global {
 		}
 
 		export type PracticeExams = {
+			category?: string | null
 			id: string
 			questions: any[] | PracticeExamsQuestions[]
 			questions_i23sd54: string
@@ -717,11 +723,20 @@ declare global {
 			videoCourse: number | VideoCourses
 		}
 
+		export type VideoCourseChapters = {
+			description?: string | null
+			id: string
+			lessons: any[] | VideoCoursesLessons[]
+			slug?: string | null
+			thumbnail: string | DirectusFiles
+			title: string
+			videoCourse: number | VideoCourses
+		}
+
 		export type VideoCourses = {
 			category?: string | null
-			estimatedDurationInMinutes: number
+			chapters: any[] | VideoCourseChapters[]
 			id: number
-			lessons: any[] | VideoCoursesLessons[]
 			slug: string
 			subscriptionTier?: string | SubscriptionTiers | null
 			tagline: string
@@ -730,7 +745,9 @@ declare global {
 		}
 
 		export type VideoCoursesLessons = {
+			chapter?: string | VideoCourseChapters | null
 			description?: string | null
+			estimatedDurationInMinutes?: number | null
 			id: number
 			title: string
 			video: string | DirectusFiles
@@ -794,6 +811,7 @@ declare global {
 			subscriptions: Subscriptions[]
 			user_exams: UserExams[]
 			user_video_courses: UserVideoCourses[]
+			video_course_chapters: VideoCourseChapters[]
 			video_courses: VideoCourses[]
 			video_courses_lessons: VideoCoursesLessons[]
 		}

@@ -55,9 +55,9 @@ export async function me(event: RequestEvent) {
 				fields: [
 					'*',
 					{
-						subscription: ['*'],
+						subscription: ['*', { subscription: ['type'] }],
 						practiceExams: ['*', { exam: ['*', { questions: [{ questions: ['*'] }] }] }],
-						videoCourses: ['lessonsFinished', 'didFinish', { videoCourse: ['*'] }]
+						videoCourses: ['*', { videoCourse: ['*'] }]
 					}
 				]
 			})

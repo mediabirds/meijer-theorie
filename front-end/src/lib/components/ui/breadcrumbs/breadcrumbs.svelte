@@ -12,18 +12,18 @@
 	const { ...restProps }: Props = $props()
 </script>
 
-<nav {...restProps} class={cn('flex items-center gap-1', restProps.class)}>
+<nav {...restProps} class={cn('flex flex-wrap items-center gap-1', restProps.class)}>
 	{#each paths as path, i}
 		{@const currentPath = '/' + paths.slice(0, i + 1).join('/')}
 		{#if i < paths.length - 1}
-			<a href={currentPath} class="hover:text-primary font-medium text-neutral-600"
-				>{capitalize(lowerCase(path))}</a
+			<a href={currentPath} class="font-medium text-neutral-600 hover:text-primary"
+				>{capitalize(lowerCase(decodeURIComponent(path)))}</a
 			>
 			{#if i !== 0}
 				<ChevronRight size="18" strokeWidth="1.5" class="relative top-[1px]" />
 			{/if}
 		{:else}
-			<span>{capitalize(lowerCase(path))}</span>
+			<span>{capitalize(lowerCase(decodeURIComponent(path)))}</span>
 		{/if}
 	{/each}
 </nav>

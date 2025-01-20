@@ -4,11 +4,15 @@
 	import { getImageUrl } from '$lib/utils'
 	import type { HTMLImgAttributes } from 'svelte/elements'
 
-	type Props = Omit<HTMLImgAttributes, 'src' | 'alt'>
+	type Props = { thumbnail?: boolean } & Omit<HTMLImgAttributes, 'src' | 'alt'>
 
-	const { ...restProps } = $props()
+	const { thumbnail, ...restProps }: Props = $props()
 </script>
 
 <a href="/">
-	<img src={getImageUrl(site.logo)} alt="Meijer Theorie" {...restProps} />
+	{#if thumbnail}
+		<img src={getImageUrl(site.favicon)} alt="Meijer Theorie" {...restProps} />
+	{:else}
+		<img src={getImageUrl(site.logo)} alt="Meijer Theorie" {...restProps} />
+	{/if}
 </a>

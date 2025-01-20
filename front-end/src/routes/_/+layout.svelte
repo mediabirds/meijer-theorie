@@ -1,52 +1,102 @@
 <script lang="ts">
+	import { afterNavigate, beforeNavigate } from '$app/navigation'
+	import { page } from '$app/state'
 	import { Logo } from '$lib/components/logo'
-	import { session } from '$lib/stores/app.svelte'
-	import { _, locale } from 'svelte-i18n'
+	import { Link } from '$lib/components/ui/link'
+	import { session, site } from '$lib/stores/app.svelte'
+	import { cn } from '$lib/utils'
+	import { _ } from 'svelte-i18n'
 
 	let { children } = $props()
 	let username = $derived(session.user?.first_name + ' ' + session.user?.last_name)
 	let subscription = $derived(session.user?.subscription.title)
+
+	const menuItems = [
+		{
+			title: $_('common.dashboard'),
+			href: '/_',
+			icon: '📚'
+		},
+		{
+			title: $_('common.video_courses'),
+			href: '/_/videocursus',
+			icon: '💻'
+		},
+		{
+			title: $_('common.partice_exams'),
+			href: '/_/oefenexamens',
+			icon: '📝'
+		},
+		{
+			title: $_('common.profile'),
+			href: '/_/profile',
+			icon: '👤'
+		}
+	]
+
+	afterNavigate(() => {
+		if (page.url.pathname.startsWith('/_/videocursus')) {
+			site.isMenuCollapsedEnabled = true
+			site.isMenuCollapsed = true
+		} else {
+			site.isMenuCollapsedEnabled = false
+			site.isMenuCollapsed = false
+		}
+	})
 </script>
 
 <div class="flex min-h-screen flex-col gap-12">
-	<div class="grid flex-grow grid-cols-[350px_1fr]">
-		<aside class="flex flex-col gap-12 rounded-ee-3xl bg-white p-8 shadow-lg">
+	<div
+		class={cn(
+			'grid flex-grow grid-cols-[350px_1fr] transition-all',
+			site.isMenuCollapsed && 'grid-cols-[110px_1fr]'
+		)}
+	>
+		<aside
+			class="flex flex-col gap-12 rounded-ee-3xl bg-white p-8 shadow-lg"
+			onmouseenter={() => {
+				if (!site.isMenuCollapsedEnabled) {
+					return
+				}
+
+				site.isMenuCollapsed = false
+			}}
+			onmouseleave={() => {
+				if (!site.isMenuCollapsedEnabled) {
+					return
+				}
+
+				site.isMenuCollapsed = true
+			}}
+		>
 			<span class="text-2xl font-bold">
-				<Logo width="200" style="width: 200px;min-width: 200px;" />
+				<Logo
+					width="200"
+					thumbnail={site.isMenuCollapsed}
+					class={cn(
+						'w-52 min-w-52',
+						site.isMenuCollapsed && 'relative -left-1 w-[45px] min-w-[45px]'
+					)}
+				/>
 			</span>
 			<nav class="flex flex-col gap-4">
-				<a href="/" class="flex items-center gap-4">
-					<span
-						class="flex min-h-11 min-w-11 items-center justify-center rounded-md bg-neutral-100 text-2xl"
-					>
-						<span class="relative -mt-1">📚</span>
-					</span>
-					<span>{$_('common.dashboard')}</span>
-				</a>
-				<a href="/_/videocursus" class="flex items-center gap-4">
-					<span
-						class="flex min-h-11 min-w-11 items-center justify-center rounded-md bg-neutral-100 text-2xl"
-					>
-						<span class="relative -mt-1">💻</span>
-					</span>
-					<span>{$_('common.video_courses')}</span>
-				</a>
-				<a href="/" class="flex items-center gap-4">
-					<span
-						class="flex min-h-11 min-w-11 items-center justify-center rounded-md bg-neutral-100 text-2xl"
-					>
-						<span class="relative -mt-1">📝</span>
-					</span>
-					<span>{$_('common.partice_exams')}</span>
-				</a>
-				<a href="/" class="flex items-center gap-4">
-					<span
-						class="flex min-h-11 min-w-11 items-center justify-center rounded-md bg-neutral-100 text-2xl"
-					>
-						<span class="relative -mt-1">👤</span>
-					</span>
-					<span>{$_('common.profile')}</span>
-				</a>
+				{#each menuItems as item}
+					<Link href={item.href} class="flex items-center gap-4">
+						<span
+							class="flex min-h-11 min-w-11 items-center justify-center rounded-md bg-neutral-100 text-2xl"
+						>
+							<span class="relative -mt-1">{item.icon}</span>
+						</span>
+						<span
+							class={cn(
+								'text-nowrap transition-all',
+								site.isMenuCollapsed && 'invisible opacity-0'
+							)}
+						>
+							{item.title}
+						</span>
+					</Link>
+				{/each}
 			</nav>
 		</aside>
 		<div>

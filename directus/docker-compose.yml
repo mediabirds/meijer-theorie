@@ -1,5 +1,5 @@
 services:
-  database:
+  meijer-database:
     image: ghcr.io/baosystems/postgis:16-3.5
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -18,12 +18,12 @@ services:
       - 5432:5432
     env_file:
       - .env
-  directus:
+  meijer-directus:
     build:
       context: .
     container_name: directus-meijer
     depends_on:
-      database:
+      meijer-database:
         condition: service_healthy
     ports:
       - 8055:8055

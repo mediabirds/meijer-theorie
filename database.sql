@@ -260,6 +260,10 @@ DROP TABLE public.block_gallery;
 DROP TABLE public.block_form;
 DROP TABLE public.block_button_group;
 DROP TABLE public.block_button;
+DROP EXTENSION postgis_topology;
+DROP EXTENSION postgis_tiger_geocoder;
+DROP EXTENSION postgis;
+DROP EXTENSION fuzzystrmatch;
 DROP SCHEMA topology;
 DROP SCHEMA tiger_data;
 DROP SCHEMA tiger;
@@ -312,6 +316,62 @@ ALTER SCHEMA topology OWNER TO directus;
 --
 
 COMMENT ON SCHEMA topology IS 'PostGIS Topology schema';
+
+
+--
+-- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS fuzzystrmatch WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION fuzzystrmatch; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance between strings';
+
+
+--
+-- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION postgis IS 'PostGIS geometry and geography spatial types and functions';
+
+
+--
+-- Name: postgis_tiger_geocoder; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder WITH SCHEMA tiger;
+
+
+--
+-- Name: EXTENSION postgis_tiger_geocoder; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION postgis_tiger_geocoder IS 'PostGIS tiger geocoder and reverse geocoder';
+
+
+--
+-- Name: postgis_topology; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS postgis_topology WITH SCHEMA topology;
+
+
+--
+-- Name: EXTENSION postgis_topology; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION postgis_topology IS 'PostGIS topology spatial types and functions';
 
 
 SET default_tablespace = '';
@@ -3170,6 +3230,25 @@ COPY public.directus_activity (id, action, "user", "timestamp", ip, user_agent, 
 1136	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 13:41:27.38+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	257	http://localhost:8055
 1137	create	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 14:28:26.271+00	172.21.0.1	node	user_video_courses	9cac4d35-b290-4890-a9f3-9cb4883d1533	http://127.0.0.1:5173
 1138	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 14:28:26.282+00	172.21.0.1	node	directus_users	60f562f9-84b6-4914-bf63-a7193567fcdf	http://127.0.0.1:5173
+1139	login	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 17:15:15.217+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_users	60f562f9-84b6-4914-bf63-a7193567fcdf	https://staging.admin.yoepie.nl
+1157	update	4ebf5c29-5909-4cd9-bcaa-903079d41bfa	2025-01-17 18:05:07.833+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_users	4ebf5c29-5909-4cd9-bcaa-903079d41bfa	https://meijertheorie.admin.mediabirds.dev
+1140	login	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 17:33:47.068+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_users	60f562f9-84b6-4914-bf63-a7193567fcdf	https://meijertheorie.admin.mediabirds.dev
+1141	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 17:33:59.089+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_collections	website	https://meijertheorie.admin.mediabirds.dev
+1142	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 17:34:22.436+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_collections	user_exams	https://meijertheorie.admin.mediabirds.dev
+1143	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 17:34:23.621+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_collections	user_video_courses	https://meijertheorie.admin.mediabirds.dev
+1144	create	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 17:37:30.481+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	259	https://meijertheorie.admin.mediabirds.dev
+1145	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 17:37:37.17+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	259	https://meijertheorie.admin.mediabirds.dev
+1146	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 17:37:37.192+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	213	https://meijertheorie.admin.mediabirds.dev
+1147	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 17:37:37.214+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	214	https://meijertheorie.admin.mediabirds.dev
+1148	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 17:37:37.228+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	239	https://meijertheorie.admin.mediabirds.dev
+1149	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 17:37:37.244+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_fields	234	https://meijertheorie.admin.mediabirds.dev
+1150	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 17:37:58.772+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_collections	practice_exams	https://meijertheorie.admin.mediabirds.dev
+1151	create	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 17:40:20.666+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_users	4ebf5c29-5909-4cd9-bcaa-903079d41bfa	https://meijertheorie.admin.mediabirds.dev
+1152	login	4ebf5c29-5909-4cd9-bcaa-903079d41bfa	2025-01-17 17:40:45.082+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_users	4ebf5c29-5909-4cd9-bcaa-903079d41bfa	https://meijertheorie.admin.mediabirds.dev
+1153	login	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 17:40:57.521+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_users	60f562f9-84b6-4914-bf63-a7193567fcdf	https://meijertheorie.admin.mediabirds.dev
+1154	update	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 17:41:51.11+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_users	4ebf5c29-5909-4cd9-bcaa-903079d41bfa	https://meijertheorie.admin.mediabirds.dev
+1155	login	4ebf5c29-5909-4cd9-bcaa-903079d41bfa	2025-01-17 17:42:01.125+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_users	4ebf5c29-5909-4cd9-bcaa-903079d41bfa	https://meijertheorie.admin.mediabirds.dev
+1156	login	4ebf5c29-5909-4cd9-bcaa-903079d41bfa	2025-01-17 18:04:43.797+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	directus_users	4ebf5c29-5909-4cd9-bcaa-903079d41bfa	https://meijertheorie.admin.mediabirds.dev
 \.
 
 
@@ -3199,18 +3278,18 @@ page_blocks	code_blocks	\N	\N	t	f	\N	\N	f	\N	\N	sort	all	#18222F	[]	3	pages	open
 pages	web_asset	Dynamic page builder	{{title}}	f	f	\N	\N	t	archived	draft	sort	all	\N	\N	1	website	open	http://localhost:3000/posts/{{slug}}?preview=true	f
 posts	article	Individual blog posts	{{title}}	f	f	\N	status	t	archived	draft	sort	all	\N	["title","slug","author","status","image","description","content"]	2	website	open	http://localhost:3000/posts/{{slug}}?preview=true	f
 practice_exams_questions	import_export	\N	\N	t	f	\N	\N	t	\N	\N	\N	all	\N	\N	3	practice_exams	open	\N	f
-website	folder_special	\N	\N	f	f	\N	\N	t	\N	\N	\N	all	\N	\N	1	\N	open	\N	f
 blocks	content_copy	\N	\N	t	f	\N	\N	t	\N	\N	\N	all	#1A212C	\N	2	\N	closed	\N	f
 subscriptions	\N	\N	\N	f	f	\N	\N	t	archived	draft	\N	all	\N	\N	3	\N	open	\N	f
 subscription_tiers_practice_exams	import_export	\N	\N	t	f	\N	\N	t	\N	\N	\N	all	\N	\N	2	subscriptions	open	\N	f
 video_courses	\N	\N	\N	f	f	\N	\N	t	\N	\N	\N	all	\N	\N	4	\N	open	\N	f
-practice_exams	\N	\N	\N	f	f	\N	\N	t	\N	\N	\N	all	\N	\N	5	\N	open	\N	f
-user_exams	\N	\N	\N	f	f	\N	\N	t	\N	\N	\N	all	\N	\N	6	\N	open	\N	f
 questions_multiple_choice	\N	\N	\N	t	f	\N	\N	t	\N	\N	\N	all	\N	\N	1	practice_exams	open	\N	f
 questions_in_order	\N	\N	\N	t	f	\N	\N	t	\N	\N	\N	all	\N	\N	2	practice_exams	open	\N	f
 video_courses_lessons	\N	\N	\N	t	f	\N	\N	t	\N	\N	\N	all	\N	\N	1	video_courses	open	\N	f
 subscription_tiers	\N	\N	\N	t	f	\N	\N	t	\N	\N	\N	all	\N	\N	1	subscriptions	open	\N	f
-user_video_courses	\N	\N	\N	f	f	\N	\N	t	\N	\N	\N	all	\N	\N	\N	\N	open	\N	f
+website	folder_special	\N	\N	t	f	\N	\N	t	\N	\N	\N	all	\N	\N	1	\N	open	\N	f
+user_exams	\N	\N	\N	t	f	\N	\N	t	\N	\N	\N	all	\N	\N	6	\N	open	\N	f
+user_video_courses	\N	\N	\N	t	f	\N	\N	t	\N	\N	\N	all	\N	\N	\N	\N	open	\N	f
+practice_exams	\N	\N	\N	t	f	\N	\N	t	\N	\N	\N	all	\N	\N	5	\N	open	\N	f
 \.
 
 
@@ -3456,12 +3535,8 @@ COPY public.directus_fields (id, collection, field, special, interface, options,
 237	practice_exams_questions	questions	\N	\N	\N	\N	\N	f	t	3	full	\N	\N	\N	f	\N	\N	\N
 238	practice_exams_questions	collection	\N	\N	\N	\N	\N	f	t	4	full	\N	\N	\N	f	\N	\N	\N
 241	questions_in_order	title	\N	input	\N	\N	\N	f	f	2	full	\N	\N	\N	t	\N	\N	\N
-213	practice_exams	id	uuid	input	\N	\N	\N	t	t	1	full	\N	\N	\N	f	\N	\N	\N
-214	practice_exams	title	\N	input	\N	\N	\N	f	f	2	full	\N	\N	\N	t	\N	\N	\N
-239	practice_exams	questions_i23sd54	alias,no-data	directus-labs-experimental-m2a-interface	\N	\N	\N	f	f	3	full	\N	\N	\N	f	\N	\N	\N
 233	questions_in_order	thumbnail	file	file-image	{"folder":"ece7bab9-5433-4a63-b9f7-bde8b517d6d9","letterbox":true}	\N	\N	f	f	3	full	\N	\N	\N	f	\N	\N	\N
 232	questions_in_order	answers	cast-json	list	{"fields":[{"field":"label","name":"label","type":"string","meta":{"field":"label","width":"half","type":"string","required":true,"interface":"input"}},{"field":"order","name":"order","type":"integer","meta":{"field":"order","width":"half","type":"integer","required":true,"interface":"input"}}]}	\N	\N	f	f	4	full	\N	\N	\N	t	\N	\N	\N
-234	practice_exams	questions	m2a	list-m2a	{"enableSelect":false}	\N	\N	f	f	4	full	\N	\N	\N	t	\N	\N	\N
 228	questions_multiple_choice	id	\N	input	\N	\N	\N	t	t	1	full	\N	\N	\N	f	\N	\N	\N
 240	questions_multiple_choice	title	\N	input	\N	\N	\N	f	f	2	full	\N	\N	\N	t	\N	\N	\N
 230	questions_multiple_choice	thumbnail	file	file-image	{"folder":"ece7bab9-5433-4a63-b9f7-bde8b517d6d9","letterbox":true}	\N	\N	f	f	3	full	\N	\N	\N	f	\N	\N	\N
@@ -3487,6 +3562,11 @@ COPY public.directus_fields (id, collection, field, special, interface, options,
 251	user_video_courses	videoCourse	m2o	select-dropdown-m2o	{"template":"{{title}}"}	\N	\N	f	f	3	full	\N	\N	\N	t	\N	\N	\N
 258	user_video_courses	lessonsFinished	cast-json	\N	\N	\N	\N	f	f	4	full	\N	\N	\N	f	\N	\N	\N
 257	user_video_courses	user	\N	select-dropdown-m2o	\N	\N	\N	f	t	5	full	\N	\N	\N	f	\N	\N	\N
+259	practice_exams	notice-mppk-g	alias,no-data	presentation-notice	{"color":"danger","text":"Let op: Dit schema bevindt zich nog in een overgangsfase en er worden op dit moment nog elementen toegevoegd, zodra dit voltooid is kun je hier oefenexamens aanmaken."}	\N	\N	f	f	1	full	\N	\N	\N	f	\N	\N	\N
+213	practice_exams	id	uuid	input	\N	\N	\N	t	t	2	full	\N	\N	\N	f	\N	\N	\N
+214	practice_exams	title	\N	input	\N	\N	\N	f	f	3	full	\N	\N	\N	t	\N	\N	\N
+239	practice_exams	questions_i23sd54	alias,no-data	directus-labs-experimental-m2a-interface	\N	\N	\N	f	f	4	full	\N	\N	\N	f	\N	\N	\N
+234	practice_exams	questions	m2a	list-m2a	{"enableSelect":false}	\N	\N	f	f	5	full	\N	\N	\N	t	\N	\N	\N
 \.
 
 
@@ -3889,6 +3969,7 @@ COPY public.directus_presets (id, bookmark, "user", role, collection, search, la
 16	\N	60f562f9-84b6-4914-bf63-a7193567fcdf	\N	posts	\N	tabular	{"tabular":{"page":1,"fields":["image","title","status","published_at","slug","author"],"limit":25}}	{"tabular":{"widths":{"image":55.890625,"title":375.66015625,"status":170.03125}}}	\N	\N	bookmark_border	\N
 19	\N	60f562f9-84b6-4914-bf63-a7193567fcdf	\N	practice_exams	\N	\N	{"tabular":{"page":1,"fields":["title","questions"]}}	{"tabular":{"widths":{"title":352}}}	\N	\N	bookmark	\N
 10	\N	60f562f9-84b6-4914-bf63-a7193567fcdf	\N	directus_files	\N	cards	{"cards":{"sort":["-uploaded_on"],"page":1,"limit":25}}	{"cards":{"icon":"insert_drive_file","title":"{{ title }}","subtitle":"{{ type }} • {{ filesize }}","size":4,"imageFit":"crop"}}	\N	\N	bookmark_border	\N
+20	\N	60f562f9-84b6-4914-bf63-a7193567fcdf	\N	subscriptions	\N	\N	{"tabular":{"page":1}}	\N	\N	\N	bookmark	\N
 \.
 
 
@@ -5046,6 +5127,19 @@ COPY public.directus_revisions (id, activity, collection, item, data, delta, par
 1097	1135	directus_fields	258	{"id":258,"collection":"user_video_courses","field":"lessonsFinished","special":["cast-json"],"interface":null,"options":null,"display":null,"display_options":null,"readonly":false,"hidden":false,"sort":4,"width":"full","translations":null,"note":null,"conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	{"collection":"user_video_courses","field":"lessonsFinished","sort":4,"group":null}	\N	\N
 1098	1136	directus_fields	257	{"id":257,"collection":"user_video_courses","field":"user","special":null,"interface":"select-dropdown-m2o","options":null,"display":null,"display_options":null,"readonly":false,"hidden":true,"sort":5,"width":"full","translations":null,"note":null,"conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	{"collection":"user_video_courses","field":"user","sort":5,"group":null}	\N	\N
 1099	1137	user_video_courses	9cac4d35-b290-4890-a9f3-9cb4883d1533	{"didFinish":true,"videoCourse":1,"lessonsFinished":["Voertuigen"],"user":"60f562f9-84b6-4914-bf63-a7193567fcdf"}	{"didFinish":true,"videoCourse":1,"lessonsFinished":["Voertuigen"],"user":"60f562f9-84b6-4914-bf63-a7193567fcdf"}	\N	\N
+1100	1141	directus_collections	website	{"collection":"website","icon":"folder_special","note":null,"display_template":null,"hidden":true,"singleton":false,"translations":null,"archive_field":null,"archive_app_filter":true,"archive_value":null,"unarchive_value":null,"sort_field":null,"accountability":"all","color":null,"item_duplication_fields":null,"sort":1,"group":null,"collapse":"open","preview_url":null,"versioning":false}	{"hidden":true}	\N	\N
+1101	1142	directus_collections	user_exams	{"collection":"user_exams","icon":null,"note":null,"display_template":null,"hidden":true,"singleton":false,"translations":null,"archive_field":null,"archive_app_filter":true,"archive_value":null,"unarchive_value":null,"sort_field":null,"accountability":"all","color":null,"item_duplication_fields":null,"sort":6,"group":null,"collapse":"open","preview_url":null,"versioning":false}	{"hidden":true}	\N	\N
+1102	1143	directus_collections	user_video_courses	{"collection":"user_video_courses","icon":null,"note":null,"display_template":null,"hidden":true,"singleton":false,"translations":null,"archive_field":null,"archive_app_filter":true,"archive_value":null,"unarchive_value":null,"sort_field":null,"accountability":"all","color":null,"item_duplication_fields":null,"sort":null,"group":null,"collapse":"open","preview_url":null,"versioning":false}	{"hidden":true}	\N	\N
+1103	1144	directus_fields	259	{"sort":5,"interface":"presentation-notice","special":["alias","no-data"],"options":{"color":"danger","text":"Let op: Dit schema bevindt zich nog in een overgangsfase en er worden op dit moment nog elementen toegevoegd, zodra dit voltooid is kun je hier oefenexamens aanmaken."},"collection":"practice_exams","field":"notice-mppk-g"}	{"sort":5,"interface":"presentation-notice","special":["alias","no-data"],"options":{"color":"danger","text":"Let op: Dit schema bevindt zich nog in een overgangsfase en er worden op dit moment nog elementen toegevoegd, zodra dit voltooid is kun je hier oefenexamens aanmaken."},"collection":"practice_exams","field":"notice-mppk-g"}	\N	\N
+1104	1145	directus_fields	259	{"id":259,"collection":"practice_exams","field":"notice-mppk-g","special":["alias","no-data"],"interface":"presentation-notice","options":{"color":"danger","text":"Let op: Dit schema bevindt zich nog in een overgangsfase en er worden op dit moment nog elementen toegevoegd, zodra dit voltooid is kun je hier oefenexamens aanmaken."},"display":null,"display_options":null,"readonly":false,"hidden":false,"sort":1,"width":"full","translations":null,"note":null,"conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	{"collection":"practice_exams","field":"notice-mppk-g","sort":1,"group":null}	\N	\N
+1105	1146	directus_fields	213	{"id":213,"collection":"practice_exams","field":"id","special":["uuid"],"interface":"input","options":null,"display":null,"display_options":null,"readonly":true,"hidden":true,"sort":2,"width":"full","translations":null,"note":null,"conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	{"collection":"practice_exams","field":"id","sort":2,"group":null}	\N	\N
+1106	1147	directus_fields	214	{"id":214,"collection":"practice_exams","field":"title","special":null,"interface":"input","options":null,"display":null,"display_options":null,"readonly":false,"hidden":false,"sort":3,"width":"full","translations":null,"note":null,"conditions":null,"required":true,"group":null,"validation":null,"validation_message":null}	{"collection":"practice_exams","field":"title","sort":3,"group":null}	\N	\N
+1107	1148	directus_fields	239	{"id":239,"collection":"practice_exams","field":"questions_i23sd54","special":["alias","no-data"],"interface":"directus-labs-experimental-m2a-interface","options":null,"display":null,"display_options":null,"readonly":false,"hidden":false,"sort":4,"width":"full","translations":null,"note":null,"conditions":null,"required":false,"group":null,"validation":null,"validation_message":null}	{"collection":"practice_exams","field":"questions_i23sd54","sort":4,"group":null}	\N	\N
+1108	1149	directus_fields	234	{"id":234,"collection":"practice_exams","field":"questions","special":["m2a"],"interface":"list-m2a","options":{"enableSelect":false},"display":null,"display_options":null,"readonly":false,"hidden":false,"sort":5,"width":"full","translations":null,"note":null,"conditions":null,"required":true,"group":null,"validation":null,"validation_message":null}	{"collection":"practice_exams","field":"questions","sort":5,"group":null}	\N	\N
+1109	1150	directus_collections	practice_exams	{"collection":"practice_exams","icon":null,"note":null,"display_template":null,"hidden":true,"singleton":false,"translations":null,"archive_field":null,"archive_app_filter":true,"archive_value":null,"unarchive_value":null,"sort_field":null,"accountability":"all","color":null,"item_duplication_fields":null,"sort":5,"group":null,"collapse":"open","preview_url":null,"versioning":false}	{"hidden":true}	\N	\N
+1110	1151	directus_users	4ebf5c29-5909-4cd9-bcaa-903079d41bfa	{"first_name":"Meijer","last_name":"Theorie","email":"admin@mediabirds.dev","password":"**********","subscription":"8e173084-fb18-45db-8d7a-bc78819b26ca","expiresAt":"2080-01-30T12:00:00"}	{"first_name":"Meijer","last_name":"Theorie","email":"admin@mediabirds.dev","password":"**********","subscription":"8e173084-fb18-45db-8d7a-bc78819b26ca","expiresAt":"2080-01-30T12:00:00"}	\N	\N
+1111	1154	directus_users	4ebf5c29-5909-4cd9-bcaa-903079d41bfa	{"id":"4ebf5c29-5909-4cd9-bcaa-903079d41bfa","first_name":"Meijer","last_name":"Theorie","email":"admin@mediabirds.dev","password":"**********","location":null,"title":null,"description":null,"tags":null,"avatar":null,"language":null,"tfa_secret":null,"status":"active","role":"c36d4878-9546-4449-857c-bd86f5e50eeb","token":null,"last_access":"2025-01-17T17:40:45.086Z","last_page":"/content","provider":"default","external_identifier":null,"auth_data":null,"email_notifications":true,"appearance":null,"theme_dark":null,"theme_light":null,"theme_light_overrides":null,"theme_dark_overrides":null,"expiresAt":"2080-01-30T12:00:00","subscription":"8e173084-fb18-45db-8d7a-bc78819b26ca","posts":[],"practiceExams":[],"videoCourses":[],"policies":[]}	{"role":"c36d4878-9546-4449-857c-bd86f5e50eeb"}	\N	\N
+1112	1157	directus_users	4ebf5c29-5909-4cd9-bcaa-903079d41bfa	{"id":"4ebf5c29-5909-4cd9-bcaa-903079d41bfa","first_name":"Meijer","last_name":"Theorie","email":"admin@mediabirds.dev","password":"**********","location":null,"title":null,"description":null,"tags":null,"avatar":null,"language":null,"tfa_secret":null,"status":"active","role":"c36d4878-9546-4449-857c-bd86f5e50eeb","token":"**********","last_access":"2025-01-17T18:04:43.806Z","last_page":"/users/4ebf5c29-5909-4cd9-bcaa-903079d41bfa","provider":"default","external_identifier":null,"auth_data":null,"email_notifications":true,"appearance":null,"theme_dark":null,"theme_light":null,"theme_light_overrides":null,"theme_dark_overrides":null,"expiresAt":"2080-01-30T12:00:00","subscription":"8e173084-fb18-45db-8d7a-bc78819b26ca","posts":[],"practiceExams":[],"videoCourses":[],"policies":[]}	{"token":"**********"}	\N	\N
 \.
 
 
@@ -5075,11 +5169,11 @@ cBAhbNs0o2E7JTJPpKVUc7IYojKCYe8YxWZlCtbvRWpgDGM5y0KHacvbIPZP20Xh	60f562f9-84b6-4
 GQcKacRA_BzQYjyd7OJotCKc64_UFh-c_s1ap_oZRF2PraWu8G1W89ff9haFGJEN	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-23 14:20:47.334+00	172.19.0.1	node	\N	http://localhost:5173	\N
 Eduo4b8HRlDUBJPchz8pPN2-DJ82wsunci325dhPdN-jSWmvGFukoayu1X0PnAyK	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-23 14:29:52.588+00	172.19.0.1	node	\N	http://localhost:5173	\N
 92NVf2iKoyTTZVcPQYqmYXgYqR_cCpbXmvqZqprKb_KlC4Hwl6gFM1w10a7eHieG	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-04-26 14:31:41.214+00	172.19.0.1	node	\N	http://localhost:5173	\N
-B8iULlneK3wyzA4lv-DO96HC0pN7SOsriV0LM4y1RVCzHN2Zu0pjgBMGDoO5XCyS	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 16:25:36.969+00	172.19.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	\N	http://localhost:8055	\N
 TImzw6v68oKqtblMX1To1A5UcclVoLTojWQ874tiZfzOu36gSrg1U784hGr8zlxy	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-04-27 10:56:36.96+00	172.21.0.1	node	\N	http://127.0.0.1:5173	\N
 4rrvXUpTM2XeSouPDcj2BCohsdeu-AK51LCdzV32hoowZxmPbg0IEho-nCAHjRC-	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-04-27 12:55:17.508+00	172.21.0.1	node	\N	http://127.0.0.1:5173	\N
-xHDxFY3jRsueBx0eN_zaQ-XZu6aURO_JjggeDnK7WR07-y9CHPcY27OdcRbnFTry	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-17 14:29:04.369+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	\N	http://localhost:8055	91b7NYYyjVOitu_j1oPJ819eRk5LrrztOJyXyzWMWe_hFgg0w7GskD4O2nlCJfa8
 91b7NYYyjVOitu_j1oPJ819eRk5LrrztOJyXyzWMWe_hFgg0w7GskD4O2nlCJfa8	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-01-18 14:28:54.369+00	172.21.0.1	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	\N	http://localhost:8055	\N
+a-sIB28mb-qTtrzaK7OI7OPvgSWsMfknTTOwqtbDZgu4RGmxOqCz5PlN-aHKRMax	60f562f9-84b6-4914-bf63-a7193567fcdf	2025-04-27 17:15:15.179+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	\N	https://staging.admin.yoepie.nl	\N
+F4_ECy1cCKgDoQDL1CT7kuUauKkzcpzjluXtzrB1Kky_eyOyumozZpbujXp6mJjg	4ebf5c29-5909-4cd9-bcaa-903079d41bfa	2025-04-27 18:04:43.776+00	77.164.21.84	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36	\N	https://meijertheorie.admin.mediabirds.dev	\N
 \.
 
 
@@ -5115,7 +5209,8 @@ COPY public.directus_translations (id, language, key, value) FROM stdin;
 COPY public.directus_users (id, first_name, last_name, email, password, location, title, description, tags, avatar, language, tfa_secret, status, role, token, last_access, last_page, provider, external_identifier, auth_data, email_notifications, appearance, theme_dark, theme_light, theme_light_overrides, theme_dark_overrides, "expiresAt", subscription) FROM stdin;
 88a6e8cf-f0f8-41db-a3a2-8a9741c086cc	Frontend	Bot	\N	\N	\N	For server-to-server communication	This user has API only access and is meant for communicating securely with Directus from your frontend.\n\nThis user has elevated permissions over the Public to:\n- Submit Forms \n- Upload Files \n\nFrom a security perspective, you would typically not want to allow public access to upload files or submit forms.\n\n- Generate a static token access below and include it in API calls to Directus when submitting forms or uploading files from a form.\n- Be careful to only use the token server side to prevent the static access token from being exposed to the client side.	["API"]	440df429-4715-42a0-afcd-569f5cdfb145	\N	\N	active	\N	\N	\N	\N	default	\N	\N	t	\N	\N	\N	\N	\N	\N	\N
 d56956bf-6ed0-465e-bb4a-ec9bde65c5f0	Webmaster	\N	cms@example.com	\N	\N	\N	\N	\N	dea64c65-de50-4d86-abea-6dee3d5256b2	\N	\N	active	c36d4878-9546-4449-857c-bd86f5e50eeb	\N	2024-12-27 13:28:31.084+00	\N	default	\N	\N	t	\N	\N	\N	\N	\N	\N	\N
-60f562f9-84b6-4914-bf63-a7193567fcdf	Admin	User	richard@codeit.ninja	$argon2id$v=19$m=65536,t=3,p=4$RJcQ9WpW48oYbrw//JWwRQ$CPjd79nlZLHxOoZVk6Dbpp0nqR2mp6ijXqjv6mKbnxQ	 	\N	\N	\N	\N	\N	\N	active	c36d4878-9546-4449-857c-bd86f5e50eeb	1nrsO0lzBtkRGPcVcxPsexKQrrW6v97d	2025-01-17 14:28:54.375+00	/users/60f562f9-84b6-4914-bf63-a7193567fcdf	default	\N	\N	t	\N	\N	\N	\N	\N	2025-02-26 12:00:00	8e173084-fb18-45db-8d7a-bc78819b26ca
+4ebf5c29-5909-4cd9-bcaa-903079d41bfa	Meijer	Theorie	admin@mediabirds.dev	$argon2id$v=19$m=65536,t=3,p=4$sIByBhYc9PPKL1+frQKLFg$X1BU7/yJA4ylDxOXvh9lWxrmYCsr+6BzfH2p5uid0Yo	\N	\N	\N	\N	\N	\N	\N	active	c36d4878-9546-4449-857c-bd86f5e50eeb	i-KeOLJfvoxRfwb6W5laCcGMN5pHqFsv	2025-01-17 18:04:43.806+00	/users	default	\N	\N	t	\N	\N	\N	\N	\N	2080-01-30 12:00:00	8e173084-fb18-45db-8d7a-bc78819b26ca
+60f562f9-84b6-4914-bf63-a7193567fcdf	Admin	User	richard@codeit.ninja	$argon2id$v=19$m=65536,t=3,p=4$RJcQ9WpW48oYbrw//JWwRQ$CPjd79nlZLHxOoZVk6Dbpp0nqR2mp6ijXqjv6mKbnxQ	 	\N	\N	\N	\N	\N	\N	active	c36d4878-9546-4449-857c-bd86f5e50eeb	1nrsO0lzBtkRGPcVcxPsexKQrrW6v97d	2025-01-17 17:40:57.528+00	/users/60f562f9-84b6-4914-bf63-a7193567fcdf	default	\N	\N	t	\N	\N	\N	\N	\N	2025-02-26 12:00:00	8e173084-fb18-45db-8d7a-bc78819b26ca
 \.
 
 
@@ -5305,6 +5400,14 @@ COPY public.questions_multiple_choice (id, answers, thumbnail, title) FROM stdin
 
 
 --
+-- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: directus
+--
+
+COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM stdin;
+\.
+
+
+--
 -- Data for Name: subscription_tiers; Type: TABLE DATA; Schema: public; Owner: directus
 --
 
@@ -5373,17 +5476,65 @@ COPY public.video_courses_lessons (id, title, video, description, "videoCourse")
 
 
 --
+-- Data for Name: geocode_settings; Type: TABLE DATA; Schema: tiger; Owner: directus
+--
+
+COPY tiger.geocode_settings (name, setting, unit, category, short_desc) FROM stdin;
+\.
+
+
+--
+-- Data for Name: pagc_gaz; Type: TABLE DATA; Schema: tiger; Owner: directus
+--
+
+COPY tiger.pagc_gaz (id, seq, word, stdword, token, is_custom) FROM stdin;
+\.
+
+
+--
+-- Data for Name: pagc_lex; Type: TABLE DATA; Schema: tiger; Owner: directus
+--
+
+COPY tiger.pagc_lex (id, seq, word, stdword, token, is_custom) FROM stdin;
+\.
+
+
+--
+-- Data for Name: pagc_rules; Type: TABLE DATA; Schema: tiger; Owner: directus
+--
+
+COPY tiger.pagc_rules (id, rule, is_custom) FROM stdin;
+\.
+
+
+--
+-- Data for Name: topology; Type: TABLE DATA; Schema: topology; Owner: directus
+--
+
+COPY topology.topology (id, name, srid, "precision", hasz) FROM stdin;
+\.
+
+
+--
+-- Data for Name: layer; Type: TABLE DATA; Schema: topology; Owner: directus
+--
+
+COPY topology.layer (topology_id, layer_id, schema_name, table_name, feature_column, feature_type, level, child_id) FROM stdin;
+\.
+
+
+--
 -- Name: directus_activity_id_seq; Type: SEQUENCE SET; Schema: public; Owner: directus
 --
 
-SELECT pg_catalog.setval('public.directus_activity_id_seq', 1138, true);
+SELECT pg_catalog.setval('public.directus_activity_id_seq', 1157, true);
 
 
 --
 -- Name: directus_fields_id_seq; Type: SEQUENCE SET; Schema: public; Owner: directus
 --
 
-SELECT pg_catalog.setval('public.directus_fields_id_seq', 258, true);
+SELECT pg_catalog.setval('public.directus_fields_id_seq', 259, true);
 
 
 --
@@ -5404,7 +5555,7 @@ SELECT pg_catalog.setval('public.directus_permissions_id_seq', 136, true);
 -- Name: directus_presets_id_seq; Type: SEQUENCE SET; Schema: public; Owner: directus
 --
 
-SELECT pg_catalog.setval('public.directus_presets_id_seq', 19, true);
+SELECT pg_catalog.setval('public.directus_presets_id_seq', 20, true);
 
 
 --
@@ -5418,7 +5569,7 @@ SELECT pg_catalog.setval('public.directus_relations_id_seq', 49, true);
 -- Name: directus_revisions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: directus
 --
 
-SELECT pg_catalog.setval('public.directus_revisions_id_seq', 1099, true);
+SELECT pg_catalog.setval('public.directus_revisions_id_seq', 1112, true);
 
 
 --
@@ -5489,6 +5640,13 @@ SELECT pg_catalog.setval('public.video_courses_id_seq', 1, true);
 --
 
 SELECT pg_catalog.setval('public.video_courses_lessons_id_seq', 2, true);
+
+
+--
+-- Name: topology_id_seq; Type: SEQUENCE SET; Schema: topology; Owner: directus
+--
+
+SELECT pg_catalog.setval('topology.topology_id_seq', 1, false);
 
 
 --

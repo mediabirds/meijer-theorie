@@ -1,9 +1,8 @@
 <script>
 	import { superForm } from 'sveltekit-superforms'
 	import { zodClient } from 'sveltekit-superforms/adapters'
-	import * as Form from '$lib/components/ui/form/'
+	import * as Form from '$lib/components/ui/form'
 	import { schema } from './schema'
-	import { Logo } from '$lib/components/logo'
 	import { H } from '$lib/components/ui/heading'
 	import { Checkbox, Input } from '$lib/components/ui/input'
 	import { _ } from 'svelte-i18n'

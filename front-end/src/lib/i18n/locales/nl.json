@@ -6,7 +6,13 @@
 		"blog": "Blog",
 		"profile": "Mijn account",
 		"chapters": "Hoofdstukken",
-		"lesson_content": "Lesinhoud"
+		"lesson_content": "Lesinhoud",
+		"hour_short": "uur",
+		"minute_short": "min",
+		"lesson": "Les",
+		"of": "van",
+		"continue": "Ga verder",
+		"restart": "Herstarten"
 	},
 	"account": {
 		"welcome": "Hi {username}",

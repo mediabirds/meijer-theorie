@@ -1,38 +1,24 @@
-# sv
+# MeijerTheorie - Leer Platform
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Dit project bevat een monorepo met daarin 2 projecten.
 
-## Creating a project
+1. De front-end, sveltekit project
+2. Het CMS / Back-end, directus project
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Voor development kun je in de root van de monorepo de volgende command gebruiken
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm run dev
 ```
 
-## Building
+Dit start de Postgresql database, [MailHog](https://github.com/mailhog/MailHog) en [Directus](https://directus.io/docs 'Directus docs') docker containers.
 
-To create a production version of your app:
+## Oude platformen
 
-```bash
-npm run build
-```
+- https://matthijs.thinkific.com/enrollments
+  niels.teunissen@mediabirds.nl
+  Mediabirds520!
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- https://leren.theorietoppers.nl/login (dit project is gebaseerd op dit platform)
+  Rochela@live.nl
+  Meijer100

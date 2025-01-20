@@ -1,8 +1,9 @@
 import { readMe, type AuthenticationData } from '@directus/sdk'
 import { redirect, type Handle } from '@sveltejs/kit'
 import { logout, me, refresh } from '../modules/auth'
+import { createClient } from '$lib/directus'
 
-export const protectedRoutes = ['/_']
+export const protectedRoutes = ['', '/_']
 
 /**
  * Auth middleware.
@@ -16,6 +17,7 @@ export const protectedRoutes = ['/_']
  * @param {import('@sveltejs/kit').Resolve} resolve
  */
 export const auth: Handle = async ({ event, resolve }) => {
+	event.locals.directus = createClient(event.fetch)
 	const token = event.cookies.get('session')
 
 	if (token) {
@@ -41,7 +43,10 @@ export const auth: Handle = async ({ event, resolve }) => {
 		event.locals.user = null
 
 		for (const route of protectedRoutes) {
-			if (event.url.pathname.startsWith(route)) {
+			if (route === event.url.pathname) {
+				redirect(301, '/account/login')
+			}
+			if (route !== '' && event.url.pathname.startsWith(route)) {
 				redirect(301, '/account/login')
 			}
 		}

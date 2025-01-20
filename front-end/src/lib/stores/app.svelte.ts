@@ -1,7 +1,3 @@
-import { browser } from '$app/environment'
-import type { AuthenticationData } from '@directus/sdk'
-import { getContext, hasContext, setContext } from 'svelte'
-
 export type SiteState = {
 	isMenuCollapsed: boolean
 	description: string
@@ -18,6 +14,7 @@ export let site: Site
 export let session: Session
 
 export class Site {
+	isMenuCollapsedEnabled = $state.raw(false)
 	isMenuCollapsed = $state.raw(false)
 	description: string = $state.raw('')
 	favicon: string = $state.raw('')
