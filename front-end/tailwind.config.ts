@@ -8,6 +8,10 @@ export default {
 		container: {
 			center: true
 		},
+		fontFamily: {
+			sans: ['Poppins', 'Helvetica', 'Arial', 'sans-serif'],
+			heading: ['Satoshi', 'sans-serif']
+		},
 		colors: {
 			white: '#ffffff',
 			black: '#000000',

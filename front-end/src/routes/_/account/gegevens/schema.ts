@@ -1,7 +1,7 @@
 import { z } from '$lib/zod'
 
 export const dataSchema = z.object({
-	email: z.string().email().required(),
+	email: z.string().email().optional(),
 	firstName: z.string().required(),
 	lastName: z.string().required()
 })

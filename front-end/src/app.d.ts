@@ -654,17 +654,26 @@ declare global {
 
 		export type PracticeExams = {
 			category?: string | null
+			components: any[] | PracticeExamsComponents[]
 			id: string
-			questions: any[] | PracticeExamsQuestions[]
-			questions_i23sd54: string
+			limitInMinutes?: number | null
 			title: string
 		}
 
-		export type PracticeExamsQuestions = {
+		export type PracticeExamsComponents = {
+			id: string
+			practiceExam?: string | PracticeExams | null
+			questions: any[] | PracticeExamsComponentsQuestions[]
+			slug?: string | null
+			timeLimitInSeconds?: number | null
+			title: string
+		}
+
+		export type PracticeExamsComponentsQuestions = {
 			collection?: string | null
 			id: number
-			practice_exam?: string | PracticeExams | null
-			questions?: string | any | null
+			item?: string | any | null
+			practice_exams_components_id?: string | PracticeExamsComponents | null
 		}
 
 		export type QuestionsInOrder = {
@@ -803,7 +812,8 @@ declare global {
 			pages: Pages[]
 			posts: Posts[]
 			practice_exams: PracticeExams[]
-			practice_exams_questions: PracticeExamsQuestions[]
+			practice_exams_components: PracticeExamsComponents[]
+			practice_exams_components_questions: PracticeExamsComponentsQuestions[]
 			questions_in_order: QuestionsInOrder[]
 			questions_multiple_choice: QuestionsMultipleChoice[]
 			subscription_tiers: SubscriptionTiers[]

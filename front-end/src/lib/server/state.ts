@@ -16,6 +16,8 @@ export class State {
 
 	readonly user: App.Locals['user']
 
+	readonly practiceExam: string | undefined
+
 	constructor(event: RequestEvent) {
 		this.url = event.url
 		this.category = event.params.category

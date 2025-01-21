@@ -79,7 +79,7 @@
 					)}
 				/>
 			</span>
-			<nav class="flex flex-col gap-4">
+			<nav class="flex flex-grow flex-col gap-4">
 				{#each menuItems as item}
 					<Link href={item.href} class="flex items-center gap-4">
 						<span
@@ -97,6 +97,18 @@
 						</span>
 					</Link>
 				{/each}
+				<Link href="/account/logout" class="mt-auto flex items-center gap-4">
+					<span
+						class="flex min-h-11 min-w-11 items-center justify-center rounded-md bg-neutral-100 text-2xl"
+					>
+						<span class="relative -mt-1">🔓</span>
+					</span>
+					<span
+						class={cn('text-nowrap transition-all', site.isMenuCollapsed && 'invisible opacity-0')}
+					>
+						{$_('common.logout')}
+					</span>
+				</Link>
 			</nav>
 		</aside>
 		<div>

@@ -21,7 +21,7 @@
 		<Tooltip.Content
 			sideOffset={6}
 			class={cn(
-				'border border-neutral-100 bg-secondary-500 px-3 py-1 text-sm text-white',
+				'border border-neutral-100 bg-neutral-200 px-3 py-1 text-sm text-black',
 				'rounded-lg font-medium shadow-lg shadow-black/5'
 			)}
 		>

@@ -98,3 +98,12 @@ export function toHoursAndMinutes(totalMinutes: number) {
 
 	return { hours, minutes }
 }
+
+export const tryer = async <T, E>(fn: () => Promise<T>): Promise<[T | null, E | null]> => {
+	try {
+		const data = await fn()
+		return [data, null] as const
+	} catch (e: unknown) {
+		return [null, e as E]
+	}
+}

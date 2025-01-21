@@ -14,7 +14,9 @@
 		"continue": "Ga verder",
 		"restart": "Herstarten",
 		"account": "Mijn account",
-		"logout": "Uitloggen"
+		"logout": "Uitloggen",
+		"personal_data": "Persoonlijke gegevens",
+		"my_subscription": "Mijn pakket"
 	},
 	"account": {
 		"data": "Gegevens",
@@ -35,5 +37,29 @@
 		"password": "Wachtwoord",
 		"confirm_password": "Bevestig wachtwoord",
 		"change_password": "Wachtwoord wijzigen"
+	},
+	"pages": {
+		"account": {
+			"change_data": {
+				"title": "Gegevens wijzigen",
+				"success": "Je gegevens zijn succesvol gewijzigd",
+				"error": "Er is een fout opgetreden, probeer het opnieuw",
+				"first_name": "Voornaam",
+				"last_name": "Achternaam",
+				"email": "E-mailadres",
+				"submit": "Wijzig gegevens"
+			},
+			"change_password": {
+				"title": "Wachtwoord wijzigen",
+				"success": "Je wachtwoord is succesvol gewijzigd",
+				"error": "Er is een fout opgetreden, probeer het opnieuw",
+				"submit": "Wijzig wachtwoord"
+			},
+			"subscription": {
+				"title": "Mijn abonnement",
+				"description": "Je hebt toegang tot alle tools om je theorie-examen te halen. Maak gebruik van de videocursus, oefenexamens en blijf je voortgang bijhouden. Alles wat je nodig hebt, vind je hier!",
+				"change": "Pakket wijzigen"
+			}
+		}
 	}
 }

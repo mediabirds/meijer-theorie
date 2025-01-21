@@ -177,34 +177,36 @@
 									href={`/_/videocursus/${data.course.category}/${data.course.slug}/${chapter.slug}/${lesson.title}`}
 									class={cn(
 										'flex items-center gap-4 px-6 py-4 transition-colors',
-										'bg-neutral-100 hover:bg-primary-50',
+										'hover:bg-primary-50 bg-neutral-100',
 										lesson.title === page.params.lesson && 'bg-primary-100'
 									)}
 								>
 									{#if lesson.title === page.params.lesson}
 										{#if isPlaying}
 											<Play
-												class="flex h-6 w-6 items-center justify-center text-secondary"
+												class="text-secondary flex h-6 w-6 items-center justify-center"
 												strokeWidth="1"
 											/>
 										{:else}
 											<Pause
-												class="flex h-6 w-6 items-center justify-center text-secondary"
+												class="text-secondary flex h-6 w-6 items-center justify-center"
 												strokeWidth="1"
 											/>
 										{/if}
 									{:else if chapter.lessonsFinished.includes(lesson.title)}
-										<Check class="relative top-[1px] h-6 w-6 text-primary" />
+										<Check class="text-primary relative top-[1px] h-6 w-6" />
 									{:else}
 										<Pause
-											class="flex h-6 w-6 items-center justify-center text-secondary"
+											class="text-secondary flex h-6 w-6 items-center justify-center"
 											strokeWidth="1"
 										/>
 									{/if}
-									{lesson.title}
+									<span class="min-w-0 overflow-clip text-ellipsis text-nowrap">
+										{lesson.title}
+									</span>
 									{#if lesson.estimatedDurationInMinutes}
 										{@const duration = toHoursAndMinutes(lesson.estimatedDurationInMinutes)}
-										<small class="ms-auto">
+										<small class="ms-auto text-nowrap">
 											{duration.hours
 												? `${duration.hours} ${$_('common.hour_short')} ${duration.minutes} ${$_('common.minute_short')} `
 												: `${duration.minutes} ${$_('common.minute_short')} `}
