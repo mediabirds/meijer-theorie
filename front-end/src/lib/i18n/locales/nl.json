@@ -12,9 +12,13 @@
 		"lesson": "Les",
 		"of": "van",
 		"continue": "Ga verder",
-		"restart": "Herstarten"
+		"restart": "Herstarten",
+		"account": "Mijn account",
+		"logout": "Uitloggen"
 	},
 	"account": {
+		"data": "Gegevens",
+		"login_data": "Login gegevens",
 		"welcome": "Hi {username}",
 		"subscription": "{subscription}",
 		"login": {
@@ -24,6 +28,12 @@
 			"remember": "Onthoud mij",
 			"submit": "Inloggen",
 			"invalid_credentials": "Ongeldige gebruikersnaam of wachtwoord"
-		}
+		},
+		"first_name": "Voornaam",
+		"last_name": "Achternaam",
+		"email": "E-mailadres",
+		"password": "Wachtwoord",
+		"confirm_password": "Bevestig wachtwoord",
+		"change_password": "Wachtwoord wijzigen"
 	}
 }

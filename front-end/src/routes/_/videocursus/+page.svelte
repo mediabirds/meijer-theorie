@@ -1,17 +1,20 @@
 <script lang="ts">
+	import { Button } from '$lib/components/ui/button'
 	import { Box } from '$lib/components/ui/layout'
 	import { Tooltip } from '$lib/components/ui/tooltip'
 	import { cn, getImageUrl } from '$lib/utils.js'
 	import { _ } from 'svelte-i18n'
 
 	const { data } = $props()
-
 	console.log(data.courses)
 </script>
 
 <div class="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
 	{#each data.courses as course}
+		{@const currentChapter =
+			course.chapters.find((chapter) => !chapter.didFinish) || course.chapters[0]}
 		{@const finishedCount = course.chapters.filter((chapter) => chapter.didFinish).length}
+		{console.log(currentChapter)}
 		<Box title={course.title!}>
 			<p class="mb-4 mt-1">{course.tagline}</p>
 			<img
@@ -40,6 +43,18 @@
 							{/snippet}
 						</Tooltip>
 					{/each}
+				</div>
+				<div class="mt-4 flex justify-end">
+					<Button
+						variant="secondary"
+						href={`/_/videocursus/${course.category}/${course.slug}/${currentChapter.slug}`}
+					>
+						{#if currentChapter.didFinish}
+							{$_('common.restart')}
+						{:else}
+							{$_('common.continue')}
+						{/if}
+					</Button>
 				</div>
 			</div>
 		</Box>

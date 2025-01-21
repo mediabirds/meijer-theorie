@@ -5,7 +5,7 @@ import { zod } from 'sveltekit-superforms/adapters'
 import { login } from '$lib/server/modules/auth'
 import { error, success } from '$lib/server/response'
 
-export const load = async ({ locals }) => {
+export const load = async () => {
 	return {
 		form: await superValidate(zod(schema))
 	}

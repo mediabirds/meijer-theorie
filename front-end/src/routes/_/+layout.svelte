@@ -29,7 +29,7 @@
 		},
 		{
 			title: $_('common.profile'),
-			href: '/_/profile',
+			href: '/_/account',
 			icon: '👤'
 		}
 	]

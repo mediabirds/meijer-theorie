@@ -113,7 +113,7 @@
 		></video>
 		<Box class="flex flex-col  items-center justify-between gap-4 lg:flex-row">
 			<span
-				class="overflow-clip text-ellipsis text-lg font-bold lg:max-w-52 lg:text-nowrap lg:text-xl"
+				class="overflow-clip text-ellipsis text-lg font-bold lg:max-w-52 lg:text-nowrap lg:text-xl xl:max-w-max"
 				>{chapter.title}</span
 			>
 			<div class="flex items-center gap-3">
