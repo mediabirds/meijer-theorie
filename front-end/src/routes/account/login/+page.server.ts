@@ -1,9 +1,8 @@
-import { fail, redirect } from '@sveltejs/kit'
+import { redirect } from '@sveltejs/kit'
 import { schema } from './schema'
-import { message, superValidate } from 'sveltekit-superforms'
+import { superValidate } from 'sveltekit-superforms'
 import { zod } from 'sveltekit-superforms/adapters'
-import { login } from '$lib/server/modules/auth'
-import { error, success } from '$lib/server/response'
+import { error } from '$lib/server/response'
 import { tryer } from '$lib/utils'
 import type { AuthenticationData } from '@directus/sdk'
 

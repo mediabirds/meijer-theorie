@@ -1,4 +1,4 @@
-import { page } from '$app/state'
+import { Exam } from './exam/exam.svelte'
 
 export type SiteState = {
 	isMenuCollapsedEnabled: boolean
@@ -56,36 +56,36 @@ export class Session {
 	}
 }
 
-export class Exam {
-	current = $derived(session.user?.practiceExams.find(({ exam }) => exam.id === page.params.id))
-	isStarted: boolean = $state.raw(false)
-	component: Directus.SchemaMapper<
-		Directus.PracticeExamsComponents,
-		{
-			questions: Directus.SchemaMapper<
-				Directus.PracticeExamsComponentsQuestions,
-				{
-					item: {
-						thumbnail: string
-						title: string
-						answers: { label: string; isCorrectAnswer: boolean }[]
-					}
-				}
-			>[]
-		}
-	> | null = $state.raw(null)
-	timeLimitInMinutes: number = $derived(this.current?.exam.limitInMinutes || 0)
-	timeLimitPerQuestionInSeconds: number | null = $state.raw(null)
+// export class Exam {
+// 	current = $derived(session.user?.practiceExams.find(({ exam }) => exam.id === page.params.id))
+// 	isStarted: boolean = $state.raw(false)
+// 	component: Directus.SchemaMapper<
+// 		Directus.PracticeExamsComponents,
+// 		{
+// 			questions: Directus.SchemaMapper<
+// 				Directus.PracticeExamsComponentsQuestions,
+// 				{
+// 					item: {
+// 						thumbnail: string
+// 						title: string
+// 						answers: { label: string; isCorrectAnswer: boolean }[]
+// 					}
+// 				}
+// 			>[]
+// 		}
+// 	> | null = $state.raw(null)
+// 	timeLimitInMinutes: number = $derived(this.current?.exam.limitInMinutes || 0)
+// 	timeLimitPerQuestionInSeconds: number | null = $state.raw(null)
 
-	start() {
-		if (!this.current) {
-			throw new Error('Exam not found')
-		}
+// 	start() {
+// 		if (!this.current) {
+// 			throw new Error('Exam not found')
+// 		}
 
-		this.isStarted = true
-		this.component = this.current.exam.components[0]
-	}
-}
+// 		this.isStarted = true
+// 		this.component = this.current.exam.components[0]
+// 	}
+// }
 
 type ExcludeFunctionPropertyNames<T> = Pick<
 	T,

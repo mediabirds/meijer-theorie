@@ -13,7 +13,7 @@
 	const { children, title, ...restProps }: Props = $props()
 </script>
 
-<div {...restProps} class={cn('rounded-3xl bg-white p-6 shadow-lg', restProps.class)}>
+<div {...restProps} class={cn('rounded-3xl bg-white p-8 shadow-lg', restProps.class)}>
 	{#if title}
 		{#if typeof title === 'string'}
 			<H level="5">{title}</H>

@@ -31,6 +31,8 @@ export const auth: Handle = async ({ event, resolve }) => {
 		await event.locals.directus.setToken(authData.access_token!)
 		const [user, error] = await me(event)
 
+		console.log(error)
+
 		if (error || !user) {
 			logout(event)
 			redirect(301, '/account/login')
@@ -46,6 +48,7 @@ export const auth: Handle = async ({ event, resolve }) => {
 			if (route === event.url.pathname) {
 				redirect(301, '/account/login')
 			}
+
 			if (route !== '' && event.url.pathname.startsWith(route)) {
 				redirect(301, '/account/login')
 			}

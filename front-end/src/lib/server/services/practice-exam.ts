@@ -7,7 +7,16 @@ export type PracticeExam = Directus.SchemaMapper<
 		components: Directus.SchemaMapper<
 			Directus.PracticeExamsComponents,
 			{
-				questions: Directus.PracticeExamsComponentsQuestions[]
+				questions: Directus.SchemaMapper<
+					Directus.PracticeExamsComponentsQuestions,
+					{
+						item: {
+							thumbnail: string
+							title: string
+							answers: { label: string; isCorrectAnswer: boolean }[]
+						}
+					}
+				>[]
 			}
 		>[]
 	}

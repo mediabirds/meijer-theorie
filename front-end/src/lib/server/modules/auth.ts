@@ -65,7 +65,7 @@ export async function me(event: RequestEvent) {
 										components: [
 											'*',
 											{
-												questions: ['collection', { item: ['*'] }]
+												questions: ['id', 'collection', { item: ['*'] }]
 											}
 										]
 									}

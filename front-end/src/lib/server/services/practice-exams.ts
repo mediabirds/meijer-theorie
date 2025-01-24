@@ -44,7 +44,7 @@ export class PracticeExamsService {
 		Directus.SchemaMapper<
 			Directus.UserExams,
 			{
-				exam: Directus.PracticeExams
+				exam: PracticeExam
 			}
 		>[]
 	> {

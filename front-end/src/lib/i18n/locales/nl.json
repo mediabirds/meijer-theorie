@@ -18,7 +18,8 @@
 		"personal_data": "Persoonlijke gegevens",
 		"my_subscription": "Mijn pakket",
 		"component": "Onderdeel",
-		"components": "Onderdelen"
+		"components": "Onderdelen",
+		"question": "Vraag"
 	},
 	"account": {
 		"data": "Gegevens",
@@ -71,7 +72,8 @@
 			"leave_exam": "Examen verlaten",
 			"description": "Dit examen helpt je om te ervaren hoe het echte theorie-examen eruitziet. Maak het onder dezelfde omstandigheden en oefen op tijd, focus en precisie.",
 			"start_exam": "Start oefenexamen",
-			"time_left": "Resterende tijd <b>{time}</b> minuten"
+			"time_remaining": "Resterende tijd <b>{time}</b> minuten",
+			"next_question": "Volgende vraag"
 		}
 	}
 }

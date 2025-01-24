@@ -3,6 +3,7 @@
 	import { _ } from 'svelte-i18n'
 	import { Button } from '$lib/components/ui/button'
 	import { cn } from '$lib/utils'
+	import { exam as examStore } from '$lib/stores/app.svelte'
 
 	type Props = {
 		exam: PracticeExam
@@ -27,7 +28,7 @@
 	<Button
 		variant={didPass === undefined || didPass === null ? 'secondary' : 'default'}
 		class="w-24"
-		href="/_/oefenexamens/{exam.id}"
+		href="/_/oefenexamens/{exam.id}/intro"
 	>
 		{#if didPass === undefined || didPass === null}
 			{$_('pages.practice_exams.start')}

@@ -12,6 +12,6 @@
 </script>
 
 <div class="flex items-center gap-2">
-	<input type="radio" bind:checked {...restProps} class={cn('hidden')} {id} />
+	<input type="radio" {...restProps} class={cn('hidden')} {id} />
 	<label for={id} class="cursor-pointer">{label}</label>
 </div>

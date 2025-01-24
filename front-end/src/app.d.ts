@@ -679,16 +679,19 @@ declare global {
 		export type PracticeExams = {
 			category?: string | null
 			components: any[] | PracticeExamsComponents[]
+			description?: string | null
 			id: string
 			limitInMinutes?: number | null
 			title: string
 		}
 
 		export type PracticeExamsComponents = {
+			description?: string | null
 			id: string
 			practiceExam?: string | PracticeExams | null
 			questions: any[] | PracticeExamsComponentsQuestions[]
-			timeLimitInSeconds?: number | null
+			timeLimitInMinutes?: number | null
+			timeLimitPerQuestionSeconds?: number | null
 			title: string
 		}
 

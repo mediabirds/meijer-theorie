@@ -5,8 +5,6 @@
 	import { _ } from 'svelte-i18n'
 
 	const { data } = $props()
-
-	// console.log(data.exams)
 </script>
 
 <Breadcrumbs />
