@@ -4,6 +4,8 @@ import { VideoCourseService } from './video-course'
 import { VideoCourses } from './video-courses'
 import { AuthService } from './auth'
 import { PracticeExamsService } from './practice-exams'
+import { UserService } from './user'
+import { PracticeExamService } from './practice-exam'
 
 export class Services {
 	/**
@@ -78,5 +80,30 @@ export class Services {
 	 */
 	practiceExams() {
 		return new PracticeExamsService(this)
+	}
+
+	/**
+	 * Creates a new instance of the PracticeExamService service.
+	 *
+	 * If `id` is not provided, it is taken from the current request state.
+	 *
+	 * @param {string} [id] - The id of the practice exam.
+	 * @returns {PracticeExamService} The PracticeExamService service instance.
+	 */
+	practiceExam(id: string) {
+		if (!id) {
+			id = this.state.practiceExam!
+		}
+
+		return new PracticeExamService(this, id)
+	}
+
+	/**
+	 * Creates a new instance of the UserService service.
+	 *
+	 * @returns {UserService} The UserService service instance.
+	 */
+	user() {
+		return new UserService(this, this.state.user!.id)
 	}
 }

@@ -5,7 +5,7 @@ import { updateItem, updateUser } from '@directus/sdk'
 export class AuthService {
 	constructor(readonly services: Services) {}
 
-	async login(email: string, password: string, remember: boolean = false) {
+	async login(email: string, password: string) {
 		return await this.services.event.locals.directus.login(email, password, { mode: 'json' })
 	}
 

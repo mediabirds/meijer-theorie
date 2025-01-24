@@ -14,7 +14,7 @@
 
 	const form = superForm(data.form, {
 		validators: zodClient(schema),
-		invalidateAll: true
+		invalidateAll: 'force'
 	})
 	const { form: formData, enhance, submitting, message } = form
 

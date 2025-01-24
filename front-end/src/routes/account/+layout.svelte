@@ -14,37 +14,3 @@
 >
 	{@render children()}
 </main>
-
-<style>
-	:global(.bg-shape > *) {
-		position: relative;
-		z-index: 213312;
-	}
-
-	.bg-shape {
-		position: relative;
-	}
-
-	.bg-shape::before,
-	.bg-shape::after {
-		display: block;
-		content: '';
-		left: calc(50% - 2500px);
-		position: absolute;
-		width: 5000px;
-		height: 5000px;
-		border-radius: 50%;
-	}
-
-	.bg-shape::before {
-		top: calc(50% + 40px);
-		z-index: 5;
-		background-color: theme('colors.primary.700');
-	}
-
-	.bg-shape::after {
-		top: 50%;
-		z-index: 4;
-		background-color: theme('colors.primary.600');
-	}
-</style>

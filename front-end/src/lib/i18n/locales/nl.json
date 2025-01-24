@@ -2,7 +2,7 @@
 	"common": {
 		"dashboard": "Dashboard",
 		"video_courses": "Videocursus",
-		"partice_exams": "Oefenexamens",
+		"practice_exams": "Oefenexamens",
 		"blog": "Blog",
 		"profile": "Mijn account",
 		"chapters": "Hoofdstukken",
@@ -16,7 +16,9 @@
 		"account": "Mijn account",
 		"logout": "Uitloggen",
 		"personal_data": "Persoonlijke gegevens",
-		"my_subscription": "Mijn pakket"
+		"my_subscription": "Mijn pakket",
+		"component": "Onderdeel",
+		"components": "Onderdelen"
 	},
 	"account": {
 		"data": "Gegevens",
@@ -60,6 +62,16 @@
 				"description": "Je hebt toegang tot alle tools om je theorie-examen te halen. Maak gebruik van de videocursus, oefenexamens en blijf je voortgang bijhouden. Alles wat je nodig hebt, vind je hier!",
 				"change": "Pakket wijzigen"
 			}
+		},
+		"practice_exams": {
+			"title": "Jouw oefenexamens",
+			"start": "Start",
+			"again": "Opnieuw",
+			"good_luck": "Success {username}!",
+			"leave_exam": "Examen verlaten",
+			"description": "Dit examen helpt je om te ervaren hoe het echte theorie-examen eruitziet. Maak het onder dezelfde omstandigheden en oefen op tijd, focus en precisie.",
+			"start_exam": "Start oefenexamen",
+			"time_left": "Resterende tijd <b>{time}</b> minuten"
 		}
 	}
 }

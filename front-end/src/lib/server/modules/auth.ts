@@ -56,7 +56,22 @@ export async function me(event: RequestEvent) {
 					'*',
 					{
 						subscription: ['*', { subscription: ['type'] }],
-						practiceExams: ['*', { exam: ['*', { questions: [{ questions: ['*'] }] }] }],
+						practiceExams: [
+							'*',
+							{
+								exam: [
+									'*',
+									{
+										components: [
+											'*',
+											{
+												questions: ['collection', { item: ['*'] }]
+											}
+										]
+									}
+								]
+							}
+						],
 						videoCourses: ['*', { videoCourse: ['*'] }]
 					}
 				]

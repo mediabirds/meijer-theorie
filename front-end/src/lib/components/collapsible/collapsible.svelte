@@ -22,9 +22,9 @@
 			{@render title()}
 		{/if}
 		{#if open}
-			<ChevronUp strokeWidth="1" class="ms-auto w-6 min-w-6 text-secondary" />
+			<ChevronUp class="ms-auto w-6 min-w-6 text-secondary" />
 		{:else}
-			<ChevronDown strokeWidth="1" class="ms-auto w-6 min-w-6 text-primary" />
+			<ChevronDown class="ms-auto w-6 min-w-6 text-primary" />
 		{/if}
 	</Collapsible.Trigger>
 	<Collapsible.Content>

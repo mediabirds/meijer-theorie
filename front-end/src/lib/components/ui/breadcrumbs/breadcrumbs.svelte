@@ -1,9 +1,10 @@
 <script lang="ts">
+	import type { HTMLAttributes } from 'svelte/elements'
 	import { page } from '$app/state'
 	import { cn } from '$lib/utils'
 	import { lowerCase, capitalize, rest } from 'lodash-es'
 	import ChevronRight from 'lucide-svelte/icons/chevron-right'
-	import type { HTMLAttributes } from 'svelte/elements'
+	import HomeIcon from 'lucide-svelte/icons/house'
 
 	const paths = $derived(page.url.pathname.split('/').filter(Boolean))
 
@@ -13,6 +14,10 @@
 </script>
 
 <nav {...restProps} class={cn('flex flex-wrap items-center gap-1', restProps.class)}>
+	<a href="/_" class="font-medium text-neutral-600 hover:text-primary">
+		<HomeIcon size="24" strokeWidth="1.5" />
+	</a>
+	<ChevronRight size="18" strokeWidth="1.5" />
 	{#each paths as path, i}
 		{@const currentPath = '/' + paths.slice(0, i + 1).join('/')}
 		{#if i < paths.length - 1}
@@ -20,7 +25,7 @@
 				>{capitalize(lowerCase(decodeURIComponent(path)))}</a
 			>
 			{#if i !== 0}
-				<ChevronRight size="18" strokeWidth="1.5" class="relative top-[1px]" />
+				<ChevronRight size="18" strokeWidth="1.5" />
 			{/if}
 		{:else}
 			<span>{capitalize(lowerCase(decodeURIComponent(path)))}</span>

@@ -1,5 +1,9 @@
+import { page } from '$app/state'
+
 export type SiteState = {
+	isMenuCollapsedEnabled: boolean
 	isMenuCollapsed: boolean
+	isMenuHidden: boolean
 	description: string
 	favicon: string
 	logo: string
@@ -13,9 +17,12 @@ export let site: Site
 
 export let session: Session
 
-export class Site {
+export let exam: Exam
+
+export class Site implements SiteState {
 	isMenuCollapsedEnabled = $state.raw(false)
 	isMenuCollapsed = $state.raw(false)
+	isMenuHidden = $state.raw(false)
 	description: string = $state.raw('')
 	favicon: string = $state.raw('')
 	logo: string = $state.raw('')
@@ -49,6 +56,37 @@ export class Session {
 	}
 }
 
+export class Exam {
+	current = $derived(session.user?.practiceExams.find(({ exam }) => exam.id === page.params.id))
+	isStarted: boolean = $state.raw(false)
+	component: Directus.SchemaMapper<
+		Directus.PracticeExamsComponents,
+		{
+			questions: Directus.SchemaMapper<
+				Directus.PracticeExamsComponentsQuestions,
+				{
+					item: {
+						thumbnail: string
+						title: string
+						answers: { label: string; isCorrectAnswer: boolean }[]
+					}
+				}
+			>[]
+		}
+	> | null = $state.raw(null)
+	timeLimitInMinutes: number = $derived(this.current?.exam.limitInMinutes || 0)
+	timeLimitPerQuestionInSeconds: number | null = $state.raw(null)
+
+	start() {
+		if (!this.current) {
+			throw new Error('Exam not found')
+		}
+
+		this.isStarted = true
+		this.component = this.current.exam.components[0]
+	}
+}
+
 type ExcludeFunctionPropertyNames<T> = Pick<
 	T,
 	{
@@ -58,3 +96,4 @@ type ExcludeFunctionPropertyNames<T> = Pick<
 
 site = new Site()
 session = new Session()
+exam = new Exam()

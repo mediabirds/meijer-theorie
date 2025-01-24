@@ -1,6 +1,7 @@
 import type { AuthenticationData } from '@directus/sdk'
 import type { createClient } from './lib/directus'
 import type { Services } from '$lib/server/services'
+import type { PracticeExam } from '$lib/server/services/practice-exam'
 
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
@@ -23,11 +24,34 @@ declare global {
 					>[]
 					subscription: Directus.SchemaMapper<
 						Directus.SubscriptionTiers,
-						{ subscription: { type: 'car' | 'scooter' | 'motor' } }
+						{
+							subscription: { type: 'car' | 'scooter' | 'motor' }
+						}
 					>
 					practiceExams: Directus.SchemaMapper<
 						Directus.UserExams,
-						{ exam: Directus.PracticeExams }
+						{
+							exam: Directus.SchemaMapper<
+								Directus.PracticeExams,
+								{
+									components: Directus.SchemaMapper<
+										Directus.PracticeExamsComponents,
+										{
+											questions: Directus.SchemaMapper<
+												Directus.PracticeExamsComponentsQuestions,
+												{
+													item: {
+														thumbnail: string
+														title: string
+														answers: { label: string; isCorrectAnswer: boolean }[]
+													}
+												}
+											>[]
+										}
+									>[]
+								}
+							>
+						}
 					>[]
 				}
 			> | null
@@ -664,7 +688,6 @@ declare global {
 			id: string
 			practiceExam?: string | PracticeExams | null
 			questions: any[] | PracticeExamsComponentsQuestions[]
-			slug?: string | null
 			timeLimitInSeconds?: number | null
 			title: string
 		}
