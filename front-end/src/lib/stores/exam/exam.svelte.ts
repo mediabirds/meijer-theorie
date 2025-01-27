@@ -11,6 +11,7 @@ export type Component = Directus.SchemaMapper<
 			Directus.PracticeExamsComponentsQuestions,
 			{
 				item: {
+					id: number
 					thumbnail: string
 					title: string
 					answers: { label: string; isCorrectAnswer: boolean }[]

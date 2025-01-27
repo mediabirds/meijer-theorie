@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Tooltip } from 'bits-ui'
 	import { site, session } from '$lib/stores/app.svelte'
-	import { onMount } from 'svelte'
 	import { getImageUrl } from '$lib/utils'
 
 	import '@fontsource/poppins/300.css'
@@ -13,7 +12,7 @@
 
 	let { children, data } = $props()
 
-	onMount(() => {
+	$effect(() => {
 		session.set({ ...data.session, user: data.user })
 		// @ts-ignore
 		site.set({ ...data.globals })

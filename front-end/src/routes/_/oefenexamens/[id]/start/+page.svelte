@@ -32,26 +32,9 @@
 			</Box>
 		</div>
 	{:else}
-		<div class="grid grid-cols-[1fr_400px] gap-6">
-			{#if exam.currentQuestion}
-				<Box>
-					<img
-						src={getImageUrl(exam.currentQuestion.item.thumbnail!, { width: 1200 })}
-						alt={exam.currentComponent.title}
-						class="rounded-lg"
-					/>
-				</Box>
-				<Box>
-					<span class="mb-4 flex justify-between">
-						<span>
-							{$_('common.question')}
-							{exam.currentQuestionIndex + 1}/{exam.currentComponent.questions.length}
-						</span>
-					</span>
-					<Question question={exam.currentQuestion} />
-				</Box>
-			{/if}
-		</div>
+		{#if exam.currentQuestion}
+			<Question question={exam.currentQuestion} />
+		{/if}
 		<div class="mt-6">
 			<Box>
 				<div class="grid grid-cols-3 items-center">
