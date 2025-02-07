@@ -6,13 +6,11 @@ FROM directus/directus:11.3.2
 
 USER root
 RUN corepack enable
-RUN mkdir ./schema-sync
 
 USER node
 RUN pnpm install directus-extension-schema-sync
 RUN pnpm install directus-extension-group-tabs-interface
 RUN pnpm install directus-extension-computed-interface
-COPY ./schema-sync ./schema-sync
 
 USER root
 RUN <<EOF
