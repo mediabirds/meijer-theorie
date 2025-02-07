@@ -1,4 +1,4 @@
-FROM directus/directus:11.3.2
+FROM directus/directus:11.4.1
 
 ## Install SQLite SpatiaLite: extend the SQLite core to support fully fledged Spatial SQL
 ## capabilities.
