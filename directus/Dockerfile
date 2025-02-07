@@ -5,6 +5,12 @@ FROM directus/directus:11.3.2
 ## https://pkgs.alpinelinux.org/package/edge/community/x86/libspatialite
 
 USER root
+RUN |
+    echo "Before: corepack version => $(corepack --version || echo 'not installed')"
+    npm install -g corepack@latest
+    echo "After : corepack version => $(corepack --version)"
+    corepack enable
+    pnpm --version
 RUN corepack enable
 
 USER node
