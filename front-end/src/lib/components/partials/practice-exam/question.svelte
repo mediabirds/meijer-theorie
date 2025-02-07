@@ -4,23 +4,14 @@
 	import QuestionMultipleChoice from './question-multiple-choice.svelte'
 	import { H } from '$lib/components/ui/heading'
 	import { Box } from '$lib/components/ui/layout'
+	import type { Component } from '$lib/stores/exam/exam.svelte'
+	import { exam } from '$lib/stores/app.svelte'
 
 	type Props = {
-		question: Directus.SchemaMapper<
-			Directus.PracticeExamsComponentsQuestions,
-			{
-				item: {
-					id: number
-					thumbnail: string
-					title: string
-					answers: { label: string; isCorrectAnswer: boolean }[]
-				}
-			}
-		>
+		question: Component['questions'][number]
 	}
 
 	let { question }: Props = $props()
-	console.log(question)
 </script>
 
 <div class="grid grid-cols-[1fr_400px] gap-6">
@@ -39,7 +30,7 @@
 		<div class="flex flex-col gap-4">
 			<H level="5">{question.item.title}</H>
 			{#if question.collection === 'questions_multiple_choice'}
-				<QuestionMultipleChoice {...question.item} />
+				<QuestionMultipleChoice {question} onanswer={(question) => {}} />
 			{/if}
 		</div>
 	</Box>

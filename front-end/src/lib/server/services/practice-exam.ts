@@ -9,14 +9,24 @@ export type PracticeExam = Directus.SchemaMapper<
 			{
 				questions: Directus.SchemaMapper<
 					Directus.PracticeExamsComponentsQuestions,
-					{
-						item: {
-							id: number
-							thumbnail: string
-							title: string
-							answers: { label: string; isCorrectAnswer: boolean }[]
-						}
-					}
+					| {
+							collection: 'questions_in_order'
+							item: {
+								id: number
+								thumbnail: string
+								title: string
+								answers: { label: string; order: number }[]
+							}
+					  }
+					| {
+							collection: 'questions_multiple_choice'
+							item: {
+								id: number
+								thumbnail: string
+								title: string
+								answers: { label: string; isCorrectAnswer: boolean }[]
+							}
+					  }
 				>[]
 			}
 		>[]

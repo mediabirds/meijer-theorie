@@ -1,31 +1,46 @@
 <script lang="ts">
 	import Radio from '$lib/components/ui/input/radio.svelte'
+	import type { Component } from '$lib/stores/exam/exam.svelte'
 	import { cn } from '$lib/utils'
 
 	type Props = {
-		id: number
-		thumbnail: string
-		title: string
-		answers: {
-			label: string
-			isCorrectAnswer: boolean
-		}[]
+		question: Component['questions'][number]
+		onanswer: (question: Props['question']) => void
 	}
 
-	let { title, answers, thumbnail, id }: Props = $props()
+	let { question, onanswer }: Props = $props()
+	let group = $state('')
 
-	console.log(title, answers, thumbnail, id)
+	$effect(() => {
+		const answerIndex = question.item.answers.findIndex((answer) => answer.label === group)
+
+		for (let i = 0; i < question.item.answers.length; i++) {
+			if (i === answerIndex) {
+				question.item.answers[i].checked = true
+			} else {
+				question.item.answers[i].checked = false
+			}
+		}
+
+		onanswer(question)
+	})
 </script>
 
 <div class="mt-2 flex flex-col gap-2">
-	{#each answers as answer, i}
+	{#each question.item.answers as answer, i}
 		<label
 			class={cn(
 				'rounded-lg bg-neutral-100 px-6 py-4 has-[:checked]:ring-2 has-[:checked]:ring-primary'
 			)}
 		>
-			<input type="radio" value={answer.label} name="question-{id}" id="question-{id}-{i}" />
-			<label class="font-medium" for="question-{id}-{i}">{answer.label}</label>
+			<input
+				type="radio"
+				id="question-{question.id}-{i}"
+				value={answer.label}
+				checked={answer.checked}
+				bind:group
+			/>
+			<label class="font-medium" for="question-{question.id}-{i}">{answer.label}</label>
 		</label>
 	{/each}
 </div>

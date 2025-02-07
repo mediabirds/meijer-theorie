@@ -688,6 +688,7 @@ declare global {
 		export type PracticeExamsComponents = {
 			description?: string | null
 			id: string
+			minAmountOfCorrectAnswers?: number | null
 			practiceExam?: string | PracticeExams | null
 			questions: any[] | PracticeExamsComponentsQuestions[]
 			timeLimitInMinutes?: number | null
@@ -700,6 +701,7 @@ declare global {
 			id: number
 			item?: string | any | null
 			practice_exams_components_id?: string | PracticeExamsComponents | null
+			sort?: number | null
 		}
 
 		export type QuestionsInOrder = {

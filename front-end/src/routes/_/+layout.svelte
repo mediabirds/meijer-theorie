@@ -46,7 +46,7 @@
 	})
 </script>
 
-{#if page.url.pathname.match(/\/_\/oefenexamens\/.+/)}
+{#if page.url.pathname.match(/\/_\/oefenexamens\/.+/) && !page.url.pathname.endsWith('/uitslag')}
 	<div class="flex min-h-screen flex-col">{@render children()}</div>
 {:else}
 	<div class="flex min-h-screen flex-col gap-12">
@@ -134,6 +134,5 @@
 				</main>
 			</div>
 		</div>
-		<footer>asdasd</footer>
 	</div>
 {/if}

@@ -4,18 +4,20 @@
 	import ChevronUp from 'lucide-svelte/icons/chevron-up'
 	import ChevronDown from 'lucide-svelte/icons/chevron-down'
 	import { slide } from 'svelte/transition'
+	import { cn } from '$lib/utils'
 
 	type Props = {
 		children: Snippet
 		title: string | Snippet
 		open?: boolean
+		class?: string
 	}
 
-	let { children, title, open = $bindable(false) }: Props = $props()
+	let { children, title, open = $bindable(false), class: classNames }: Props = $props()
 </script>
 
 <Collapsible.Root bind:open>
-	<Collapsible.Trigger class="flex w-full items-center px-6 py-6">
+	<Collapsible.Trigger class={cn('flex w-full items-center px-6 py-6', classNames)}>
 		{#if typeof title === 'string'}
 			<span>{title}</span>
 		{:else}
