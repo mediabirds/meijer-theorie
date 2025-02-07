@@ -1,0 +1,38 @@
+services:
+  meijer-database:
+    image: ghcr.io/baosystems/postgis:16-3.5
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    healthcheck:
+      test: ["CMD", "pg_isready", "--host=localhost", "--username=directus"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_interval: 5s
+      start_period: 30s
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    ports:
+      - 5001:5432
+    env_file:
+      - .env
+  meijer-directus:
+    build:
+      context: .
+    container_name: directus-meijer
+    depends_on:
+      meijer-database:
+        condition: service_healthy
+    ports:
+      - 8001:8055
+    volumes:
+      - ./database:/directus/database
+      - ./uploads:/directus/uploads
+      - ./extensions:/directus/extensions
+    env_file:
+      - .env
+
+volumes:
+  postgres-data:
