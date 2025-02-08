@@ -15,7 +15,7 @@ services:
     volumes:
       - ./database:/var/lib/postgresql/data
     ports:
-      - 5001:5432
+      - 5432:5432
     env_file:
       - .env
   meijer-directus:
@@ -26,7 +26,7 @@ services:
       meijer-database:
         condition: service_healthy
     ports:
-      - 8001:8055
+      - 8055:8055
     volumes:
       - ./database:/directus/database
       - ./uploads:/directus/uploads
