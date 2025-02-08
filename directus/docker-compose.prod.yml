@@ -25,8 +25,6 @@ services:
     depends_on:
       meijer-database:
         condition: service_healthy
-      meijer-cache:
-        condition: service_healthy
     ports:
       - 8055:8055
     volumes:
