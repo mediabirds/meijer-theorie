@@ -18,23 +18,14 @@ services:
       retries: 5
       start_interval: 5s
       start_period: 30s
-  meijer-cache:
-    image: redis:6
-    healthcheck:
-      test: ["CMD-SHELL", "[ $$(redis-cli ping) = 'PONG' ]"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_interval: 5s
-      start_period: 30s
-    networks:
-      - dokploy-network
   meijer-directus:
     build:
       context: .
     container_name: directus-meijer
     depends_on:
       meijer-database:
+        condition: service_healthy
+      meijer-cache:
         condition: service_healthy
     ports:
       - 8055:8055
