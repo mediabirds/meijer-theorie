@@ -36,7 +36,8 @@ export class VideoCourseService {
 				filter: {
 					category: { _eq: this.category },
 					slug: { _eq: this.course }
-				}
+				},
+				fields: ['*', { chapters: ['*', { lessons: ['*'] }], subscriptionTiers: ['*.*'] }]
 			})
 		)
 

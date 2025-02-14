@@ -3,7 +3,6 @@
 	import { Logo } from '$lib/components/logo'
 	import { Button } from '$lib/components/ui/button'
 	import { exam, session } from '$lib/stores/app.svelte'
-	import { cn } from '$lib/utils'
 	import { onMount } from 'svelte'
 	import { _ } from 'svelte-i18n'
 
@@ -11,7 +10,8 @@
 	let username = $derived(session.user?.first_name + ' ' + session.user?.last_name)
 
 	onMount(() => {
-		exam.init(data.practiceExam.exam)
+		// @ts-ignore
+		exam.init(data.practiceExam)
 	})
 </script>
 

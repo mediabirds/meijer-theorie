@@ -1,3 +1,4 @@
+import type { Component } from '$lib/stores/exam/exam.svelte'
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { PUBLIC_DIRECTUS_URL } from '$env/static/public'
@@ -105,5 +106,38 @@ export const tryer = async <T, E>(fn: () => Promise<T>): Promise<[T | null, E | 
 		return [data, null] as const
 	} catch (e: unknown) {
 		return [null, e as E]
+	}
+}
+
+export const parseResult = (components: Component[]) => {
+	let totalQuestionsCount = 0
+	let correctAnswersCount = 0
+	let minCorrectAnswersCount = 0
+
+	components.forEach((component) => {
+		minCorrectAnswersCount += component.minAmountOfCorrectAnswers ?? 0
+
+		component.questions.forEach((question) => {
+			totalQuestionsCount++
+			if (
+				(question.collection === 'questions_in_order' &&
+					question.item.answers.every((answer) => answer.givenOrder === answer.order)) ||
+				(question.collection === 'questions_multiple_choice' &&
+					question.item.answers.every((answer) => answer.checked === answer.isCorrectAnswer))
+			) {
+				question.isCorrect = true
+				correctAnswersCount++
+			} else {
+				question.isCorrect = false
+			}
+		})
+	})
+
+	return {
+		components,
+		totalQuestionsCount,
+		correctAnswersCount,
+		minCorrectAnswersCount,
+		didPass: correctAnswersCount >= minCorrectAnswersCount
 	}
 }

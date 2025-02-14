@@ -6,7 +6,7 @@
 	import { _ } from 'svelte-i18n'
 
 	const { data } = $props()
-	console.log(data.courses)
+	console.log(data.courses[0])
 </script>
 
 <div class="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
@@ -14,7 +14,6 @@
 		{@const currentChapter =
 			course.chapters.find((chapter) => !chapter.didFinish) || course.chapters[0]}
 		{@const finishedCount = course.chapters.filter((chapter) => chapter.didFinish).length}
-		{console.log(currentChapter)}
 		<Box title={course.title!}>
 			<p class="mb-4 mt-1">{course.tagline}</p>
 			<img

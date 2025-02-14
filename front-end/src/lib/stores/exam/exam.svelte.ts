@@ -1,6 +1,4 @@
-import type { PracticeExam } from '$lib/server/services/practice-exam'
 import { createTimer, createTimer2 } from '../timer.svelte'
-import { Result } from './result.svelte'
 
 export type Component = Directus.SchemaMapper<
 	Directus.PracticeExamsComponents,
@@ -35,8 +33,27 @@ export type Component = Directus.SchemaMapper<
 	}
 >
 
+export type PracticeExam = Directus.SchemaMapper<
+	Directus.UserExams,
+	{
+		exam: Directus.SchemaMapper<
+			Directus.PracticeExams,
+			{
+				components: Component[]
+			}
+		>
+		result: {
+			components: any
+			totalQuestionsCount: number
+			correctAnswersCount: number
+			minCorrectAnswersCount: number
+			didPass: boolean
+		}
+	}
+>
+
 export class Exam {
-	id?: string = $state.raw(undefined)
+	id?: number = $state.raw(undefined)
 
 	title?: string = $state.raw(undefined)
 
@@ -136,11 +153,11 @@ export class Exam {
 		)
 	})
 
-	init(exam: PracticeExam) {
-		this.id = exam.id
-		this.title = exam.title
-		this.description = exam.description!
-		this.components = exam.components
+	init(practiceExam: PracticeExam) {
+		this.id = practiceExam.id
+		this.title = practiceExam.exam.title
+		this.description = practiceExam.exam.description!
+		this.components = practiceExam.exam.components
 		this.started = false
 
 		this.components.forEach((component, index) => {

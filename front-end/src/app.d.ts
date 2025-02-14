@@ -31,26 +31,7 @@ declare global {
 					practiceExams: Directus.SchemaMapper<
 						Directus.UserExams,
 						{
-							exam: Directus.SchemaMapper<
-								Directus.PracticeExams,
-								{
-									components: Directus.SchemaMapper<
-										Directus.PracticeExamsComponents,
-										{
-											questions: Directus.SchemaMapper<
-												Directus.PracticeExamsComponentsQuestions,
-												{
-													item: {
-														thumbnail: string
-														title: string
-														answers: { label: string; isCorrectAnswer: boolean }[]
-													}
-												}
-											>[]
-										}
-									>[]
-								}
-							>
+							exam: PracticeExam
 						}
 					>[]
 				}
@@ -607,10 +588,12 @@ declare global {
 		}
 
 		export type Globals = {
+			contactMail?: string | null
 			description?: string | null
 			directus_url?: string | null
 			favicon?: string | DirectusFiles | null
 			id: string
+			kvk?: string | null
 			logo?: string | DirectusFiles | null
 			meta_credentials: string
 			openai_api_key?: string | null
@@ -730,7 +713,7 @@ declare global {
 			slug?: string | null
 			subscription?: number | Subscriptions | null
 			title: string
-			videoCourses: any[] | VideoCourses[]
+			videoCourse?: number | null
 		}
 
 		export type SubscriptionTiersPracticeExams = {
@@ -749,6 +732,7 @@ declare global {
 			didPass?: boolean | null
 			exam?: string | PracticeExams | null
 			id: number
+			result?: unknown | null
 			user?: string | DirectusUsers | null
 		}
 
@@ -775,7 +759,7 @@ declare global {
 			chapters: any[] | VideoCourseChapters[]
 			id: number
 			slug: string
-			subscriptionTier?: string | SubscriptionTiers | null
+			subscriptionTiers: any[] | VideoCoursesSubscriptionTiers[]
 			tagline: string
 			thumbnail: string | DirectusFiles
 			title?: string | null
@@ -788,6 +772,12 @@ declare global {
 			id: number
 			title: string
 			video: string | DirectusFiles
+			videoCourse?: number | VideoCourses | null
+		}
+
+		export type VideoCoursesSubscriptionTiers = {
+			id: number
+			subscriptionTier?: string | SubscriptionTiers | null
 			videoCourse?: number | VideoCourses | null
 		}
 
@@ -852,6 +842,7 @@ declare global {
 			video_course_chapters: VideoCourseChapters[]
 			video_courses: VideoCourses[]
 			video_courses_lessons: VideoCoursesLessons[]
+			video_courses_subscription_tiers: VideoCoursesSubscriptionTiers[]
 		}
 
 		export type Schemas = Directus.CustomDirectusTypes[keyof CustomDirectusTypes]

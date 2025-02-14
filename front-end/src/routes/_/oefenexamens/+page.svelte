@@ -10,8 +10,8 @@
 <Breadcrumbs />
 <Box title={$_('pages.practice_exams.title')} class="mt-6 max-w-4xl">
 	<div class="mt-6 space-y-4">
-		{#each data.exams as { exam, didPass }, i}
-			<PracticeExam {exam} {didPass} index={i + 1} />
+		{#each data.exams as { id, exam, didPass }, i}
+			<PracticeExam {id} {exam} {didPass} index={i + 1} />
 		{/each}
 	</div>
 </Box>

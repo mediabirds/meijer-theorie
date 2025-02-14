@@ -15,9 +15,9 @@
 	this={`h${level}`}
 	{...restProps}
 	class={cn(
-		level === '1' && 'font-heading text-5xl font-bold',
-		level === '2' && 'font-heading text-4xl font-semibold',
-		level === '3' && 'font-heading text-3xl font-semibold',
+		level === '1' && 'font-heading text-4xl font-bold md:text-5xl',
+		level === '2' && 'font-heading text-3xl font-semibold md:text-4xl',
+		level === '3' && 'font-heading text-2xl font-semibold md:text-3xl',
 		level === '4' && 'font-heading text-2xl font-semibold',
 		level === '5' && 'font-heading text-xl font-semibold',
 		level === '6' && 'font-heading text-lg font-semibold',

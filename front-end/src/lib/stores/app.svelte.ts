@@ -1,4 +1,5 @@
 import { Exam } from './exam/exam.svelte'
+import { innerWidth } from 'svelte/reactivity/window'
 
 export type SiteState = {
 	isMenuCollapsedEnabled: boolean
@@ -26,10 +27,18 @@ export class Site implements SiteState {
 	description: string = $state.raw('')
 	favicon: string = $state.raw('')
 	logo: string = $state.raw('')
-	social_links: unknown = $state.raw({})
+	social_links: Array<{ service: string; url: string }> = $state.raw([])
 	tagline: string = $state.raw('')
 	title: string = $state.raw('')
 	url: string = $state.raw('')
+	contactMail: string = $state.raw('')
+	kvk: string = $state.raw('')
+
+	isLoading = $derived.by(() => {
+		if (innerWidth.current === undefined || (session.user && !session.user.email)) {
+			return true
+		}
+	})
 
 	set(data: ExcludeFunctionPropertyNames<SiteState>) {
 		for (const [key, value] of Object.entries(data)) {

@@ -9,6 +9,8 @@
 	import { H } from '../ui/heading'
 	import { goto } from '$app/navigation'
 	import { exam } from '$lib/stores/app.svelte'
+
+	let isSaving = $state(false)
 </script>
 
 <div class="container mt-2 flex flex-col gap-6">
@@ -59,14 +61,29 @@
 						type="button"
 						onclick={() => {
 							if (exam.didReachEnd) {
-								localStorage.setItem(exam.id!, JSON.stringify($state.snapshot(exam.components)))
-								goto(`/_/oefenexamens/${exam.id}/uitslag`)
+								isSaving = true
+
+								fetch('/api/exams/result', {
+									method: 'POST',
+									body: JSON.stringify({
+										id: exam.id,
+										components: $state.snapshot(exam.components)
+									})
+								}).then(() => {
+									setTimeout(() => {
+										goto(`/_/oefenexamens/${exam.id}/uitslag`, { invalidateAll: true })
+										isSaving = false
+									}, 500)
+								})
 							} else {
 								exam.nextQuestion()
 							}
 						}}
+						spinner={isSaving}
 					>
-						<ArrowRightIcon />
+						{#if !isSaving}
+							<ArrowRightIcon />
+						{/if}
 					</Button>
 				</span>
 			</div>

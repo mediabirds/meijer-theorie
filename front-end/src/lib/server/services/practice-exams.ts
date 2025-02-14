@@ -36,7 +36,7 @@ export class PracticeExamsService {
 	 * fetches additional exams and attaches them to the user. The function then returns an
 	 * updated list of the user's practice exams.
 	 *
-	 * @returns {Promise<Directus.SchemaMapper<Directus.UserExams, { exam: Directus.PracticeExams }>[]}
+	 * @returns {Promise<Directus.SchemaMapper<Directus.UserExams, { exam: Directus.PracticeExams }>[]>}
 	 *          A promise that resolves to an array of the user's practice exams, including
 	 *          any newly added exams if applicable.
 	 */
@@ -71,6 +71,4 @@ export class PracticeExamsService {
 
 		return []
 	}
-
-	//async addExamsToUser(exams: PracticeExam[]) {}
 }

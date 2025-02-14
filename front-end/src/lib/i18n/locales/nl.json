@@ -24,7 +24,13 @@
 		"partice_exams": "Oefenexamens",
 		"back_to_overview": "Terug naar overzicht",
 		"correct_answer": "Juiste antwoord",
-		"your_answer": "Jouw antwoord"
+		"your_answer": "Jouw antwoord",
+		"contact": "Contact",
+		"social_media": "Social media",
+		"404_title": "Oh nee, een doodlopende weg!",
+		"404_description": "Geen zorgen, we helpen je terug op de juiste route. Klik hieronder om verder te gaan!",
+		"404_button": "Terug naar de homepagina",
+		"500_title": "Oh nee, er is een klein ongelukje opgetreden!"
 	},
 	"account": {
 		"data": "Gegevens",
@@ -81,16 +87,20 @@
 			"next_question": "Volgende vraag",
 			"result": "Uitslag",
 			"results": {
-				"title": "Helaas, je hebt het niet gehaald",
+				"failed_title": "Helaas, je hebt het niet gehaald",
+				"passed_title": "Gefeliciteerd, je bent geslaagd!",
 				"score": "Je hebt {correctCount} van de {totalCount} vragen goed beantwoord",
 				"failed_description": "Je hebt deze keer niet genoeg punten behaald om te slagen. Bekijk je antwoorden om te zien waar je nog kunt verbeteren.",
-				"try_again": "Probeer het nog een keer!",
-				"try_again_description": "Geen zorgen met een paar extra oefenexamens zul je al snel merken dat het beter gaat. Blijf gefocust en ga ervoor!",
+				"failed_try_again": "Probeer het nog een keer!",
+				"failed_try_again_description": "Geen zorgen met een paar extra oefenexamens zul je al snel merken dat het beter gaat. Blijf gefocust en ga ervoor!",
+				"passed_try_again": "Goed gedaan!",
+				"passed_try_again_description": "Je inspanningen hebben hun vruchten afgeworpen. Blijf oefenen om je kennis nog verder te versterken. Blijf gefocust en ga zo door!",
 				"improve_your_score": "Verbeter je score",
 				"retake_exam": "Examen herkansen",
 				"continue_practicing": "Verder oefenen",
 				"other_exam": "Ander examen",
-				"check_answers": "Bekijk je antwoorden"
+				"check_answers": "Bekijk je antwoorden",
+				"passed_description": "Gefeliciteerd! Je hebt voldoende punten behaald om te slagen. Bekijk je antwoorden om te zien wat je goed hebt gedaan en waar je jezelf nog verder kunt verbeteren."
 			}
 		}
 	}

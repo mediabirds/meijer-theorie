@@ -8,9 +8,9 @@
 	import { cn, getImageUrl } from '$lib/utils'
 	import { sortBy } from 'lodash-es'
 	import { exam } from '$lib/stores/app.svelte'
-	import { getContext, onMount } from 'svelte'
+	import { getExamContext } from './context'
 
-	const result = getContext<Result>('EXAM_RESULT')
+	const context = getExamContext()
 </script>
 
 <Box>
@@ -24,8 +24,7 @@
 					type="button"
 					class="flex items-center gap-2 transition-transform hover:-translate-x-1"
 					onclick={() => {
-						result.showResult = false
-						console.log(result)
+						context.showResult = false
 					}}
 				>
 					<ArrowLeft />
@@ -36,7 +35,7 @@
 	{/snippet}
 
 	<div class="mt-12 space-y-4">
-		{#each result?.components! as component}
+		{#each context.outcome.result.components! as component}
 			<Collapsible class="rounded-lg bg-neutral-200">
 				{#snippet title()}
 					<H level="6" class="text-md font-sans font-medium">{component.title}</H>

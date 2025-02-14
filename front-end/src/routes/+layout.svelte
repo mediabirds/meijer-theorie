@@ -9,6 +9,7 @@
 	import '@fontsource/poppins/600.css'
 
 	import '../app.css'
+	import { GridLoader } from '$lib/components/ui/loader'
 
 	let { children, data } = $props()
 
@@ -24,6 +25,12 @@
 	<link rel="icon" href={getImageUrl(site.favicon, { width: 16 })} sizes="16x16" />
 </svelte:head>
 
-<Tooltip.Provider>
-	{@render children()}
-</Tooltip.Provider>
+{#if site.isLoading}
+	<div class="flex h-screen w-screen items-center justify-center">
+		<GridLoader />
+	</div>
+{:else}
+	<Tooltip.Provider>
+		{@render children()}
+	</Tooltip.Provider>
+{/if}

@@ -39,9 +39,15 @@ export class VideoCourses {
 		const courses = await this.services.event.locals.directus.request<VideoCourse[]>(
 			readItems('video_courses', {
 				filter: {
-					subscriptionTier: { _eq: this.services.event.locals.user!.subscription.id }
+					_or: [
+						{
+							subscriptionTiers: {
+								subscriptionTier: { _eq: this.services.state.user!.subscription.id }
+							}
+						}
+					]
 				},
-				fields: ['*', { chapters: ['*', { lessons: ['*'] }] }]
+				fields: ['*', { chapters: ['*', { lessons: ['*'] }], subscriptionTiers: ['*.*'] }]
 			})
 		)
 

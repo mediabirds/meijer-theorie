@@ -6,6 +6,7 @@ import { AuthService } from './auth'
 import { PracticeExamsService } from './practice-exams'
 import { UserService } from './user'
 import { PracticeExamService } from './practice-exam'
+import { UserExamService } from './user-exam'
 
 export class Services {
 	/**
@@ -90,12 +91,22 @@ export class Services {
 	 * @param {string} [id] - The id of the practice exam.
 	 * @returns {PracticeExamService} The PracticeExamService service instance.
 	 */
-	practiceExam(id: string) {
+	practiceExam(id?: string) {
 		if (!id) {
 			id = this.state.practiceExam!
 		}
 
 		return new PracticeExamService(this, id)
+	}
+
+	/**
+	 * Creates a new instance of the UserExamService service.
+	 *
+	 * @param {string} id - The id of the user exam.
+	 * @returns {UserExamService} The UserExamService service instance.
+	 */
+	userExam(id: string) {
+		return new UserExamService(this, id)
 	}
 
 	/**

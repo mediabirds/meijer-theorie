@@ -1,5 +1,6 @@
-import { readItem } from '@directus/sdk'
+import { readItem, updateItem } from '@directus/sdk'
 import type { Services } from '.'
+import type { parseResult } from '$lib/utils'
 
 export type PracticeExam = Directus.SchemaMapper<
 	Directus.PracticeExams,
