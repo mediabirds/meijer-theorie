@@ -14,16 +14,16 @@
 	let { id, exam, index, didPass = $bindable(undefined) }: Props = $props()
 </script>
 
-<div class="flex items-center gap-2">
+<div class="xs:flex-row flex flex-col items-center gap-2">
 	<span
 		class={cn(
-			'flex flex-grow gap-2 rounded-xl bg-neutral-100 px-6 py-3 text-sm font-medium',
+			'xs:w-0 flex w-full flex-grow gap-2 rounded-xl bg-neutral-100 px-6 py-3 text-sm font-medium',
 			true === didPass && 'bg-primary-100 text-primary',
 			false === didPass && 'bg-destructive-100 text-destructive'
 		)}
 	>
 		<span>#{index}</span>
-		<span>{exam.title}</span>
+		<span class="overflow-hidden text-ellipsis text-nowrap">{exam.title}</span>
 		{#if didPass === true}
 			<span>🎉</span>
 		{:else if didPass === false}
@@ -32,7 +32,7 @@
 	</span>
 	<Button
 		variant={didPass === undefined || didPass === null ? 'secondary' : 'default'}
-		class="w-24"
+		class="xs:min-w-24 xs:max-w-24 w-full"
 		href="/_/oefenexamens/{id}/intro"
 	>
 		{#if didPass === undefined || didPass === null}

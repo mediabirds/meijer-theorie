@@ -3,4 +3,6 @@
 	import { _ } from 'svelte-i18n'
 </script>
 
-<Exam />
+<div class="flex flex-grow items-center p-4">
+	<Exam />
+</div>

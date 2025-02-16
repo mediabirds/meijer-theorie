@@ -14,7 +14,7 @@
 </script>
 
 <div class="container mt-2 flex flex-col gap-6">
-	<div class="grid grid-cols-[1fr_420px] gap-6">
+	<div class="grid gap-6 md:grid-cols-[1fr_420px]">
 		<Box>
 			<img
 				src={getImageUrl(exam.currentQuestion!.item.thumbnail, { width: 1200 })}
@@ -41,15 +41,15 @@
 	</div>
 	<div>
 		<Box>
-			<div class="grid grid-cols-3 items-center">
+			<div class="grid grid-cols-1 items-center gap-y-6 md:grid-cols-3">
 				{#if exam.componentTimer}
-					<span class="col-start-2 text-center">
+					<span class="text-center md:col-start-2">
 						{@html $_('pages.practice_exams.time_remaining', {
 							values: { time: `${exam.componentTimer.minutes}:${exam.componentTimer.seconds}` }
 						})}
 					</span>
 				{/if}
-				<span class="col-start-3 flex items-center justify-end gap-2">
+				<span class="flex items-center justify-center gap-2 md:col-start-3 md:justify-end">
 					{#if exam.didReachEnd}
 						{$_('pages.practice_exams.result')}
 					{:else}

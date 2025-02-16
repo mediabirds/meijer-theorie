@@ -6,9 +6,11 @@
 	import DotIcon from 'lucide-svelte/icons/dot'
 </script>
 
-<div class="bg-shape flex h-full flex-grow items-center justify-center rounded-xl bg-white">
+<div
+	class="bg-shape flex h-full flex-grow justify-center rounded-xl bg-white p-4 pt-12 md:items-center md:pt-0"
+>
 	<div class="flex max-w-2xl flex-col gap-6">
-		<H level="2" class="self-start">
+		<H level="2" class="text-center">
 			{exam.title}
 		</H>
 		<div class=" rounded-xl bg-neutral-100 p-8 shadow-lg">
