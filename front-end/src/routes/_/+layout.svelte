@@ -133,7 +133,7 @@
 						{$_('account.subscription', { values: { subscription } })}
 					</span>
 				</header>
-				<main class="p-8">
+				<main class="p-6">
 					<div class="container">
 						{@render children()}
 					</div>
