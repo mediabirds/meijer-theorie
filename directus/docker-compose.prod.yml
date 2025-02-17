@@ -8,6 +8,7 @@ services:
     volumes:
       - directus_uploads:/directus/uploads
       - directus_extensions:/directus/extensions
+      - directus_database:/directus/database
     networks:
       - dokploy-network
     env_file:
@@ -16,3 +17,4 @@ services:
 volumes:
   directus_uploads:
   directus_extensions:
+  directus_database:
