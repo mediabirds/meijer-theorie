@@ -21,11 +21,13 @@
 
 <div class="container">
 	<div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
-		<VideoCourse
-			course={currentVideoCourse}
-			title={$_('common.video_course.title')}
-			description={$_('common.video_course.description')}
-		/>
+		{#if currentVideoCourse}
+			<VideoCourse
+				course={currentVideoCourse}
+				title={$_('common.video_course.title')}
+				description={$_('common.video_course.description')}
+			/>
+		{/if}
 		<Box
 			title={$_('common.practice_exam.title')}
 			class="max-w-4xl"
