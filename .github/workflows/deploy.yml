@@ -35,7 +35,7 @@ jobs:
           build-args: |
             PUBLIC_DIRECTUS_URL=${{ secrets.PUBLIC_DIRECTUS_URL }}
 
-      - name: Trigger Deployment After Build
+      - name: Trigger Deployment
         run: |
           curl -X 'POST' \
           'https://deploy.codeit.website/api/trpc/application.deploy' \
