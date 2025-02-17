@@ -36,7 +36,6 @@ jobs:
             PUBLIC_DIRECTUS_URL=${{ secrets.PUBLIC_DIRECTUS_URL }}
 
       - name: Trigger Deployment After Build
-        uses: dokploy/dokploy-action@main
         run: |
           curl -X 'POST' \
           'https://deploy.codeit.website/api/trpc/application.deploy' \
