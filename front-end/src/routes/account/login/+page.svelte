@@ -17,8 +17,6 @@
 		invalidateAll: 'force'
 	})
 	const { form: formData, enhance, submitting, message } = form
-
-	$inspect($message)
 </script>
 
 <div class="container flex flex-col items-center px-8">

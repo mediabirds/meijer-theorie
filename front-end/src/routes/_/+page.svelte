@@ -17,8 +17,6 @@
 
 		return course
 	})
-
-	$inspect(data)
 </script>
 
 <div class="container">
