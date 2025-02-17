@@ -5,7 +5,8 @@ on:
     branches: ["master"]
     paths:
       - "front-end/**"
- 
+      - ".github/workflows/**"
+      
 jobs:
   build-and-push-dockerfile-image:
     runs-on: ubuntu-24.04-arm
