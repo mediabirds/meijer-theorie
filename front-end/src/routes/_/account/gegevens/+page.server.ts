@@ -35,8 +35,6 @@ export const actions = {
 			return error(form, 400, 'INVALID_DATA', err || userdata || undefined)
 		}
 
-		console.log(userdata)
-
 		return success(form, userdata)
 	},
 	changePassword: async ({ request, locals }) => {

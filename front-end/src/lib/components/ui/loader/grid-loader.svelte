@@ -1,13 +1,20 @@
-<div class="lds-grid text-neutral-500">
-	<div></div>
-	<div></div>
-	<div></div>
-	<div></div>
-	<div></div>
-	<div></div>
-	<div></div>
-	<div></div>
-	<div></div>
+<script lang="ts">
+	import { _ } from 'svelte-i18n'
+</script>
+
+<div class="flex flex-col items-center justify-center gap-4">
+	<div class="lds-grid text-secondary-500">
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
+	<span class="font-medium text-neutral-500">{$_('common.loading')}</span>
 </div>
 
 <style>

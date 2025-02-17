@@ -2,6 +2,7 @@
 	import { Tooltip } from 'bits-ui'
 	import { site, session } from '$lib/stores/app.svelte'
 	import { getImageUrl } from '$lib/utils'
+	import { GridLoader } from '$lib/components/ui/loader'
 
 	import '@fontsource/poppins/300.css'
 	import '@fontsource/poppins/400.css'
@@ -9,7 +10,6 @@
 	import '@fontsource/poppins/600.css'
 
 	import '../app.css'
-	import { GridLoader } from '$lib/components/ui/loader'
 
 	let { children, data } = $props()
 

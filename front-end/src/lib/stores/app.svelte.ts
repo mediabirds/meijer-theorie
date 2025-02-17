@@ -33,6 +33,7 @@ export class Site implements SiteState {
 	url: string = $state.raw('')
 	contactMail: string = $state.raw('')
 	kvk: string = $state.raw('')
+	mobileMenuOpen = $state.raw(false)
 
 	isLoading = $derived.by(() => {
 		if (innerWidth.current === undefined || (session.user && !session.user.email)) {

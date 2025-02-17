@@ -4,8 +4,6 @@
 	import { session } from '$lib/stores/app.svelte'
 	import { _ } from 'svelte-i18n'
 	import ExternalLinkIcon from 'lucide-svelte/icons/square-arrow-out-up-right'
-
-	console.log(session)
 </script>
 
 <div class="rounded-xl bg-neutral-100 p-8">

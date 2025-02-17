@@ -30,7 +30,8 @@
 		"404_title": "Oh nee, een doodlopende weg!",
 		"404_description": "Geen zorgen, we helpen je terug op de juiste route. Klik hieronder om verder te gaan!",
 		"404_button": "Terug naar de homepagina",
-		"500_title": "Oh nee, er is een klein ongelukje opgetreden!"
+		"500_title": "Oh nee, er is een klein ongelukje opgetreden!",
+		"loading:": "Laden..."
 	},
 	"account": {
 		"data": "Gegevens",

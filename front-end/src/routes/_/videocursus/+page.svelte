@@ -6,7 +6,6 @@
 	import { _ } from 'svelte-i18n'
 
 	const { data } = $props()
-	console.log(data.courses[0])
 </script>
 
 <div class="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
