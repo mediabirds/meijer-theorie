@@ -6,7 +6,7 @@ on:
     paths:
       - "front-end/**"
       - ".github/workflows/**"
-      
+
 jobs:
   build-and-push-dockerfile-image:
     runs-on: ubuntu-24.04-arm
@@ -34,3 +34,13 @@ jobs:
           platforms: linux/arm64
           build-args: |
             PUBLIC_DIRECTUS_URL=${{ secrets.PUBLIC_DIRECTUS_URL }}
+
+      - name: Trigger Deployment After Build
+        uses: dokploy/dokploy-action@main
+        run: |
+          curl -X 'POST' \
+          'https://deploy.codeit.website/api/trpc/application.deploy' \
+          -H 'accept: application/json' \
+          -H 'Authorization: Bearer ${{ secrets.DOKPLOY_TOKEN }}' \
+          -H 'Content-Type: application/json' \
+          -d '{"json":{"applicationId": "Tr2ETnRjO4jaByxYSQ5Rz"}}'
