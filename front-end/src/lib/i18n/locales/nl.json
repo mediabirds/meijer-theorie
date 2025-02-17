@@ -31,7 +31,27 @@
 		"404_description": "Geen zorgen, we helpen je terug op de juiste route. Klik hieronder om verder te gaan!",
 		"404_button": "Terug naar de homepagina",
 		"500_title": "Oh nee, er is een klein ongelukje opgetreden!",
-		"loading:": "Laden..."
+		"loading:": "Laden...",
+		"video_course": {
+			"title": "Videocursus",
+			"description": "Ga verder waar je was gebleven en blijf op koers naar je examen!"
+		},
+		"practice_exam": {
+			"title": "Oefenexamen",
+			"description": "Kijk hoe goed je al voorbereid bent!"
+		},
+		"subscription_timer_widget": {
+			"title": "Jouw pakket",
+			"description": "{subscription}",
+			"day": "Dag",
+			"days": "Dagen",
+			"hours": "Uren",
+			"hour": "Uur",
+			"minutes": "Minuten",
+			"minute": "Minuut",
+			"seconds": "Seconden",
+			"second": "Seconde"
+		}
 	},
 	"account": {
 		"data": "Gegevens",
