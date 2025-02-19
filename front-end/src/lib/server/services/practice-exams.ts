@@ -1,7 +1,6 @@
 import { readItems } from '@directus/sdk'
 import type { Services } from '.'
 import type { PracticeExam } from './practice-exam'
-import { tryer } from '$lib/utils'
 
 export class PracticeExamsService {
 	constructor(readonly services: Services) {}
