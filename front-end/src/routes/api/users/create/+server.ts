@@ -3,10 +3,6 @@ import { fromError } from 'zod-validation-error'
 import z from 'zod'
 import { createUser, readRoles } from '@directus/sdk'
 import { generatePassword } from '$lib/utils.js'
-import mjml2html from 'mjml'
-import AccountCreated from '$lib/email-templates/account-created.mjml?raw'
-import Handlebars from 'handlebars'
-import { EMAIL_FROM } from '$env/static/private'
 
 const schema = z.object({
 	email: z.string().email(),
@@ -40,9 +36,6 @@ export const POST = async ({ request, locals }) => {
 			})
 		}
 
-		const { html } = mjml2html(AccountCreated)
-		const template = Handlebars.compile(html)
-
 		const userData = {
 			email: data.email,
 			first_name: data.firstName,
@@ -56,17 +49,19 @@ export const POST = async ({ request, locals }) => {
 		}
 		const user = await locals.directus.request(createUser(userData))
 
-		const response = await locals.services.email().sendMail({
-			to: user.email!,
-			from: EMAIL_FROM,
-			subject: 'Account gegevens',
-			html: template({
+		const response = await locals.services.email().send(
+			{
+				to: user.email!,
+				subject: 'MeijerTheorie, welkom!'
+			},
+			'account_created',
+			{
 				days: subscriptionTier.daysOfAccess,
-				firstName: user.first_name,
-				username: user.email,
+				firstName: user.first_name!,
+				username: user.email!,
 				password: generatedPassword
-			})
-		})
+			}
+		)
 
 		if (response.accepted.length === 0) {
 			return json({

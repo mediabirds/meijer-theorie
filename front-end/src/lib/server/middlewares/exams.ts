@@ -8,6 +8,9 @@ import type { Handle } from '@sveltejs/kit'
  * returns an updated list of the user's practice exams.
  */
 export const exams: Handle = async ({ event, resolve }) => {
-	await event.locals.services.practiceExams().getExamsForUser()
+	if (event.locals.user && event.locals.services.state.user) {
+		await event.locals.services.practiceExams().getExamsForUser()
+	}
+
 	return await resolve(event)
 }

@@ -9,14 +9,7 @@ import { PracticeExamService } from './practice-exam'
 import { UserExamService } from './user-exam'
 import { SubscriptionsService } from './subscriptions'
 import { SubscriptionTierService } from './subscription-tier'
-import nodemailer from 'nodemailer'
-import {
-	EMAIL_FROM,
-	EMAIL_SMTP_HOST,
-	EMAIL_SMTP_PASSWORD,
-	EMAIL_SMTP_PORT,
-	EMAIL_SMTP_USER
-} from '$env/static/private'
+import { EmailService } from './email'
 
 export class Services {
 	/**
@@ -46,22 +39,12 @@ export class Services {
 	}
 
 	/**
-	 * Returns a nodemailer transporter for sending emails.
+	 * Creates a new instance of the EmailService.
 	 *
-	 * @returns {Transporter} The transporter instance.
+	 * @returns {EmailService} The EmailService instance.
 	 */
 	email() {
-		const transport = nodemailer.createTransport({
-			host: EMAIL_SMTP_HOST,
-			port: EMAIL_SMTP_PORT as unknown as number,
-			secure: false,
-			auth: {
-				user: EMAIL_SMTP_USER,
-				pass: EMAIL_SMTP_PASSWORD
-			}
-		})
-
-		return transport
+		return new EmailService(this)
 	}
 
 	/**
