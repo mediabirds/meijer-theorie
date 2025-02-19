@@ -1,0 +1,97 @@
+<mjml>
+	<mj-head>
+		<mj-font name="Raleway" href="https://fonts.googleapis.com/css?family=Raleway" />
+	</mj-head>
+	<mj-body>
+		<mj-section>
+			<mj-column>
+				<mj-image
+					align="left"
+					width="250px"
+					src="https://nbg1.your-objectstorage.com/mediabirds-public/logo-meijer-small.png"
+				></mj-image>
+
+				<mj-divider border-width="1px" border-color="lightgrey" />
+			</mj-column>
+		</mj-section>
+		<mj-section padding="0">
+			<mj-column>
+				<mj-text font-size="28px" font-weight="900"> Welkom, {{firstName}} </mj-text>
+				<mj-text font-size="16px">
+					Je hebt vanaf nu {{days}} dagen toegang tot het
+					<a style="color: #e64c4b" href="https://platform.meijertheoriecursus.nl" target="_blank">
+						theorieplatform.
+					</a>
+				</mj-text>
+			</mj-column>
+		</mj-section>
+		<mj-section padding-top="20px">
+			<mj-column>
+				<mj-text padding-bottom="5px" font-size="16px" font-weight="700">
+					Je kunt met de volgende gegevens inloggen:
+				</mj-text>
+				<mj-text font-size="16px">
+					<span>Gebruikersnaam</span>: {{username}}<br />
+					<span>Wachtwoord</span>: {{password}}
+				</mj-text>
+			</mj-column>
+		</mj-section>
+		<mj-section padding="0">
+			<mj-column>
+				<mj-button
+					align="left"
+					background-color="#E64C4B"
+					color="white"
+					border-radius="12px"
+					height="45px"
+					font-size="16px"
+					href="https://platform.meijertheoriecursus.nl"
+				>
+					Klik hier om in te loggen
+				</mj-button>
+			</mj-column>
+		</mj-section>
+		<mj-section padding-top="60px">
+			<mj-group>
+				<mj-column>
+					<mj-divider border-width="1px" border-color="lightgrey" />
+				</mj-column>
+			</mj-group>
+		</mj-section>
+		<mj-section padding-top="0">
+			<mj-group>
+				<mj-column padding-left="20px" width="70px">
+					<mj-image
+						align="left"
+						padding="0"
+						width="50px"
+						height="50px"
+						src="https://nbg1.your-objectstorage.com/mediabirds-public/instagram-icon-red-circle.png"
+						href="https://www.instagram.com/meijertheorie/"
+					/>
+				</mj-column>
+				<mj-column>
+					<mj-image
+						align="left"
+						padding="0"
+						width="49px"
+						height="49px"
+						src="https://nbg1.your-objectstorage.com/mediabirds-public/tiktok-icon-red-circle.png"
+						href="https://www.tiktok.com/@meijer.theorie"
+					/>
+				</mj-column>
+			</mj-group>
+			<mj-group>
+				<mj-column>
+					<mj-text font-size="18px" font-weight="bold" padding-bottom="16px">Contact</mj-text>
+					<mj-text font-size="16px" padding-top="0" padding-bottom="5px">
+						<a style="color: black" href="mailto:matthijsmeijer@outlook.com"
+							>matthijsmeijer@outlook.com</a
+						>
+					</mj-text>
+					<mj-text font-size="16px" padding-top="0"> KVK: 5865812379 </mj-text>
+				</mj-column>
+			</mj-group>
+		</mj-section>
+	</mj-body>
+</mjml>

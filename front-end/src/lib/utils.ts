@@ -141,3 +141,40 @@ export const parseResult = (components: Component[]) => {
 		didPass: correctAnswersCount >= minCorrectAnswersCount
 	}
 }
+
+export const generatePassword = (
+	length = 12,
+	options?: { uppercase?: boolean; lowercase?: boolean; numbers?: boolean; symbols?: boolean }
+) => {
+	options = {
+		uppercase: true,
+		lowercase: true,
+		numbers: true,
+		symbols: true,
+		...options
+	}
+
+	const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz'
+	const numberChars = '0123456789'
+	const symbolChars = '!@#$%^&*()_-+=<>?/{}[]'
+
+	let allChars = ''
+	let password = ''
+
+	if (options.uppercase) allChars += uppercaseChars
+	if (options.lowercase) allChars += lowercaseChars
+	if (options.numbers) allChars += numberChars
+	if (options.symbols) allChars += symbolChars
+
+	if (allChars.length === 0) {
+		throw new Error('At least one character type must be selected')
+	}
+
+	for (let i = 0; i < length; i++) {
+		const randomIndex = Math.floor(Math.random() * allChars.length)
+		password += allChars[randomIndex]
+	}
+
+	return password
+}

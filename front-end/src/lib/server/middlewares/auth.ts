@@ -31,9 +31,9 @@ export const auth: Handle = async ({ event, resolve }) => {
 		await event.locals.directus.setToken(authData.access_token!)
 		const [user, error] = await me(event)
 
-		if (error || !user) {
+		if (error || !user || !user.subscription?.id) {
 			logout(event)
-			redirect(301, '/account/login')
+			redirect(301, '/account/login?reason=account_not_setup_correctly')
 		}
 
 		event.locals.session = authData

@@ -65,7 +65,7 @@ export class PracticeExamsService {
 			/**
 			 * Attach exams to user
 			 */
-			await Promise.all(exams.map((exam) => this.services.user().addExam(exam)))
+			await Promise.all(exams.map(async (exam) => await this.services.user().addExam(exam)))
 			return await this.services.user().getPracticeExams()
 		}
 

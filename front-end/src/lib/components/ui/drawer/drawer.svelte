@@ -23,7 +23,7 @@
 		<Dialog.Content
 			class={cn(
 				'w-full p-6 sm:max-w-[400px]',
-				'fixed left-0 top-0 z-50 flex h-screen bg-white shadow-lg outline-none',
+				'fixed left-0 top-0 z-50 flex h-dvh bg-white shadow-lg outline-none',
 				'data-[state=open]:animate-in data-[state=closed]:animate-out',
 				'data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left'
 			)}

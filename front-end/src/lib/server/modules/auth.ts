@@ -48,7 +48,7 @@ export async function refresh(
 	}
 }
 
-export async function me(event: RequestEvent) {
+export async function me(event: RequestEvent): Promise<[App.Locals['user'] | null, any]> {
 	try {
 		const user = await event.locals.directus.request<App.Locals['user']>(
 			readMe({

@@ -1,4 +1,4 @@
-import { error, type RequestEvent } from '@sveltejs/kit'
+import type { RequestEvent } from '@sveltejs/kit'
 import { State } from '../state'
 import { VideoCourseService } from './video-course'
 import { VideoCourses } from './video-courses'
@@ -7,6 +7,16 @@ import { PracticeExamsService } from './practice-exams'
 import { UserService } from './user'
 import { PracticeExamService } from './practice-exam'
 import { UserExamService } from './user-exam'
+import { SubscriptionsService } from './subscriptions'
+import { SubscriptionTierService } from './subscription-tier'
+import nodemailer from 'nodemailer'
+import {
+	EMAIL_FROM,
+	EMAIL_SMTP_HOST,
+	EMAIL_SMTP_PASSWORD,
+	EMAIL_SMTP_PORT,
+	EMAIL_SMTP_USER
+} from '$env/static/private'
 
 export class Services {
 	/**
@@ -33,6 +43,25 @@ export class Services {
 	constructor(event: RequestEvent) {
 		this.event = event
 		this.state = new State(event)
+	}
+
+	/**
+	 * Returns a nodemailer transporter for sending emails.
+	 *
+	 * @returns {Transporter} The transporter instance.
+	 */
+	email() {
+		const transport = nodemailer.createTransport({
+			host: EMAIL_SMTP_HOST,
+			port: EMAIL_SMTP_PORT as unknown as number,
+			secure: false,
+			auth: {
+				user: EMAIL_SMTP_USER,
+				pass: EMAIL_SMTP_PASSWORD
+			}
+		})
+
+		return transport
 	}
 
 	/**
@@ -114,7 +143,26 @@ export class Services {
 	 *
 	 * @returns {UserService} The UserService service instance.
 	 */
-	user() {
-		return new UserService(this, this.state.user!.id)
+	user(id?: string) {
+		return new UserService(this, id ? id : this.state.user!.id)
+	}
+
+	/**
+	 * Creates a new instance of the SubscriptionService service.
+	 *
+	 * @returns {SubscriptionService} The SubscriptionService service instance.
+	 */
+	subscriptions() {
+		return new SubscriptionsService(this)
+	}
+
+	/**
+	 * Creates a new instance of the SubscriptionTierService service.
+	 *
+	 * @param {string} id - The id of the subscription tier.
+	 * @returns {SubscriptionTierService} The SubscriptionTierService service instance.
+	 */
+	subscriptionTier(id: string) {
+		return new SubscriptionTierService(this, id)
 	}
 }
