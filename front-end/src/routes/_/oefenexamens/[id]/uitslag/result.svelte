@@ -15,11 +15,11 @@
 
 <Box>
 	{#snippet title()}
-		<div class="flex items-center justify-between">
-			<div>
+		<div class="flex flex-col items-center justify-between gap-y-4 lg:flex-row">
+			<div class="order-2 lg:order-1">
 				<H level="5">{exam?.title}</H>
 			</div>
-			<div>
+			<div class="order-1 lg:order-2">
 				<button
 					type="button"
 					class="flex items-center gap-2 transition-transform hover:-translate-x-1"
@@ -42,11 +42,11 @@
 				{/snippet}
 				<div class="divide-y divide-neutral-200 rounded-lg bg-neutral-100">
 					{#each component.questions as question}
-						<div class="grid grid-cols-[300px_1fr] items-start gap-4 p-6">
+						<div class="grid grid-cols-1 items-start gap-4 p-6 md:grid-cols-[300px_1fr]">
 							<img
 								src={getImageUrl(question.item.thumbnail, { width: 300 })}
 								alt={question.item.title}
-								class="aspect-square rounded-lg object-cover"
+								class="w-full rounded-lg md:aspect-square md:w-auto md:object-cover"
 							/>
 							<div class="rounded-lg bg-white p-6">
 								<H level="6" class="text-md mb-6 font-sans font-medium">{question.item.title}</H>
@@ -55,7 +55,7 @@
 										{#each question.item.answers as answer, index}
 											<label
 												class={cn(
-													'flex items-center justify-between rounded-lg bg-neutral-100 px-5 py-4',
+													'flex flex-col justify-between gap-y-4 rounded-lg bg-neutral-100 px-5 py-4 md:flex-row md:items-center',
 													answer.isCorrectAnswer && answer.checked && '!bg-primary-100',
 													answer.isCorrectAnswer && '!bg-primary-100',
 													answer.checked && 'bg-secondary-100',

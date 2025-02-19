@@ -42,12 +42,12 @@
 		<div class="flex flex-col gap-2 rounded-lg bg-neutral-100 p-3">
 			<span class="flex gap-1">
 				<span
-					class="w-8 rounded-md bg-white py-3 text-center text-2xl font-bold xs:w-10 xs:text-3xl"
+					class="w-7 rounded-md bg-white py-3 text-center text-xl font-bold xs:w-10 xs:text-3xl"
 				>
 					{expiresIn.days > 9 ? expiresIn.days.toString().split('')[0] : '0'}
 				</span>
 				<span
-					class="w-8 rounded-md bg-white py-3 text-center text-2xl font-bold xs:w-10 xs:text-3xl"
+					class="w-7 rounded-md bg-white py-3 text-center text-xl font-bold xs:w-10 xs:text-3xl"
 				>
 					{expiresIn.days > 9 ? expiresIn.days.toString().split('')[1] : expiresIn.days}
 				</span>
@@ -61,12 +61,12 @@
 		<div class="flex flex-col gap-2 rounded-lg bg-neutral-100 p-3">
 			<span class="flex gap-1">
 				<span
-					class="w-8 rounded-md bg-white py-3 text-center text-2xl font-bold xs:w-10 xs:text-3xl"
+					class="w-7 rounded-md bg-white py-3 text-center text-xl font-bold xs:w-10 xs:text-3xl"
 				>
 					{expiresIn.hours > 9 ? expiresIn.hours.toString().split('')[0] : '0'}
 				</span>
 				<span
-					class="w-8 rounded-md bg-white py-3 text-center text-2xl font-bold xs:w-10 xs:text-3xl"
+					class="w-7 rounded-md bg-white py-3 text-center text-xl font-bold xs:w-10 xs:text-3xl"
 				>
 					{expiresIn.hours > 9 ? expiresIn.hours.toString().split('')[1] : expiresIn.hours}
 				</span>
@@ -80,12 +80,12 @@
 		<div class="flex flex-col gap-2 rounded-lg bg-neutral-100 p-3">
 			<span class="flex gap-1">
 				<span
-					class="w-8 rounded-md bg-white py-3 text-center text-2xl font-bold xs:w-10 xs:text-3xl"
+					class="w-7 rounded-md bg-white py-3 text-center text-xl font-bold xs:w-10 xs:text-3xl"
 				>
 					{expiresIn.minutes > 9 ? expiresIn.minutes.toString().split('')[0] : '0'}
 				</span>
 				<span
-					class="w-8 rounded-md bg-white py-3 text-center text-2xl font-bold xs:w-10 xs:text-3xl"
+					class="w-7 rounded-md bg-white py-3 text-center text-xl font-bold xs:w-10 xs:text-3xl"
 				>
 					{expiresIn.minutes > 9 ? expiresIn.minutes.toString().split('')[1] : expiresIn.minutes}
 				</span>
