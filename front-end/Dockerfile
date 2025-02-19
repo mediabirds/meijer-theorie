@@ -21,7 +21,7 @@ ENV EMAIL_SMTP_PORT=$EMAIL_SMTP_PORT
 ARG EMAIL_SMTP_USER
 ENV EMAIL_SMTP_USER=$EMAIL_SMTP_USER
 
-ARG S3_ACCESS_KEY    
+ARG S3_ACCESS_KEY
 ENV S3_ACCESS_KEY=$S3_ACCESS_KEY
 
 ARG S3_SECRET_KEY
@@ -34,7 +34,7 @@ WORKDIR /app
 COPY package.json ./
 
 # Install dependencies
-RUN bun install --verbose
+RUN bun install
 
 # Copy the rest of the application files
 COPY . .
