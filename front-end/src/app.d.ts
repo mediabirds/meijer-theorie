@@ -37,6 +37,7 @@ declare global {
 				}
 			> | null
 			services: Services
+			isExpired: boolean
 		}
 		// interface PageData {}
 		// interface PageState {}

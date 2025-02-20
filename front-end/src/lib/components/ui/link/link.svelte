@@ -9,6 +9,14 @@
 	let { href, children, ...restProps }: Props = $props()
 </script>
 
-<a {...restProps} {href} class={cn('transition-colors hover:text-primary', restProps.class)}>
+<a
+	{...restProps}
+	{href}
+	class={cn(
+		'transition-colors hover:text-primary',
+		page.url.pathname === href && 'font-medium text-primary',
+		restProps.class
+	)}
+>
 	{@render children()}
 </a>

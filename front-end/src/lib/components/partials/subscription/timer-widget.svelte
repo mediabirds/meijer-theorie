@@ -49,7 +49,11 @@
 				<span
 					class="w-7 rounded-md bg-white py-3 text-center text-xl font-bold xs:w-10 xs:text-3xl"
 				>
-					{expiresIn.days > 9 ? expiresIn.days.toString().split('')[1] : expiresIn.days}
+					{expiresIn.days > 9
+						? expiresIn.days.toString().split('')[1]
+						: expiresIn.days < 0
+							? '0'
+							: '0'}
 				</span>
 			</span>
 			<span class="text-sm">
@@ -68,7 +72,11 @@
 				<span
 					class="w-7 rounded-md bg-white py-3 text-center text-xl font-bold xs:w-10 xs:text-3xl"
 				>
-					{expiresIn.hours > 9 ? expiresIn.hours.toString().split('')[1] : expiresIn.hours}
+					{expiresIn.hours > 9
+						? expiresIn.hours.toString().split('')[1]
+						: expiresIn.hours < 0
+							? '0'
+							: '0'}
 				</span>
 			</span>
 			<span class="text-sm">
@@ -87,7 +95,11 @@
 				<span
 					class="w-7 rounded-md bg-white py-3 text-center text-xl font-bold xs:w-10 xs:text-3xl"
 				>
-					{expiresIn.minutes > 9 ? expiresIn.minutes.toString().split('')[1] : expiresIn.minutes}
+					{expiresIn.minutes > 9
+						? expiresIn.minutes.toString().split('')[1]
+						: expiresIn.minutes < 0
+							? '0'
+							: '0'}
 				</span>
 			</span>
 			<span class="text-sm">

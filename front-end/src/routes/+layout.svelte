@@ -16,7 +16,7 @@
 	$effect(() => {
 		session.set({ ...data.session, user: data.user })
 		// @ts-ignore
-		site.set({ ...data.globals })
+		site.set({ ...data.globals, isExpired: data.isExpired })
 	})
 </script>
 

@@ -51,6 +51,11 @@
 			"minute": "Minuut",
 			"seconds": "Seconden",
 			"second": "Seconde"
+		},
+		"subscription_expired": {
+			"title": "Je abonnement is verlopen",
+			"description": "Let op, je abonnement is verlopen, je kunt via onderstaande knop je pakket verlengen of een ander pakket kiezen.",
+			"button": "Kies een pakket"
 		}
 	},
 	"account": {

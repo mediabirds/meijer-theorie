@@ -34,6 +34,7 @@ export class Site implements SiteState {
 	contactMail: string = $state.raw('')
 	kvk: string = $state.raw('')
 	mobileMenuOpen = $state.raw(false)
+	isExpired: boolean = $state.raw(false)
 
 	isLoading = $derived.by(() => {
 		if (innerWidth.current === undefined || (session.user && !session.user.email)) {

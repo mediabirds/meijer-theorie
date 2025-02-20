@@ -28,12 +28,14 @@
 		{
 			title: $_('common.video_courses'),
 			href: '/_/videocursus',
-			icon: '💻'
+			icon: '💻',
+			subscription: true
 		},
 		{
 			title: $_('common.partice_exams'),
 			href: '/_/oefenexamens',
-			icon: '📝'
+			icon: '📝',
+			subscription: true
 		},
 		{
 			title: $_('common.profile'),
@@ -97,11 +99,25 @@
 					</span>
 					<nav class="flex flex-grow flex-col gap-4">
 						{#each menuItems as item}
-							<Link href={item.href} class="flex items-center gap-4">
+							<Link
+								href={item.href}
+								class={cn(
+									'flex items-center gap-4',
+									item.subscription && site.isExpired && 'pointer-events-none text-neutral-400',
+									item.subscription && site.isExpired && 'hover:text-neutral-400'
+								)}
+							>
 								<span
 									class="flex min-h-11 min-w-11 items-center justify-center rounded-md bg-neutral-100 text-2xl"
 								>
-									<span class="relative -mt-1">{item.icon}</span>
+									<span
+										class={cn(
+											'relative -mt-1',
+											item.subscription && site.isExpired && 'opacity-30'
+										)}
+									>
+										{item.icon}
+									</span>
 								</span>
 								<span
 									class={cn(
