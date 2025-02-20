@@ -52,8 +52,8 @@
 					{expiresIn.days > 9
 						? expiresIn.days.toString().split('')[1]
 						: expiresIn.days < 0
-							? '0'
-							: '0'}
+							? 0
+							: expiresIn.days.toString().split('')[0]}
 				</span>
 			</span>
 			<span class="text-sm">
@@ -75,8 +75,8 @@
 					{expiresIn.hours > 9
 						? expiresIn.hours.toString().split('')[1]
 						: expiresIn.hours < 0
-							? '0'
-							: '0'}
+							? 0
+							: expiresIn.hours.toString().split('')[0]}
 				</span>
 			</span>
 			<span class="text-sm">
@@ -98,8 +98,8 @@
 					{expiresIn.minutes > 9
 						? expiresIn.minutes.toString().split('')[1]
 						: expiresIn.minutes < 0
-							? '0'
-							: '0'}
+							? 0
+							: expiresIn.minutes.toString().split('')[0]}
 				</span>
 			</span>
 			<span class="text-sm">

@@ -93,7 +93,7 @@
 									</div>
 								{/if}
 								{#if question.collection === 'questions_in_order'}
-									<div class="grid grid-cols-[1fr_30%] gap-12">
+									<div class="grid gap-12 lg:grid-cols-[1fr_30%]">
 										<div class="flex w-full flex-col gap-2">
 											<span class="block text-start">{$_('common.your_answer')}</span>
 											{#each sortBy(question.item.answers, 'givenOrder') as answer, index}

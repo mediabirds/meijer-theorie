@@ -7,7 +7,7 @@
 		"front-end"
 	],
 	"scripts": {
-		"dev": "cd directus && docker compose up -d --remove-orphans --build && cd ../front-end && npm run dev",
+		"dev": "cd directus && docker compose up -d --remove-orphans && cd ../front-end && npm run dev",
 		"dev:frontend": "cd front-end && npm run dev",
 		"typegen": "npx indirectus sdk generate --url http://localhost:8055 --token 1nrsO0lzBtkRGPcVcxPsexKQrrW6v97d --outputDir ./front-end/src/lib/directus",
 		"db:export": "export PGPASSWORD='directus' && cd directus && docker compose up -d meijer-database && sleep 2 && pg_dump --clean -U directus -h 127.0.0.1 -p 5432 -d directus > ./database.sql",
