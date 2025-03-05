@@ -42,13 +42,6 @@
 	<div>
 		<Box>
 			<div class="grid grid-cols-1 items-center gap-y-6 md:grid-cols-3">
-				{#if exam.componentTimer}
-					<span class="text-center md:col-start-2">
-						{@html $_('pages.practice_exams.time_remaining', {
-							values: { time: `${exam.componentTimer.minutes}:${exam.componentTimer.seconds}` }
-						})}
-					</span>
-				{/if}
 				<span class="flex items-center justify-center gap-2 md:col-start-3 md:justify-end">
 					{#if exam.didReachEnd}
 						{$_('pages.practice_exams.result')}

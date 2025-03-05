@@ -24,6 +24,13 @@
 					{$_('pages.practice_exams.good_luck', { values: { username } })}
 				</span>
 			</span>
+			{#if exam.componentTimer}
+				<span class="text-center md:col-start-2">
+					{@html $_('pages.practice_exams.time_remaining', {
+						values: { time: `${exam.componentTimer.minutes}:${exam.componentTimer.seconds}` }
+					})}
+				</span>
+			{/if}
 			{#if exam.questionTimer}
 				<span class="flex items-center">
 					<span class="relative top-[1px] w-6 font-medium"

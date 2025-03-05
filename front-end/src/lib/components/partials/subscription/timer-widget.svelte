@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { invalidateAll } from '$app/navigation'
+	import { Button } from '$lib/components/ui/button'
 	import { Box } from '$lib/components/ui/layout'
 	import { session } from '$lib/stores/app.svelte'
 	import { differenceInMilliseconds } from 'date-fns'
@@ -7,6 +9,7 @@
 
 	let currentDate = $state(new Date())
 	let interval = $state<Timer>()
+	let isSendingPauseRequest = $state(false)
 
 	let expiresIn = $derived.by(() => {
 		const ms = differenceInMilliseconds(new Date(session.user?.expiresAt!), currentDate)
@@ -123,5 +126,23 @@
 					: $_('common.subscription_timer_widget.seconds')}
 			</span>
 		</div> -->
+	</div>
+	<div class="mt-4 flex gap-2">
+		<Button
+			variant="secondary"
+			onclick={() => {
+				isSendingPauseRequest = true
+
+				fetch('/api/subscriptions/pause', {
+					method: 'POST'
+				}).finally(async () => {
+					await invalidateAll()
+					isSendingPauseRequest = false
+				})
+			}}
+			spinner={isSendingPauseRequest}
+		>
+			{$_('common.subscription_timer_widget.pause')}
+		</Button>
 	</div>
 </Box>

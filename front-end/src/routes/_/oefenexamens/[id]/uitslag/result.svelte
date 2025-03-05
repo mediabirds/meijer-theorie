@@ -103,9 +103,12 @@
 														'[&.sortable-ghost]:border-2 [&.sortable-ghost]:border-dashed [&.sortable-ghost]:border-primary',
 														'[&.sortable-ghost]:text-primary [&.sortable-ghost]:opacity-50',
 														'[&.sortable-chosen_svg]:cursor-grabbing',
-														answer.givenOrder !== answer.order && '!bg-secondary-100'
+														answer.givenOrder &&
+															answer.givenOrder !== answer.order &&
+															'!bg-secondary-100'
 													)}
 													data-id={answer.order}
+													data-order={answer.givenOrder}
 												>
 													<span>{answer.label}</span>
 													<svg
@@ -145,8 +148,11 @@
 															'[&.sortable-ghost]:text-primary [&.sortable-ghost]:opacity-50',
 															'[&.sortable-chosen_svg]:cursor-grabbing'
 														)}
-														data-id={answer.order}>{answer.label}</span
+														data-id={answer.order}
+														data-order={answer.givenOrder}
 													>
+														{answer.label}
+													</span>
 												{/each}
 											</div>
 										</div>

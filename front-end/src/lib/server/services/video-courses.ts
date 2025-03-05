@@ -47,7 +47,13 @@ export class VideoCourses {
 						}
 					]
 				},
-				fields: ['*', { chapters: ['*', { lessons: ['*'] }], subscriptionTiers: ['*.*'] }]
+				fields: ['*', { chapters: ['*', { lessons: ['*'] }], subscriptionTiers: ['*.*'] }],
+				deep: {
+					// @ts-ignore
+					chapters: {
+						_sort: 'order'
+					}
+				}
 			})
 		)
 

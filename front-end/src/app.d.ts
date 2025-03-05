@@ -38,6 +38,7 @@ declare global {
 			> | null
 			services: Services
 			isExpired: boolean
+			isPaused: boolean
 		}
 		// interface PageData {}
 		// interface PageState {}
@@ -487,6 +488,8 @@ declare global {
 			external_identifier?: string | null
 			first_name?: string | null
 			id: string
+			isPaused?: boolean | null
+			isPausedAt?: string | null
 			language?: string | null
 			last_access?: string | null
 			last_name?: string | null
@@ -603,6 +606,7 @@ declare global {
 			tagline?: string | null
 			title?: string | null
 			url?: string | null
+			whatsapp?: string | null
 		}
 
 		export type Navigation = {
@@ -665,7 +669,7 @@ declare global {
 			components: any[] | PracticeExamsComponents[]
 			description?: string | null
 			id: string
-			limitInMinutes?: number | null
+			order?: number | null
 			title: string
 		}
 
@@ -714,7 +718,6 @@ declare global {
 			slug?: string | null
 			subscription?: number | Subscriptions | null
 			title: string
-			videoCourse?: number | null
 		}
 
 		export type SubscriptionTiersPracticeExams = {
@@ -749,6 +752,7 @@ declare global {
 			description?: string | null
 			id: string
 			lessons: any[] | VideoCoursesLessons[]
+			order?: number | null
 			slug?: string | null
 			thumbnail: string | DirectusFiles
 			title: string

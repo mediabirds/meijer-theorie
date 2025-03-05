@@ -37,7 +37,13 @@ export class VideoCourseService {
 					category: { _eq: this.category },
 					slug: { _eq: this.course }
 				},
-				fields: ['*', { chapters: ['*', { lessons: ['*'] }], subscriptionTiers: ['*.*'] }]
+				fields: ['*', { chapters: ['*', { lessons: ['*'] }], subscriptionTiers: ['*.*'] }],
+				deep: {
+					// @ts-ignore
+					chapters: {
+						_sort: 'order'
+					}
+				}
 			})
 		)
 
@@ -67,7 +73,8 @@ export class VideoCourseService {
 						category: { _eq: this.category }
 					}
 				},
-				fields: ['*', { lessons: ['*'] }]
+				fields: ['*', { lessons: ['*'] }],
+				sort: 'order'
 			})
 		)
 

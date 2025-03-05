@@ -54,4 +54,4 @@ COPY --from=builder /app /app
 EXPOSE 3000
 
 # Start the application
-CMD ["bun", "./build/index.js"]
+ENTRYPOINT [ "bun ./build/index.js" ]

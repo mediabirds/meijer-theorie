@@ -1,6 +1,8 @@
-import { readUser, updateUser, type DirectusUser, type Query } from '@directus/sdk'
 import type { Services } from '.'
 import type { PracticeExam } from './practice-exam'
+import { readUser, updateUser, type DirectusUser, type Query } from '@directus/sdk'
+import { sortBy } from 'lodash-es'
+import { differenceInMilliseconds } from 'date-fns'
 
 const fields: Query<Directus.CustomDirectusTypes, Directus.DirectusUsers>['fields'] = [
 	'*',
@@ -49,7 +51,8 @@ export class UserService {
 	}
 
 	async getPracticeExams() {
-		return (await this.fetch()).practiceExams
+		const exams = (await this.fetch()).practiceExams
+		return sortBy(exams, 'exam.order')
 	}
 
 	async addExam(exam: PracticeExam) {
@@ -60,5 +63,25 @@ export class UserService {
 		})
 
 		return response.practiceExams
+	}
+
+	pauseSubscription() {
+		return this.update({ isPaused: true, isPausedAt: new Date().toISOString() })
+	}
+
+	resumeSubscription() {
+		const difference = differenceInMilliseconds(
+			this.services.state.user?.expiresAt!,
+			new Date(this.services.state.user?.isPausedAt!)
+		)
+		const newExpiresAt = new Date(new Date().getTime() + difference)
+
+		return this.update({
+			isPaused: false,
+			isPausedAt: null,
+			expiresAt: newExpiresAt.toISOString()
+		})
+
+		//return this.update({ isPaused: false })
 	}
 }

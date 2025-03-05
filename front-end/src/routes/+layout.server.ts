@@ -3,6 +3,7 @@ export const load = async ({ locals }) => {
 		globals: locals.globals,
 		session: locals.session,
 		user: locals.user,
-		isExpired: locals.isExpired
+		isExpired: locals.isExpired,
+		isPaused: locals.isPaused
 	}
 }

@@ -5,10 +5,13 @@ export type SiteState = {
 	isMenuCollapsedEnabled: boolean
 	isMenuCollapsed: boolean
 	isMenuHidden: boolean
+	isExpired: boolean
+	isPaused: boolean
 	description: string
 	favicon: string
 	logo: string
 	social_links: unknown
+	whatsapp: string
 	tagline: string
 	title: string
 	url: string
@@ -28,6 +31,7 @@ export class Site implements SiteState {
 	favicon: string = $state.raw('')
 	logo: string = $state.raw('')
 	social_links: Array<{ service: string; url: string }> = $state.raw([])
+	whatsapp: string = $state.raw('')
 	tagline: string = $state.raw('')
 	title: string = $state.raw('')
 	url: string = $state.raw('')
@@ -35,6 +39,7 @@ export class Site implements SiteState {
 	kvk: string = $state.raw('')
 	mobileMenuOpen = $state.raw(false)
 	isExpired: boolean = $state.raw(false)
+	isPaused: boolean = $state.raw(false)
 
 	isLoading = $derived.by(() => {
 		if (innerWidth.current === undefined || (session.user && !session.user.email)) {
