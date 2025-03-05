@@ -43,7 +43,7 @@ COPY . .
 RUN bun run build
 
 # Use a lightweight runtime image
-FROM oven/bun:1.1.42-slim AS runner
+FROM node:22-slim AS runner
 
 WORKDIR /app
 
@@ -54,4 +54,4 @@ COPY --from=builder /app /app
 EXPOSE 3000
 
 # Start the application
-CMD [ "bun", "./build/index.js" ]
+CMD [ "node", "./build/index.js" ]

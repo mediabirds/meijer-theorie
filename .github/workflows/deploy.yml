@@ -46,8 +46,5 @@ jobs:
       - name: Trigger Deployment
         run: |
           curl -X 'POST' \
-          'https://deploy.codeit.website/api/trpc/application.deploy' \
-          -H 'accept: application/json' \
-          -H 'Authorization: Bearer ${{ secrets.DOKPLOY_TOKEN }}' \
-          -H 'Content-Type: application/json' \
-          -d '{"json":{"applicationId": "Tr2ETnRjO4jaByxYSQ5Rz"}}'
+          'https://deploy.codeit.website/api/deploy/j7ke0jBoDgtu8quSCoTEu' \
+          -H 'accept: application/json'
