@@ -10,6 +10,7 @@ import { UserExamService } from './user-exam'
 import { SubscriptionsService } from './subscriptions'
 import { SubscriptionTierService } from './subscription-tier'
 import { EmailService } from './email'
+import { DownloadsService } from './downloads'
 
 export class Services {
 	/**
@@ -147,5 +148,14 @@ export class Services {
 	 */
 	subscriptionTier(id: string) {
 		return new SubscriptionTierService(this, id)
+	}
+
+	/**
+	 * Creates a new instance of the DownloadsService.
+	 *
+	 * @returns {DownloadsService} The DownloadsService instance.
+	 */
+	downloads() {
+		return new DownloadsService(this)
 	}
 }

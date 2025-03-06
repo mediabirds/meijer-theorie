@@ -1,16 +1,15 @@
 <script lang="ts">
-	import { setExamContext } from '.'
 	import { Box } from '../ui/layout'
 	import { H } from '../ui/heading'
 	import { Button } from '../ui/button'
 	import { _ } from 'svelte-i18n'
-	import Question from './question.svelte'
 	import { untrack } from 'svelte'
 	import { exam } from '$lib/stores/app.svelte'
+	import Question from './question.svelte'
 
 	$effect(() => {
 		if (exam.questionTimer && exam.questionTimer.value === 0) {
-			untrack(() => exam.nextQuestion())
+			untrack(() => exam.gotoNextQuestion())
 		}
 	})
 

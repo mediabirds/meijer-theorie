@@ -66,25 +66,29 @@
 		</Box>
 	{:else}
 		<div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-2">
-			{#if currentVideoCourse}
-				<VideoCourse
-					course={currentVideoCourse}
-					title={$_('common.video_course.title')}
-					description={$_('common.video_course.description')}
-				/>
-			{/if}
-			<Box
-				title={$_('common.practice_exam.title')}
-				class="max-w-4xl"
-				description={$_('common.practice_exam.description')}
-			>
-				<div class="mt-6 space-y-4">
-					{#each sortBy(data.user?.practiceExams, 'exam.order') as { id, exam, didPass }, i}
-						<PracticeExam {id} {exam} {didPass} index={i + 1} />
-					{/each}
-				</div>
-			</Box>
-			<TimerWidget />
+			<div class="flex flex-col gap-6">
+				{#if currentVideoCourse}
+					<VideoCourse
+						course={currentVideoCourse}
+						title={$_('common.video_course.title')}
+						description={$_('common.video_course.description')}
+					/>
+				{/if}
+				<TimerWidget />
+			</div>
+			<div class="flex flex-col gap-6">
+				<Box
+					title={$_('common.practice_exam.title')}
+					class="max-w-4xl"
+					description={$_('common.practice_exam.description')}
+				>
+					<div class="mt-6 space-y-4">
+						{#each sortBy(data.user?.practiceExams, 'exam.order') as { id, exam, didPass }, i}
+							<PracticeExam {id} {exam} {didPass} index={i + 1} />
+						{/each}
+					</div>
+				</Box>
+			</div>
 		</div>
 	{/if}
 </div>

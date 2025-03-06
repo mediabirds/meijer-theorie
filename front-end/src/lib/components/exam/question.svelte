@@ -1,16 +1,20 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
 	import { getImageUrl } from '$lib/utils'
 	import { Button } from '../ui/button'
 	import { Box } from '../ui/layout'
-	import { _ } from 'svelte-i18n'
-	import ArrowRightIcon from 'lucide-svelte/icons/arrow-right'
-	import MultipleChoiceQuestion from './questions/multiple-choice-question.svelte'
-	import InOrderQuestion from './questions/in-order-question.svelte'
 	import { H } from '../ui/heading'
 	import { goto } from '$app/navigation'
 	import { exam } from '$lib/stores/app.svelte'
+	import ArrowLeftIcon from 'lucide-svelte/icons/arrow-left'
+	import ArrowRightIcon from 'lucide-svelte/icons/arrow-right'
+	import InOrderQuestion from './questions/in-order-question.svelte'
+	import MultipleChoiceQuestion from './questions/multiple-choice-question.svelte'
 
 	let isSaving = $state(false)
+	let showPrevButton = $derived(
+		!exam.currentComponent?.timeLimitPerQuestionSeconds && exam.hasPrevQuestion
+	)
 </script>
 
 <div class="container mt-2 flex flex-col gap-6">
@@ -41,8 +45,27 @@
 	</div>
 	<div>
 		<Box>
-			<div class="grid grid-cols-1 items-center gap-y-6 md:grid-cols-3">
-				<span class="flex items-center justify-center gap-2 md:col-start-3 md:justify-end">
+			<div class="flex items-center justify-between">
+				{#if showPrevButton}
+					<span class="flex items-center gap-2">
+						<Button
+							size="icon"
+							variant="secondary"
+							type="button"
+							onclick={() => exam.gotoPrevQuestion()}
+						>
+							{#if !isSaving}
+								<ArrowLeftIcon />
+							{/if}
+						</Button>
+						{#if exam.didReachEnd}
+							{$_('pages.practice_exams.result')}
+						{:else}
+							{$_('pages.practice_exams.prev_question')}
+						{/if}
+					</span>
+				{/if}
+				<span class="ms-auto flex items-center gap-2">
 					{#if exam.didReachEnd}
 						{$_('pages.practice_exams.result')}
 					{:else}
@@ -69,7 +92,7 @@
 									}, 500)
 								})
 							} else {
-								exam.nextQuestion()
+								exam.gotoNextQuestion()
 							}
 						}}
 						spinner={isSaving}

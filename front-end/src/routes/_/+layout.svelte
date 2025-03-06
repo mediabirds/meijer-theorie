@@ -38,6 +38,12 @@
 			subscription: true
 		},
 		{
+			title: $_('common.downloads'),
+			href: '/_/downloads',
+			icon: '📎',
+			subscription: true
+		},
+		{
 			title: $_('common.profile'),
 			href: '/_/account',
 			icon: '👤'

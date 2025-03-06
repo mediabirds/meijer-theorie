@@ -55,7 +55,7 @@ export async function me(event: RequestEvent): Promise<[App.Locals['user'] | nul
 				fields: [
 					'*',
 					{
-						subscription: ['*', { subscription: ['type'] }],
+						subscription: ['*', { subscription: ['type', 'id'] }],
 						practiceExams: [
 							'*',
 							{

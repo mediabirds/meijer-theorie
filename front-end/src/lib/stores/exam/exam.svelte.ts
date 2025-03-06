@@ -153,6 +153,26 @@ export class Exam {
 		)
 	})
 
+	nextQuestion = $derived.by(() => {
+		if (!this.hasNextQuestion) {
+			return null
+		}
+
+		const questionIndex = this.currentQuestionIndex
+
+		return this.currentComponent!.questions[questionIndex + 1]
+	})
+
+	prevQuestion = $derived.by(() => {
+		if (!this.hasPrevQuestion) {
+			return null
+		}
+
+		const questionIndex = this.currentQuestionIndex
+
+		return this.currentComponent!.questions[questionIndex - 1]
+	})
+
 	init(practiceExam: PracticeExam) {
 		this.id = practiceExam.id
 		this.title = practiceExam.exam.title
@@ -164,36 +184,13 @@ export class Exam {
 			component.started = false
 			component.isActive = index === 0
 
-			// TODO: Remove this
-			// if (index === 0) {
-			// 	component.started = true
-			// }
-
 			component.questions.forEach((question, index) => {
 				question.isActive = index === 0
-
-				// @TODO: Remove this, this is just for testing
-				// if (question.collection === 'questions_in_order') {
-				// 	question.item.answers.forEach((answer, ai) => {
-				// 		answer.givenOrder = answer.order === 0 ? 2 : answer.order === 2 ? 0 : answer.order
-				// 	})
-				// }
-
-				// // @TODO: Remove this, this is just for testing
-				// if (question.collection === 'questions_multiple_choice') {
-				// 	question.item.answers.forEach((answer, index) => {
-				// 		if (index === 0) {
-				// 			answer.checked = true
-				// 		} else {
-				// 			answer.checked = false
-				// 		}
-				// 	})
-				// }
 			})
 		})
 	}
 
-	nextQuestion() {
+	gotoNextQuestion() {
 		if (!this.hasNextQuestion) {
 			if (this.hasNextComponent) {
 				const index = this.currentComponentIndex
@@ -206,13 +203,13 @@ export class Exam {
 			return
 		}
 
-		const index = this.currentQuestionIndex
+		const questionIndex = this.currentQuestionIndex
 
-		this.currentComponent!.questions[index].isActive = false
-		this.currentComponent!.questions[index + 1].isActive = true
+		this.currentComponent!.questions[questionIndex].isActive = false
+		this.currentComponent!.questions[questionIndex + 1].isActive = true
 	}
 
-	prevQuestion() {
+	gotoPrevQuestion() {
 		if (!this.hasPrevQuestion) {
 			if (this.hasPrevComponent) {
 				const index = this.currentComponentIndex
@@ -222,6 +219,7 @@ export class Exam {
 				this.components[index - 1].isActive = true
 			}
 		}
+
 		const questionIndex = this.currentQuestionIndex
 
 		this.currentComponent!.questions[questionIndex].isActive = false

@@ -25,7 +25,7 @@ declare global {
 					subscription: Directus.SchemaMapper<
 						Directus.SubscriptionTiers,
 						{
-							subscription: { type: 'car' | 'scooter' | 'motor' }
+							subscription: { type: 'car' | 'scooter' | 'motor'; id: number }
 						}
 					>
 					practiceExams: Directus.SchemaMapper<
@@ -542,6 +542,12 @@ declare global {
 			was_active_before_deprecation: boolean
 		}
 
+		export type Downloads = {
+			file?: string | DirectusFiles | null
+			filename?: string | null
+			id: string
+		}
+
 		export type FormFields = {
 			choices?: unknown | null
 			form?: string | Forms | null
@@ -727,9 +733,16 @@ declare global {
 		}
 
 		export type Subscriptions = {
+			downloads: any[] | SubscriptionsDownloads[]
 			id: number
 			tiers: any[] | SubscriptionTiers[]
 			type: string
+		}
+
+		export type SubscriptionsDownloads = {
+			downloads_id?: string | Downloads | null
+			id: number
+			subscriptions_id?: number | Subscriptions | null
 		}
 
 		export type UserExams = {
@@ -824,6 +837,7 @@ declare global {
 			directus_users: DirectusUsers[]
 			directus_versions: DirectusVersions[]
 			directus_webhooks: DirectusWebhooks[]
+			downloads: Downloads[]
 			form_fields: FormFields[]
 			form_submission_values: FormSubmissionValues[]
 			form_submissions: FormSubmissions[]
@@ -842,6 +856,7 @@ declare global {
 			subscription_tiers: SubscriptionTiers[]
 			subscription_tiers_practice_exams: SubscriptionTiersPracticeExams[]
 			subscriptions: Subscriptions[]
+			subscriptions_downloads: SubscriptionsDownloads[]
 			user_exams: UserExams[]
 			user_video_courses: UserVideoCourses[]
 			video_course_chapters: VideoCourseChapters[]

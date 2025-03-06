@@ -32,6 +32,8 @@
 		"404_button": "Terug naar de homepagina",
 		"500_title": "Oh nee, er is een klein ongelukje opgetreden!",
 		"loading:": "Laden...",
+		"download": "Download",
+		"downloads": "Downloads",
 		"video_course": {
 			"title": "Videocursus",
 			"description": "Ga verder waar je was gebleven en blijf op koers naar je examen!"
@@ -120,6 +122,7 @@
 			"start_exam": "Start oefenexamen",
 			"time_remaining": "Resterende tijd <b>{time}</b> minuten",
 			"next_question": "Volgende vraag",
+			"prev_question": "Vorige vraag",
 			"result": "Uitslag",
 			"results": {
 				"failed_title": "Helaas, je hebt het niet gehaald",
@@ -137,6 +140,10 @@
 				"check_answers": "Bekijk je antwoorden",
 				"passed_description": "Gefeliciteerd! Je hebt voldoende punten behaald om te slagen. Bekijk je antwoorden om te zien wat je goed hebt gedaan en waar je jezelf nog verder kunt verbeteren."
 			}
+		},
+		"downloads": {
+			"title": "Downloads",
+			"description": "Hier vind je alle materialen die je helpen bij het leren voor je theorie-examen."
 		}
 	}
 }
