@@ -143,7 +143,8 @@
 		},
 		"downloads": {
 			"title": "Downloads",
-			"description": "Hier vind je alle materialen die je helpen bij het leren voor je theorie-examen."
+			"description": "Hier vind je alle materialen die je helpen bij het leren voor je theorie-examen.",
+			"no_downloads": "Er zijn momenteel geen downloads beschikbaar."
 		}
 	}
 }
