@@ -19,7 +19,6 @@
 		session.set({ ...data.session, user: data.user })
 		// @ts-ignore
 		site.set({ ...data.globals, isExpired: data.isExpired, isPaused: data.isPaused })
-		console.log(data.globals)
 	})
 </script>
 

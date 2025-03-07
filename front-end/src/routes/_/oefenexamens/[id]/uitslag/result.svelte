@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Result } from '$lib/stores/exam/result.svelte'
 	import { _ } from 'svelte-i18n'
 	import { Box } from '$lib/components/ui/layout'
 	import { H } from '$lib/components/ui/heading'
@@ -42,6 +41,7 @@
 				{/snippet}
 				<div class="divide-y divide-neutral-200 rounded-lg bg-neutral-100">
 					{#each component.questions as question}
+						{console.log(question.item)}
 						<div class="grid grid-cols-1 items-start gap-4 p-6 md:grid-cols-[300px_1fr]">
 							<img
 								src={getImageUrl(question.item.thumbnail, { width: 300 })}
@@ -49,7 +49,13 @@
 								class="w-full rounded-lg md:aspect-square md:w-auto md:object-cover"
 							/>
 							<div class="rounded-lg bg-white p-6">
-								<H level="6" class="text-md mb-6 font-sans font-medium">{question.item.title}</H>
+								<H level="6" class="text-md mb-4 font-sans font-medium">{question.item.title}</H>
+
+								{#if question.item.incorrectAnswerFeedback}
+									<small class="mb-4 block text-primary"
+										>{question.item.incorrectAnswerFeedback}</small
+									>
+								{/if}
 								{#if question.collection === 'questions_multiple_choice'}
 									<div class="flex flex-col gap-2">
 										{#each question.item.answers as answer, index}

@@ -701,6 +701,7 @@ declare global {
 		export type QuestionsInOrder = {
 			answers?: unknown | null
 			id: number
+			incorrectAnswerFeedback?: string | null
 			thumbnail?: string | DirectusFiles | null
 			title: string
 		}
@@ -708,6 +709,7 @@ declare global {
 		export type QuestionsMultipleChoice = {
 			answers?: unknown | null
 			id: number
+			incorrectAnswerFeedback?: string | null
 			thumbnail?: string | DirectusFiles | null
 			title: string
 		}
