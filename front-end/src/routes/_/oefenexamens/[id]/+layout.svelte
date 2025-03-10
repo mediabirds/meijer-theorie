@@ -18,9 +18,9 @@
 {#if !page.url.pathname.endsWith('/uitslag')}
 	<header class="bg-white p-4 shadow-lg">
 		<div class="container flex items-center justify-between">
-			<span class="flex items-center gap-4">
+			<span class="flex hidden items-center gap-4 sm:block">
 				<Logo thumbnail width="35" />
-				<span class="overflow-hidden text-ellipsis text-nowrap font-medium">
+				<span class="hidden overflow-hidden text-ellipsis text-nowrap font-medium md:block">
 					{$_('pages.practice_exams.good_luck', { values: { username } })}
 				</span>
 			</span>
@@ -29,19 +29,6 @@
 					{@html $_('pages.practice_exams.time_remaining', {
 						values: { time: `${exam.componentTimer.minutes}:${exam.componentTimer.seconds}` }
 					})}
-				</span>
-			{/if}
-			{#if exam.questionTimer}
-				<span class="flex items-center">
-					<span class="relative top-[1px] w-6 font-medium"
-						>{(exam.questionTimer.value / 1000).toFixed(0)}</span
-					>
-					<span class="block h-4 w-16 overflow-clip rounded-full bg-primary-200">
-						<span
-							class="block h-full w-full bg-primary"
-							style={`width: ${100 - (exam.questionTimer.value / 1000 / exam.currentComponent!.timeLimitPerQuestionSeconds!) * 100}%;`}
-						></span>
-					</span>
 				</span>
 			{/if}
 			<Button href="/_/oefenexamens">

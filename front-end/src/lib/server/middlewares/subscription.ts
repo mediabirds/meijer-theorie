@@ -1,4 +1,5 @@
 import { redirect, type Handle } from '@sveltejs/kit'
+import { differenceInWeeks } from 'date-fns'
 import { isAfter } from 'date-fns/isAfter'
 
 export const subscription: Handle = async ({ event, resolve }) => {
@@ -7,6 +8,18 @@ export const subscription: Handle = async ({ event, resolve }) => {
 	}
 
 	event.locals.isPaused = !!event.locals.user.isPaused
+
+	/**
+	 * Can only pause subscription for a maximum of 4 weeks
+	 * If greater than that, resume the subscription
+	 */
+	if (event.locals.user.expiresAt) {
+		const difference = differenceInWeeks(new Date(), event.locals.user.expiresAt!)
+
+		if (difference >= 4) {
+			await event.locals.services.user().resumeSubscription()
+		}
+	}
 
 	/**
 	 * Only check if the subscription is expired if the subscription is not paused

@@ -3,6 +3,7 @@
 	import PracticeExam from '$lib/components/partials/practice-exam/practice-exam.svelte'
 	import { TimerWidget } from '$lib/components/partials/subscription'
 	import { VideoCourse } from '$lib/components/partials/video-course/index.js'
+	import { Alert } from '$lib/components/ui/alert'
 	import { Button } from '$lib/components/ui/button/index.js'
 	import H from '$lib/components/ui/heading/H.svelte'
 	import { Box } from '$lib/components/ui/layout'
@@ -34,6 +35,9 @@
 			>
 				<H level="2">{$_('common.subscription_paused.title')}</H>
 				<p>{$_('common.subscription_paused.description')}</p>
+				<Alert variant="primary" class="my-4">
+					{$_('common.subscription_paused.alert')}
+				</Alert>
 				<Button
 					variant="secondary"
 					onclick={() => {

@@ -63,7 +63,8 @@
 		"subscription_paused": {
 			"title": "Je abonnement is gepauzeerd",
 			"description": "Je abonnement is gepauzeerd, je kunt via onderstaande knop je abonnement opnieuw activeren.",
-			"button": "Activeren"
+			"button": "Activeren",
+			"alert": "LET OP: Je kunt je abonnement niet langer dan 4 weken pauzeren, na 4 weken wordt je abonnement weer automatisch geactiveerd."
 		},
 		"whatsapp": {
 			"description": "Contact opnemen via WhatsApp"

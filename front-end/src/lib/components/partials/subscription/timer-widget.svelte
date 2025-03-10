@@ -128,21 +128,24 @@
 		</div> -->
 	</div>
 	<div class="mt-4 flex gap-2">
-		<Button
-			variant="secondary"
-			onclick={() => {
-				isSendingPauseRequest = true
+		{#if false === !!session.user?.isPausedAt}
+			<Button
+				variant="secondary"
+				onclick={() => {
+					isSendingPauseRequest = true
 
-				fetch('/api/subscriptions/pause', {
-					method: 'POST'
-				}).finally(async () => {
-					await invalidateAll()
-					isSendingPauseRequest = false
-				})
-			}}
-			spinner={isSendingPauseRequest}
-		>
-			{$_('common.subscription_timer_widget.pause')}
-		</Button>
+					fetch('/api/subscriptions/pause', {
+						method: 'POST'
+					}).finally(async () => {
+						await invalidateAll()
+						isSendingPauseRequest = false
+					})
+				}}
+				spinner={isSendingPauseRequest}
+				disabled={!!session.user?.isPausedAt}
+			>
+				{$_('common.subscription_timer_widget.pause')}
+			</Button>
+		{/if}
 	</div>
 </Box>

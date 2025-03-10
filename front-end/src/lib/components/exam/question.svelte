@@ -45,9 +45,9 @@
 	</div>
 	<div>
 		<Box>
-			<div class="flex items-center justify-between">
-				{#if showPrevButton}
-					<span class="flex items-center gap-2">
+			<div class="grid grid-cols-3">
+				<span class="flex items-center gap-2">
+					{#if showPrevButton}
 						<Button
 							size="icon"
 							variant="secondary"
@@ -58,19 +58,36 @@
 								<ArrowLeftIcon />
 							{/if}
 						</Button>
-						{#if exam.didReachEnd}
-							{$_('pages.practice_exams.result')}
-						{:else}
-							{$_('pages.practice_exams.prev_question')}
-						{/if}
+						<span class="hidden md:block">
+							{#if exam.didReachEnd}
+								{$_('pages.practice_exams.result')}
+							{:else}
+								{$_('pages.practice_exams.prev_question')}
+							{/if}
+						</span>
+					{/if}
+				</span>
+				{#if exam.questionTimer}
+					<span class="flex items-center justify-center">
+						<span class="relative top-[1px] w-6 font-medium"
+							>{(exam.questionTimer.value / 1000).toFixed(0)}</span
+						>
+						<span class="block h-4 w-16 overflow-clip rounded-full bg-primary-200">
+							<span
+								class="block h-full w-full bg-primary"
+								style={`width: ${100 - (exam.questionTimer.value / 1000 / exam.currentComponent!.timeLimitPerQuestionSeconds!) * 100}%;`}
+							></span>
+						</span>
 					</span>
 				{/if}
 				<span class="ms-auto flex items-center gap-2">
-					{#if exam.didReachEnd}
-						{$_('pages.practice_exams.result')}
-					{:else}
-						{$_('pages.practice_exams.next_question')}
-					{/if}
+					<span class="hidden md:block">
+						{#if exam.didReachEnd}
+							{$_('pages.practice_exams.result')}
+						{:else}
+							{$_('pages.practice_exams.next_question')}
+						{/if}
+					</span>
 					<Button
 						size="icon"
 						variant="secondary"

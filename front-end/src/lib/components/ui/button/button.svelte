@@ -70,7 +70,7 @@
 		class={cn(buttonVariants({ variant, size }), className)}
 		{type}
 		{...restProps}
-		disabled={spinner}
+		disabled={restProps.disabled || spinner}
 	>
 		{#if spinner}
 			<LoaderCircleIcon class="animate-spin" />

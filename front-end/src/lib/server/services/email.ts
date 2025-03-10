@@ -10,6 +10,7 @@ import {
 import type SMTPTransport from 'nodemailer/lib/smtp-transport'
 import type Mail from 'nodemailer/lib/mailer'
 import AccountCreated from '$lib/email-templates/account-created.mjml?raw'
+import SubscriptionUpdated from '$lib/email-templates/subscription-extended.mjml?raw'
 import mjml2html from 'mjml'
 import Handlebars from 'handlebars'
 
@@ -23,6 +24,14 @@ export type AccountCreatedTemplate = EmailTemplate<
 	}
 >
 
+export type SubscriptionUpdated = EmailTemplate<
+	'SubscriptionUpdated',
+	{
+		days: number
+		firstName: string
+	}
+>
+
 export type EmailTemplate<Name extends string, Context extends Record<string, any>> = {
 	template: string
 	name: Name
@@ -31,6 +40,7 @@ export type EmailTemplate<Name extends string, Context extends Record<string, an
 
 export type EmailTemplates = {
 	account_created: AccountCreatedTemplate
+	subscription_updated: SubscriptionUpdated
 }
 
 export class EmailService {
@@ -48,6 +58,14 @@ export class EmailService {
 				firstName: '',
 				username: '',
 				password: ''
+			}
+		},
+		subscription_updated: {
+			template: SubscriptionUpdated,
+			name: 'SubscriptionUpdated',
+			context: {
+				days: 0,
+				firstName: ''
 			}
 		}
 	}

@@ -66,6 +66,10 @@ export class UserService {
 	}
 
 	pauseSubscription() {
+		if (this.services.state.user?.isPausedAt) {
+			return null
+		}
+
 		return this.update({ isPaused: true, isPausedAt: new Date().toISOString() })
 	}
 
@@ -78,10 +82,7 @@ export class UserService {
 
 		return this.update({
 			isPaused: false,
-			isPausedAt: null,
 			expiresAt: newExpiresAt.toISOString()
 		})
-
-		//return this.update({ isPaused: false })
 	}
 }

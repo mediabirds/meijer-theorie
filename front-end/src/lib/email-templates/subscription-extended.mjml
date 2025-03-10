@@ -16,24 +16,13 @@
 		</mj-section>
 		<mj-section padding="0">
 			<mj-column>
-				<mj-text font-size="28px" font-weight="900"> Welkom, {{firstName}} 🎉 </mj-text>
-				<mj-text font-size="16px">
-					Je hebt vanaf nu {{days}} dagen toegang tot het
-					<a style="color: #e64c4b" href="https://platform.meijertheoriecursus.nl" target="_blank">
-						theorieplatform.
-					</a>
-				</mj-text>
+				<mj-text font-size="28px" font-weight="900"> Hi, {{firstName}} 🖐️ </mj-text>
+				<mj-text font-size="16px">Je abonnement is met {{days}} dagen verlengd 🎉.</mj-text>
 			</mj-column>
 		</mj-section>
-		<mj-section padding-top="20px">
+		<mj-section padding-top="0">
 			<mj-column>
-				<mj-text padding-bottom="5px" font-size="16px" font-weight="700">
-					Je kunt met de volgende gegevens inloggen:
-				</mj-text>
-				<mj-text font-size="16px">
-					<span>Gebruikersnaam</span>: {{username}}<br />
-					<span>Wachtwoord</span>: {{password}}
-				</mj-text>
+				<mj-text font-size="16px">Je kunt inloggen met dezelfde gegevens als voorheen.</mj-text>
 			</mj-column>
 		</mj-section>
 		<mj-section padding="0">

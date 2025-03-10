@@ -1,8 +1,9 @@
 import { json } from '@sveltejs/kit'
 import { fromError } from 'zod-validation-error'
 import z from 'zod'
-import { createUser, readRoles } from '@directus/sdk'
+import { createUser, readRoles, readUsers } from '@directus/sdk'
 import { generatePassword } from '$lib/utils.js'
+import { addDays } from 'date-fns'
 
 const schema = z.object({
 	email: z.string().email(),
@@ -24,6 +25,44 @@ export const POST = async ({ request, locals }) => {
 		}
 
 		const subscriptionTier = await locals.services.subscriptionTier(data.subscriptionTier).fetch()
+		const existingUser = await locals.directus.request(
+			readUsers({
+				filter: { email: { _eq: data.email } }
+			})
+		)
+
+		if (existingUser.length > 0) {
+			const user = existingUser[0]
+			const response = await locals.services.user(user.id).update({
+				expiresAt: addDays(user.expiresAt!, subscriptionTier.daysOfAccess).toISOString(),
+				subscription: subscriptionTier.id
+			})
+
+			const emailResponse = await locals.services.email().send(
+				{
+					to: user.email!,
+					subject: 'MeijerTheorie, welkom!'
+				},
+				'subscription_updated',
+				{
+					days: subscriptionTier.daysOfAccess,
+					firstName: user.first_name!
+				}
+			)
+
+			if (emailResponse.accepted.length === 0) {
+				return json({
+					error: 'Email could not be sent',
+					code: 'SERVER_ERROR'
+				})
+			}
+
+			return json({
+				data: response,
+				status: 'SUBSCRIPTION_UPDATED'
+			})
+		}
+
 		const generatedPassword = generatePassword(12, { symbols: false })
 		const authenticatedRole = await locals.directus.request(
 			readRoles({ filter: { name: { _eq: 'Authenticated' } } })
@@ -66,12 +105,12 @@ export const POST = async ({ request, locals }) => {
 		if (response.accepted.length === 0) {
 			return json({
 				error: 'Email could not be sent',
-				status: 'SERVER_ERROR'
+				code: 'SERVER_ERROR'
 			})
 		}
 
 		return json({
-			status: 'SUCCESS',
+			code: 'USER_CREATED',
 			data: userData
 		})
 	} catch (_) {
@@ -79,7 +118,7 @@ export const POST = async ({ request, locals }) => {
 
 		return json({
 			error: 'Something went wrong',
-			status: 'SERVER_ERROR',
+			code: 'SERVER_ERROR',
 			data: _
 		})
 	}

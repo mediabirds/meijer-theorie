@@ -37,7 +37,7 @@
 	</Tooltip.Provider>
 
 	{#if site.whatsapp}
-		<div class="group/whatsapp fixed bottom-4 right-4 flex items-center gap-4">
+		<div class="group/whatsapp fixed bottom-4 right-4 z-50 flex items-center gap-4">
 			<span
 				class={cn(
 					'rounded-md bg-white px-4 py-2 opacity-0 shadow-xl transition-opacity',
