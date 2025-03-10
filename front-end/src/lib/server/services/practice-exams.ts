@@ -62,9 +62,23 @@ export class PracticeExamsService {
 				.slice(0, subscription.maxPracticeExams! - practiceExams.length)
 
 			/**
+			 * Make sure we are not adding more exams then there exists
+			 * Otherwise we end up in a loop
+			 */
+			if (exams.length < subscription.maxPracticeExams!) {
+				if (this.services.event.locals.user && this.services.event.locals.user.practiceExams) {
+					return this.services.event.locals.user.practiceExams
+				}
+
+				return await this.services.user().getPracticeExams()
+			}
+
+			/**
 			 * Attach exams to user
 			 */
-			await Promise.all(exams.map(async (exam) => await this.services.user().addExam(exam)))
+			await this.services.user().update({
+				practiceExams: exams.map((e) => ({ exam: e.id }))
+			})
 			return await this.services.user().getPracticeExams()
 		}
 
