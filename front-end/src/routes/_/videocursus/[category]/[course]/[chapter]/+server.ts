@@ -12,7 +12,7 @@ export const GET = async ({ params, locals }) => {
 		chapter.lessons.find((l) => !chapter.lessonsFinished.includes(l.title)) || chapter.lessons[0]
 
 	return redirect(
-		302,
+		301,
 		`/_/videocursus/${params.category}/${params.course}/${params.chapter}/${lesson.title}`
 	)
 }

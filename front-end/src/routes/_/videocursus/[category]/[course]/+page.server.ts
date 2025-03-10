@@ -1,5 +1,5 @@
-export const load = async (event) => {
-	const chapter = await event.locals.services.videoCourse().current()
+export const load = async ({ locals, params }) => {
+	const chapter = await locals.services.videoCourse(params.category, params.course).current()
 
 	return {
 		chapter
