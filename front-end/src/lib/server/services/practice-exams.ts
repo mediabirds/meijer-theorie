@@ -66,7 +66,10 @@ export class PracticeExamsService {
 			 * Otherwise we end up in a loop
 			 */
 			if (exams.length < subscription.maxPracticeExams!) {
-				if (this.services.event.locals.user && this.services.event.locals.user.practiceExams) {
+				if (
+					this.services.event.locals.user &&
+					this.services.event.locals.user.practiceExams.length
+				) {
 					return this.services.event.locals.user.practiceExams
 				}
 

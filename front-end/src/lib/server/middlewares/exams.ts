@@ -9,7 +9,7 @@ import type { Handle } from '@sveltejs/kit'
  */
 export const exams: Handle = async ({ event, resolve }) => {
 	if (event.locals.user && event.locals.services.state.user) {
-		await event.locals.services.practiceExams().getExamsForUser()
+		event.locals.user.practiceExams = await event.locals.services.practiceExams().getExamsForUser()
 	}
 
 	return await resolve(event)
