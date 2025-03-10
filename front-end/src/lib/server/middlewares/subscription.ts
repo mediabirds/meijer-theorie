@@ -13,11 +13,12 @@ export const subscription: Handle = async ({ event, resolve }) => {
 	 * Can only pause subscription for a maximum of 4 weeks
 	 * If greater than that, resume the subscription
 	 */
-	if (event.locals.user.expiresAt) {
-		const difference = differenceInWeeks(new Date(), event.locals.user.expiresAt!)
+	if (event.locals.user.isPausedAt) {
+		const difference = differenceInWeeks(new Date(), event.locals.user.isPausedAt)
 
 		if (difference >= 4) {
 			await event.locals.services.user().resumeSubscription()
+			event.locals.isPaused = false
 		}
 	}
 

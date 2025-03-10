@@ -110,6 +110,7 @@
 			src={`${PUBLIC_DIRECTUS_URL}/assets/${lesson?.video}`}
 			controls
 			class="w-full rounded-2xl shadow-lg"
+			controlslist="nodownload"
 		></video>
 		<Box class="flex flex-col  items-center justify-between gap-4 lg:flex-row">
 			<span
@@ -177,27 +178,27 @@
 									href={`/_/videocursus/${data.course.category}/${data.course.slug}/${chapter.slug}/${lesson.title}`}
 									class={cn(
 										'flex items-center gap-4 px-6 py-4 transition-colors',
-										'hover:bg-primary-50 bg-neutral-100',
+										'bg-neutral-100 hover:bg-primary-50',
 										lesson.title === page.params.lesson && 'bg-primary-100'
 									)}
 								>
 									{#if lesson.title === page.params.lesson}
 										{#if isPlaying}
 											<Play
-												class="text-secondary flex h-6 w-6 items-center justify-center"
+												class="flex h-6 w-6 items-center justify-center text-secondary"
 												strokeWidth="1"
 											/>
 										{:else}
 											<Pause
-												class="text-secondary flex h-6 w-6 items-center justify-center"
+												class="flex h-6 w-6 items-center justify-center text-secondary"
 												strokeWidth="1"
 											/>
 										{/if}
 									{:else if chapter.lessonsFinished.includes(lesson.title)}
-										<Check class="text-primary relative top-[1px] h-6 w-6" />
+										<Check class="relative top-[1px] h-6 w-6 text-primary" />
 									{:else}
 										<Pause
-											class="text-secondary flex h-6 w-6 items-center justify-center"
+											class="flex h-6 w-6 items-center justify-center text-secondary"
 											strokeWidth="1"
 										/>
 									{/if}
