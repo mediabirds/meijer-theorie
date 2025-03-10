@@ -80,7 +80,7 @@
 						</span>
 					</span>
 				{/if}
-				<span class="ms-auto flex items-center gap-2">
+				<div class="col-start-3 flex items-center justify-end gap-2">
 					<span class="hidden md:block">
 						{#if exam.didReachEnd}
 							{$_('pages.practice_exams.result')}
@@ -118,7 +118,7 @@
 							<ArrowRightIcon />
 						{/if}
 					</Button>
-				</span>
+				</div>
 			</div>
 		</Box>
 	</div>
